@@ -1,2 +1,2 @@
 # quiz
-A kahoot-like quiz system. Using JAX-RS, jQuery, AJAX and Bootstrap. Made while learning web developement at NTNU.
+Et kahootlignende quiz-system. Bruker JAX-RS, jQuery, AJAX and Bootstrap. Lagd som en del av faget Systemutvikling 2, på Dataingeniør, NTNU.
