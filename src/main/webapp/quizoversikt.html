@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link rel="stylesheet" type="text/css" href="css/quizoversikt.css">
+    <script src="javascript/quizoversikt.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> <!-- Bootstrap -->
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+</head>
+<body>
+
+    <h1> Live quizzer </h1>
+
+    <table id="myTable">
+        <thead>
+        <tr><th class="navnfelt">Navn</th><th class="tidfelt">Start</th><th class="deltagerfelt">Deltagere</th><th class="knappfelt"></th>
+        </tr></thead>
+        <tbody>
+        <tr>
+            <td class="navnfelt">Lørdagsquiz</td>
+            <td class="tidfelt">17:54 (10s) </td>
+            <td class="deltagerfelt">8/20 </td>
+            <td class="knappfelt"><button type="button" class="btn btn-success btn-block">Bli med!</button></td>
+        </tr>
+        <tr>
+            <td class="navnfelt">Lørdagsquiz</td>
+            <td class="tidfelt">18:54 </td>
+            <td class="deltagerfelt">8/20 </td>
+            <td class="knappfelt"><button type="button" class="btn btn-success btn-block">Bli med!</button></td>
+        </tr>
+
+        </tbody>
+    </table>
+
+    <script>
+
+        //Placeholder metode for å vise at det går an å legge inn rader
+        //Skal hente inn rad-informasjon v.h.a. AJAX senere.
+
+        $("button").click(function(){
+            var name = $("#name").val();
+            var email = $("#email").val();
+            var markup = "<tr><td>kek</td><td>" + name + "</td><td>" + email + "</td><td class='knappfelt'><button type='button' class='btn btn-success btn-block'>Bli med!</button></td></tr>";
+            $("table tbody").append(markup);
+        });
+
+        // Find and remove selected table rows
+        $(".delete-row").click(function(){
+            $("table tbody").find('input[name="record"]').each(function(){
+                if($(this).is(":checked")){
+                    $(this).parents("tr").remove();
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
