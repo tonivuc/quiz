@@ -3,14 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" type="text/css" href="">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> <!-- Bootstrap -->
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.min.css"> <!-- Bootstrap -->
     <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script> <!-- jQuery -->
     <script src="http://cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script> <!-- JavaScript -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <script>
+        $(document).ready(function(){
+
+            // Lag ny rest-ressursen under '/kunder/'
+            /*
+            $("#create").click(function () {
+
+            });
+            */
+
+            function getFunksjon() {
+                //jQuery $.get()-metode.
+                $.ajax({
+                    url: 'rest/oppgv2/',
+                    type: 'GET',
+                    success: function (result) {
+                        $("h1").html(result)
+                        alert("kake");
+                    }
+                })
+            }
+
+            getFunksjon();
+        })
+
+
+    </script>
 </head>
 <body>
+
+    <div id="sentrer">
+        <h1> Velkommen! </h1>
+        <a class="btn btn-success btn-lg mx-2" href="quizoversikt.html">Join Quiz!</a>
+        <a class="btn btn-primary btn-lg mx-2" href="lagquiz.html">Lag quiz!</a>
+    </div>
 
 </body>
 </html>
