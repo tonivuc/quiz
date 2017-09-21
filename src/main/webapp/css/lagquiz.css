@@ -1,0 +1,16 @@
+h1 {
+    margin-bottom:12px;
+}
+
+.main {
+    top:45%;
+    position: absolute;
+
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%)
+}
+
+#test {
+    margin-left:40px;
+}

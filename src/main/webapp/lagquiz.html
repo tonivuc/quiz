@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Lag quiz</title>
+    <link rel="stylesheet" type="text/css" href="css/lagquiz.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.min.css"> <!-- Bootstrap -->
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script> <!-- jQuery -->
+    <script src="http://cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script> <!-- JavaScript -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script>
+        $(document).ready(function(){
+            var myVar = setInterval(getFunksjon, 1000);
+
+            // Lag ny rest-ressursen under '/kunder/'
+            $("#nyttSporsmaal").click(function () {
+                /*
+                $.ajax({
+                    url: 'rest/lagquiz/' + $("#navnInput").val(),
+                    type: 'POST',
+                    success: function (result) {
+                        alert("Post success!");
+                    }
+                })
+                */
+                alert("test");
+                $.ajax({
+                    url: 'rest/lagquiz',
+                    type: 'POST',
+                    data: JSON.stringify({
+                        navn: $("#navnInput").val(),
+                        etternavn: "Odegård"
+                    }),
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'json',
+                    success: function (result) {
+                        alert("Stringify success!");
+                    }
+                })
+            });
+
+            function getFunksjon() {
+                //jQuery $.get()-metode.
+                $.ajax({
+                    url: 'rest/lagquiz/',
+                    type: 'GET',
+                    success: function (result) {
+                        $("h1").html(result)
+                    }
+                })
+            }
+        })
+
+    </script>
+</head>
+<body>
+
+<div class="main">
+    <h1> Lag ny quiz </h1>
+    <form>
+    <div class="form-group"> <label>Navn på quiz</label>
+        <input id="navnInput" type="text" name="nick" class="form-control" placeholder="Skriv inn quiznavn"> </div>
+    <div class="form-group"> <label>Tidspunkt for start</label>
+        <input type="datetime-local" name="tidspunkt" class="form-control"> </div>
+    <button id="nyttSporsmaal" type="button" class="btn btn-primary">Legg til spørsmål</button>
+    <button id="test" type="submit" class="btn btn-success">Ferdig</button>
+    </form>
+</div>
+
+</body>
+</html>
