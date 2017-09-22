@@ -2,71 +2,70 @@
 <html lang="en">
 <head>
     <title>Lag quiz</title>
+
     <link rel="stylesheet" type="text/css" href="css/lagquiz.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.min.css"> <!-- Bootstrap -->
-    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script> <!-- jQuery -->
-    <script src="http://cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script> <!-- JavaScript -->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css"> <!-- Bootstrap -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    '
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <script>
-        $(document).ready(function(){
-            var myVar = setInterval(getFunksjon, 1000);
-
-            // Lag ny rest-ressursen under '/kunder/'
-            $("#nyttSporsmaal").click(function () {
-                /*
-                $.ajax({
-                    url: 'rest/lagquiz/' + $("#navnInput").val(),
-                    type: 'POST',
-                    success: function (result) {
-                        alert("Post success!");
-                    }
-                })
-                */
-                alert("test");
-                $.ajax({
-                    url: 'rest/lagquiz',
-                    type: 'POST',
-                    data: JSON.stringify({
-                        navn: $("#navnInput").val(),
-                        etternavn: "Odegård"
-                    }),
-                    contentType: 'application/json; charset=utf-8',
-                    dataType: 'json',
-                    success: function (result) {
-                        alert("Stringify success!");
-                    }
-                })
-            });
-
-            function getFunksjon() {
-                //jQuery $.get()-metode.
-                $.ajax({
-                    url: 'rest/lagquiz/',
-                    type: 'GET',
-                    success: function (result) {
-                        $("h1").html(result)
-                    }
-                })
-            }
-        })
-
-    </script>
 </head>
 <body>
 
 <div class="main">
     <h1> Lag ny quiz </h1>
-    <form>
+    <form id="hovedSkjema">
     <div class="form-group"> <label>Navn på quiz</label>
         <input id="navnInput" type="text" name="nick" class="form-control" placeholder="Skriv inn quiznavn"> </div>
     <div class="form-group"> <label>Tidspunkt for start</label>
-        <input type="datetime-local" name="tidspunkt" class="form-control"> </div>
-    <button id="nyttSporsmaal" type="button" class="btn btn-primary">Legg til spørsmål</button>
-    <button id="test" type="submit" class="btn btn-success">Ferdig</button>
+        <input type="datetime-local" id="quizStartTid" class="form-control"> </div>
+    <button id="nyttSporsmaal" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Legg til spørsmål</button>
+        <div class="list-group" id="quizSporsmaalListe">
+
+        </div>
+
+        <button id="submitQuiz" type="submit" class="btn btn-success">Ferdig</button>
     </form>
+
+
 </div>
 
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Modal Header</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group"> <label>Nytt spørsmål</label>
+                    <input id="nyttSporsmaalInput" type="text" name="sporsmaal" class="form-control" placeholder="Skriv inn spørsmål"> </div>
+                <div class="form-group"> <label>Varighet</label>
+                    <input type="text" id="spmVarighet" class="form-control" placeholder="Skriv inn tidsfrist i sekunder"> </div>
+                <div class="gruppering">
+                    <div class="form-group"> <label>Nytt svaralternativ</label>
+                        <input id="nyttSvar" type="text"  class="form-control" placeholder="Skriv inn et svar"> </div>
+                    <button id="nyttSvarKnapp" type="button" class="btn btn-primary valg">Legg inn</button>
+                </div>
+
+                <div class="funkyradio">
+
+                </div>
+                <button id="sporsmaalFerdig" type="submit" class="btn btn-success" data-dismiss="modal">Ferdig</button>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="javascript/lagquiz.js"></script>
 </body>
 </html>

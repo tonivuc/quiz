@@ -3,8 +3,8 @@ package RESTfiler;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
-@Path("/lagquiz")
-public class lagQuiz {
+@Path("/QuizService")
+public class QuizService {
 
     //String lagretUtMelding;
     static String lagretMeldingInn = "kake";
