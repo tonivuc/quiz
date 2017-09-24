@@ -4,9 +4,17 @@ public class Sporsmaal {
 
     String sporsmaalTekst;
     String[] svarArray;
+    String bildeURL;
     int riktigSvar;
     int varighet;
 
+    public String getBildeURL() {
+        return bildeURL;
+    }
+
+    public void setBildeURL(String bildeURL) {
+        this.bildeURL = bildeURL;
+    }
 
     public String getSporsmaalTekst() {
         return sporsmaalTekst;

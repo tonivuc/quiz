@@ -29,6 +29,7 @@
         var sporsmaal = {
             sporsmaalTekst:"",
             svarArray:[],
+            bildeURL:"",
             riktigSvar:0,
             varighet:0
         };
@@ -36,6 +37,7 @@
         sporsmaal.sporsmaalTekst =$("#nyttSporsmaalInput").val();
         sporsmaal.riktigSvar = selectedKnappNr;
         sporsmaal.varighet = $("#spmVarighet").val();
+        sporsmaal.bildeURL = $("#spmBildeURL").val();
         //Fyll spørsmål-objektet  med svar og fjern stuff fra "Modal"
         for(i = 0; i < midlertidligSvarArray.length; i++){
             $("#radioParent"+i+"").remove();
@@ -45,6 +47,7 @@
         $("#nyttSporsmaalInput").val("");
         $("#spmVarighet").val("");
         $("#nyttSvar").val("");
+        $("#spmBildeURL").val("http://www.petmd.com/sites/default/files/what-does-it-mean-when-cat-wags-tail.jpg")
         console.log("Array length: "+quiz.sporsmaalArray.length);
         quiz.sporsmaalArray.push(sporsmaal);
         console.log(quiz.sporsmaalArray[quiz.sporsmaalArray.length-1]);

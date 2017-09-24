@@ -9,34 +9,6 @@
     <script src="http://cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script> <!-- JavaScript -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
-    <script>
-        $(document).ready(function(){
-
-            // Lag ny rest-ressursen under '/kunder/'
-            /*
-            $("#create").click(function () {
-
-            });
-            */
-
-            function getFunksjon() {
-                //jQuery $.get()-metode.
-                $.ajax({
-                    url: 'rest/oppgv2/',
-                    type: 'GET',
-                    success: function (result) {
-                        $("h1").html(result)
-                    }
-                })
-            }
-
-            getFunksjon();
-        })
-
-
-    </script>
 </head>
 <body>
 

@@ -8,12 +8,14 @@ function setup() {
 
 }
 
-$("button").click(function(){
-    var name = $("#name").val();
-    var email = $("#email").val();
-    var markup = "<tr><td>kek</td><td>" + name + "</td><td>" + email + "</td><td class='knappfelt'><button type='button' class='btn btn-success btn-block'>Bli med!</button></td></tr>";
-    $("table tbody").append(markup);
+//Kan bruke det her til å få opp scoreboard senere
+/*
+$(document).on("click", ".quizButton", function(event){
+    valgtQuiz = $(this).attr('id');
+
 });
+*/
+
 
 var tid = window.setInterval(refresh,2000)
 
@@ -47,7 +49,7 @@ function refresh() {
 function sjekkMotLokalt() {
     //Sletter først, mindre å gå gjennom etterpå
 
-    /*
+
     var fant2 = false;
     //Sjekk om det finnes et element i lokaleQuizzer som ikke finnes i serverQuizzer
     //Gå gjennom alle elementer i lokaleQuizzer
@@ -66,7 +68,7 @@ function sjekkMotLokalt() {
             fjernQuiz();
         }
     }
-    */
+
 
     //Sammenlign alle quizIDer i serverquizzer med quizIDer i lokaleQuizzer
     //Legg inn nye quizzer
@@ -100,9 +102,15 @@ function sjekkMotLokalt() {
 }
 
 function leggInnQuiz(quiz) {
-    lokaleQuizzer.push(quiz)
-    var markup = "<tr><td>"+quiz.tittel+"</td><td>" + quiz.startTidspunkt + "</td><td>8/20</td><td class='knappfelt'><button type='button' class='btn btn-success btn-block'>Bli med!</button></td></tr>";
-    $("table tbody").append(markup);
+    lokaleQuizzer.push(quiz);
+    //onclick="location.href='http://google.com';" value="Go to Google"
+    //Alt herfra er bare for å få med hvilken quiz man har klikket på
+    var markupStart = "<tr><td>"+quiz.tittel+"</td><td>" + quiz.startTidspunkt + "</td><td>8/20</td><td class='knappfelt'><form action='quiz.html?id='><button id='";
+    var markupMiddle = quiz.id;
+    var markupLast = "' type='submit' class='btn btn-success btn-block quizButton' >Bli med!</button></form></td></tr>";
+    var con1 = markupStart.concat(markupMiddle);
+    var con2 = con1.concat(markupLast);
+    $("table tbody").append(con2);
 }
 
 function fjernQuiz() {
