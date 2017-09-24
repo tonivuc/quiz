@@ -1,7 +1,9 @@
 
 //Hoved-objekt, inneholder mange spørsmål med svar.
     var quiz = {
-
+        tittel:"",
+        sporsmaalArray:[],
+        startTidspunkt:""
     };
 
     var knappnr = 0;
@@ -48,27 +50,35 @@
         console.log(quiz.sporsmaalArray[quiz.sporsmaalArray.length-1]);
         $("#quizSporsmaalListe").append("<a href='' class='list-group-item'>"+sporsmaal.sporsmaalTekst+"</a>");
 
-        //AJAX
-        $.ajax({
-            url: 'rest/lagquiz',
-            type: 'POST',
-            data: JSON.stringify({
-                navn: $("#navnInput").val(),
-                etternavn: "Odegård"
-            }),
-            contentType: 'application/json; charset=utf-8',
-            dataType: 'json',
-            success: function (result) {
-                alert("Stringify success!");
-            }
-        })
+
     });
 
 
     //var myVar = setInterval(getFunksjon, 1000);
 
-    // Lag ny rest-ressursen under '/kunder/'
-    $("#nyttSporsmaal").click(function () {
+    //Send inn Quiz til REST-serveren
+    $("#submitQuiz").click(function () {
+        console.log(JSON.stringify(quiz));
+
+        quiz.tittel = $("#navnInput").val();
+        quiz.startTidspunkt = $("#quizStartTid").val();
+
+        console.log("Quiz stringified"+JSON.stringify(quiz));
+
+        //AJAX
+        $.ajax({
+            url: 'rest/QuizService',
+            type: 'POST',
+            data: JSON.stringify(quiz),
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            success: function (result) {
+                alert("Stringify success!");
+            },
+            error: function (err) {
+                console.log(err)
+            }
+        })
 
         /*
         $.ajax({

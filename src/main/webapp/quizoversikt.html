@@ -5,7 +5,7 @@
     <title>Title</title>
 
     <link rel="stylesheet" type="text/css" href="css/quizoversikt.css">
-    <script src="javascript/quizoversikt.js"></script>
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> <!-- Bootstrap -->
     <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="http://cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
@@ -19,6 +19,8 @@
 <body>
 
     <h1> Live quizzer </h1>
+    <div id="velgNick">
+    </div>
 
     <table id="myTable">
         <thead>
@@ -41,27 +43,6 @@
         </tbody>
     </table>
 
-    <script>
-
-        //Placeholder metode for å vise at det går an å legge inn rader
-        //Skal hente inn rad-informasjon v.h.a. AJAX senere.
-
-        $("button").click(function(){
-            var name = $("#name").val();
-            var email = $("#email").val();
-            var markup = "<tr><td>kek</td><td>" + name + "</td><td>" + email + "</td><td class='knappfelt'><button type='button' class='btn btn-success btn-block'>Bli med!</button></td></tr>";
-            $("table tbody").append(markup);
-        });
-
-        // Find and remove selected table rows
-        $(".delete-row").click(function(){
-            $("table tbody").find('input[name="record"]').each(function(){
-                if($(this).is(":checked")){
-                    $(this).parents("tr").remove();
-                }
-            });
-        });
-    </script>
-
+    <script src="javascript/quizoversikt.js"></script>
 </body>
 </html>

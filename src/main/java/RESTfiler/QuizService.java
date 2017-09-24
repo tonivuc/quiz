@@ -1,19 +1,26 @@
 package RESTfiler;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.util.ArrayList;
 
 @Path("/QuizService")
 public class QuizService {
 
-    //String lagretUtMelding;
-    static String lagretMeldingInn = "kake";
+    static ArrayList<Quiz> quizArray = new ArrayList<Quiz>();
+    static int antQuizGenerert = 0;
 
     @GET
-    @Produces(MediaType.TEXT_PLAIN)
-    public String getKunde() {
+    @Produces(MediaType.APPLICATION_JSON)
+    public Quiz[] getQuizzer() {
         //Produser tekstbeskjed
-        return lagretMeldingInn;
+        Quiz[] quizzer = new Quiz[quizArray.size()];
+        for (int i = 0; i < quizArray.size(); i++) {
+            quizzer[i] = quizArray.get(i);
+        }
+        return quizzer;
     }
     /*
     @POST
@@ -27,10 +34,17 @@ public class QuizService {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public void leggInnNavn(Person person) {
-        System.out.println("INITIATED!");
-        lagretMeldingInn = person.getNavn();
-        System.out.println(person.getNavn());
+    public void leggInQuiz(Quiz quiz) {
+        System.out.println(quiz.getTittel());
+        System.out.println("WE HAVE ENTERED THE QUIZ METHOD!");
+
+        System.out.println("antQuizGenerert: "+antQuizGenerert);
+        quiz.setId(antQuizGenerert);
+        antQuizGenerert = antQuizGenerert +1;
+        System.out.println("antQuizGenerert (andre linje): "+antQuizGenerert);
+
+        quizArray.add(quiz);
+        System.out.println(quiz.getTittel()+" sin ID = "+quiz.getId());
     }
 
 }

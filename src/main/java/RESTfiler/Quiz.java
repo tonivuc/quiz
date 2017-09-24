@@ -6,7 +6,17 @@ import java.util.Date;
 public class Quiz implements Serializable{
 
     String tittel;
-    Sporsmaal sporsmaalArray;
+    int id;
+    Sporsmaal[] sporsmaalArray;
+    String startTidspunkt;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getTittel() {
         return tittel;
@@ -16,22 +26,20 @@ public class Quiz implements Serializable{
         this.tittel = tittel;
     }
 
-    public Sporsmaal getSporsmaalArray() {
+    public Sporsmaal[] getSporsmaalArray() {
         return sporsmaalArray;
     }
 
-    public void setSporsmaalArray(Sporsmaal sporsmaalArray) {
+    public void setSporsmaalArray(Sporsmaal[] sporsmaalArray) {
         this.sporsmaalArray = sporsmaalArray;
     }
 
-    public Date getStartTidspunkt() {
+    public String getStartTidspunkt() {
         return startTidspunkt;
     }
 
-    public void setStartTidspunkt(Date startTidspunkt) {
+    public void setStartTidspunkt(String startTidspunkt) {
         this.startTidspunkt = startTidspunkt;
     }
-
-    Date startTidspunkt; //Litt usikker på hva slags objekt jeg skal bruke her
 
 }
