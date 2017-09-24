@@ -2,7 +2,9 @@
 //Hoved-objekt, inneholder mange spørsmål med svar.
     var quiz = {
         tittel:"",
+        id:0,
         sporsmaalArray:[],
+        sporsmaalNaa:0,
         startTidspunkt:""
     };
 
@@ -96,14 +98,3 @@
 
         */
     });
-
-    function getFunksjon() {
-        //jQuery $.get()-metode.
-        $.ajax({
-            url: 'rest/lagquiz/',
-            type: 'GET',
-            success: function (result) {
-                $("h1").html(result)
-            }
-        })
-    }

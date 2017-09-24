@@ -8,7 +8,17 @@ public class Quiz implements Serializable{
     String tittel;
     int id;
     Sporsmaal[] sporsmaalArray;
+    int sporsmaalNaa; //Sier oss hvilket spørsmål vi er på, index til array.
     String startTidspunkt;
+
+
+    public int getSporsmaalNaa() {
+        return sporsmaalNaa;
+    }
+
+    public void setSporsmaalNaa(int sporsmaalNaa) {
+        this.sporsmaalNaa = sporsmaalNaa;
+    }
 
     public int getId() {
         return id;

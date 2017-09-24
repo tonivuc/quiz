@@ -22,15 +22,32 @@ public class QuizService {
         }
         return quizzer;
     }
-    /*
-    @POST
-    @Path("/{navnInput}")
-    @Consumes(MediaType.TEXT_PLAIN)
-    public void addKunde(@PathParam("navnInput") String kundeId) {
-        //lagretMeldingInn = kundeId;
-        //System.out.println(kundeId);
+
+    @GET
+    @Path("/{quizId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Quiz getQuiz(@PathParam("quizId") int quizId) {
+        for (int i = 0; i < quizArray.size(); i++) {
+            if (quizArray.get(i).getId() == quizId) {
+                System.out.println("Returnerer "+quizArray.get(i).getTittel());
+                return quizArray.get(i);
+            }
+        }
+        return null;
     }
-    */
+
+    //Metoden oppdaterer quizzen på serveren så den vet hvilket spørsmål den er på
+    @POST
+    @Path("/sporsmaal")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void addKunde(Quiz quizInn) {
+        for (int i = 0; i < quizArray.size(); i++) {
+            if (quizInn.getId() == quizArray.get(i).getId()) {
+                quizArray.get(i).setSporsmaalNaa(quizInn.getSporsmaalNaa());
+            }
+        }
+    }
+
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
