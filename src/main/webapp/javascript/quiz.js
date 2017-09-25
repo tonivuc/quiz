@@ -35,19 +35,25 @@ var sporsmaal = {
 };
 
 var quizId = 0; //Lar denne være manuell for testing
+var kallenavn;
 
 
-//Hent quizId fra localstorage
+//Hent stuff fra localstorage
 function getQuizId() {
     quizId = localStorage.getItem("quizId");
     console.log("QuizID= "+quizId);
+}
+
+function getKallenavn() {
+    kallenavn = localStorage.getItem("kallenavn");
+    console.log("Kallenavn: "+kallenavn)
 }
 
 //Interaksjon med REST-server
 //Hent quiz-objekt fra server
 function hentQuiz(id) {
     $.ajax({
-        url: 'rest/QuizService/'+id+'',
+        url: 'rest/QuizService/quiz/'+id+'',
         type: 'GET',
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
@@ -72,6 +78,22 @@ function oppdaterSporsmaalNaa() {
     })
 }
 
+function leggInnSpiller() {
+    $.ajax({
+        url: 'rest/QuizService/quiz',
+        type: 'POST',
+        data: JSON.stringify({
+            quizId:quizId,
+            kallenavn:kallenavn
+        }),
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        success: function(result) {
+            //Kan returnere ID til spilleren kanskje?/quiz/{quizId}
+        }
+    })
+}
+
 //Generelle metoder
 function main() {
     getQuizId();
@@ -86,6 +108,7 @@ function setupLayout() {
     sporsmaal = quiz.sporsmaalArray[quiz.sporsmaalNaa];
     tidIgjen = sporsmaal.varighet;
     $("#sporsmaalTekst").text(sporsmaal.sporsmaalTekst);
+    $("#kallenavnOutput").text(sporsmaal.sporsmaalTekst);
     nyeSvar();
 }
 

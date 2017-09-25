@@ -29,7 +29,7 @@ $(".delete-row").click(function(){
 function refresh() {
 
     $.ajax({
-        url: 'rest/QuizService',
+        url: 'rest/QuizService/quiz',
         type: 'GET',
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',

@@ -11,7 +11,7 @@ import java.io.Serializable;
 public class Spiller implements Serializable{
 
     String kallenavn;
-    int poeng;
+    int poeng = 0;
 
     public String getKallenavn() {
         return kallenavn;
@@ -27,5 +27,9 @@ public class Spiller implements Serializable{
 
     public void setPoeng(int poeng) {
         this.poeng = poeng;
+    }
+
+    public void addPoeng(int poeng) {
+        this.poeng = this.poeng+poeng;
     }
 }
