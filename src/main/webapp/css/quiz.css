@@ -1,0 +1,51 @@
+html, body {
+    height: 100%;
+    margin: 0;
+}
+div {
+    /*height: 100%;*/
+    background-color: #EEE;
+    float: left;
+}
+#left {
+    width:20%;
+    margin: 5px;
+    text-align:center;
+}
+#center {
+    margin: 5px 0;
+    width: 58%;
+    text-align:center;
+}
+#right {
+    margin: 5px;
+    width: 20%;
+    text-align:center;
+}
+
+#svar {
+    text-align:center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#svar {
+    width:80%
+}
+
+#tid {
+    margin-top:20%;
+    font-size: 5.5em;
+}
+
+#poeng {
+    margin-top:20%;
+    font-size: 2.5em;
+}
+
+img {
+    width:50%;
+    height:50;
+}
+
+
