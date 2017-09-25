@@ -12,10 +12,23 @@ public class Quiz implements Serializable{
     int sporsmaalNaa; //Sier oss hvilket spørsmål vi er på, index til array.
     String startDato;
     String startTid;
-    ArrayList<Spiller> spillere;
+    ArrayList<Spiller> spillere = new ArrayList<>();
 
     public void addSpiller(Spiller spiller) {
         spillere.add(spiller);
+    }
+
+    public int oppdaterPoeng(Spiller spiller) {
+        System.out.println("Size på spillere tabell: "+spillere.size());
+        for (int i = 0; i < spillere.size(); i++) {
+            //Når man sammenligner strings fra serveren med vanlige strings må serverstring sine /" fjernes.
+            String omformetServerNavn = spillere.get(i).getKallenavn().replaceAll("\"","");
+            if (omformetServerNavn.equals(spiller.getKallenavn())) {
+                spillere.get(i).setPoeng(spiller.getPoeng());
+                return spillere.get(i).getPoeng();
+            }
+        }
+        return -1;
     }
 
     public ArrayList<Spiller> getSpillere() {

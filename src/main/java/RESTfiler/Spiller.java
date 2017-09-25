@@ -11,7 +11,7 @@ import java.io.Serializable;
 public class Spiller implements Serializable{
 
     String kallenavn;
-    int poeng = 0;
+    int poeng;
 
     public String getKallenavn() {
         return kallenavn;

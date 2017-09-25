@@ -15,7 +15,7 @@ for (var i = 0, max = query.length; i < max; i++)
 }
 */
 var tid = window.setInterval(tellNed,1000);
-var tidIgjen = 0;
+
 
 //Objekt og variabler
 var quiz = {
@@ -34,8 +34,10 @@ var sporsmaal = {
     varighet:0
 };
 
+var tidIgjen = 0;
 var quizId = 0; //Lar denne være manuell for testing
 var kallenavn;
+var poeng = 0;
 
 
 //Hent stuff fra localstorage
@@ -65,7 +67,7 @@ function hentQuiz(id) {
     })
 }
 
-function oppdaterSporsmaalNaa() {
+function oppdaterSporsmaalNaa() { //Altså spørsmålnr
     $.ajax({
         url: 'rest/QuizService/sporsmaal',
         type: 'POST',
@@ -80,16 +82,42 @@ function oppdaterSporsmaalNaa() {
 
 function leggInnSpiller() {
     $.ajax({
-        url: 'rest/QuizService/quiz',
+        url: 'rest/QuizService/quiz/'+quizId+'',
         type: 'POST',
+        data: JSON.stringify(kallenavn),
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        success: function(result) {
+            alert("Kallenavn "+kallenavn+" lagt på server!")
+            //Kan returnere ID til spilleren kanskje?/quiz/{quizId}
+        },
+        error: function(error) {
+            console.log(error);
+        }
+    })
+}
+
+function oppdaterSpillerPoeng() {
+    //Hvis svar er riktig
+    poeng=poeng+10;
+
+
+
+    $.ajax({
+        url: 'rest/QuizService/quiz/'+quizId+'',
+        type: 'PUT',
         data: JSON.stringify({
-            quizId:quizId,
-            kallenavn:kallenavn
+            kallenavn:kallenavn,
+            poeng:poeng,
         }),
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
         success: function(result) {
+            alert("OppdaterPoeng returnerte "+result);
             //Kan returnere ID til spilleren kanskje?/quiz/{quizId}
+        },
+        error: function(error) {
+            console.log(error);
         }
     })
 }
@@ -97,6 +125,7 @@ function leggInnSpiller() {
 //Generelle metoder
 function main() {
     getQuizId();
+    getKallenavn();
     hentQuiz(quizId);
 }
 
@@ -110,6 +139,7 @@ function setupLayout() {
     $("#sporsmaalTekst").text(sporsmaal.sporsmaalTekst);
     $("#kallenavnOutput").text(sporsmaal.sporsmaalTekst);
     nyeSvar();
+    leggInnSpiller();
 }
 
 function tellNed() {
@@ -117,9 +147,19 @@ function tellNed() {
     $("#tid").text(tidIgjen);
 
     //Logikk for å gå til neste quiz, ish?
-    if (tidIgjen <= 0) {
-        //Gå til neste quiz
+    if (tidIgjen === 0) {
+        nesteSporsmaal();
     }
+}
+
+function nesteSporsmaal() {
+    oppdaterSpillerPoeng();
+    /*quiz.sporsmaalNaa++;
+    sporsmaal = quiz.sporsmaalArray[quiz.sporsmaalNaa];
+    oppdaterSporsmaalNaa();
+    fjernAlleSvar();
+    nyeSvar();
+    */
 }
 
 function fjernAlleSvar() {

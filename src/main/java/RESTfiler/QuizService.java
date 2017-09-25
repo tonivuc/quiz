@@ -7,7 +7,7 @@ import javax.ws.rs.core.MediaType;
 import java.util.ArrayList;
 
 //Liten kommentar:
-//Vet vi ikke skal tenke så mye sikkerhet, lett å jukse...
+//Vet vi ikke skal tenke så mye sikkerhet, men det er lett å jukse...
 //To måter å ordne sjekking av svar på quiz.
 
 //REMOTE:
@@ -22,15 +22,27 @@ import java.util.ArrayList;
 //Hvis ja, poeng+10
 //Send spillerens poengsum til serveren som en UPDATE.
 
-//Velger dette siden det er enklere.
-//Man kan jo si OH, så mane UPDATE-queries til serveren!
-//Men er jo like mange som må sendes tilbake hvis det andre hadde vært valgt.
+//Velger dette siden det er enklere. Kan oppdateres senere.
 
 @Path("/QuizService")
 public class QuizService {
 
     static ArrayList<Quiz> quizArray = new ArrayList<Quiz>();
     static int antQuizGenerert = 0;
+
+
+    @PUT
+    @Path("/quiz/{quizId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public int leggInnPoeng(@PathParam("quizId") int quizId, Spiller spiller) {
+        for (int i = 0; i < quizArray.size(); i++) {
+            if (quizArray.get(i).getId() == quizId) {
+                return quizArray.get(i).oppdaterPoeng(spiller);
+            }
+        }
+        return -1;
+    }
+
 
     @GET
     @Path("/quiz")
@@ -72,13 +84,14 @@ public class QuizService {
     }
 
     @POST
-    @Path("/quiz")
+    @Path("/quiz/{quizId}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void addSpiller(KallenavnQuiz kallenavnquiz) {
+    public void addSpiller(@PathParam("quizId") int quizId, String kallenavn) {
+        System.out.println("Vi er inne i LEGG INN SPILLER I JAVA!");
         Spiller nySpiller = new Spiller();
-        nySpiller.setKallenavn(kallenavnquiz.getKallenavn());
+        nySpiller.setKallenavn(kallenavn);
         for (int i = 0; i < quizArray.size(); i++) {
-            if (quizArray.get(i).getId() == kallenavnquiz.quizId) {
+            if (quizArray.get(i).getId() == quizId) {
                 quizArray.get(i).addSpiller(nySpiller);
             }
         }
@@ -88,6 +101,7 @@ public class QuizService {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public void leggInQuiz(Quiz quiz) {
+
         System.out.println(quiz.getTittel());
         System.out.println("WE HAVE ENTERED THE QUIZ METHOD!");
 
