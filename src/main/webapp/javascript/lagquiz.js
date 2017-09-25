@@ -5,7 +5,8 @@
         id:0,
         sporsmaalArray:[],
         sporsmaalNaa:0,
-        startTidspunkt:""
+        startDato:"",
+        startTid:"",
     };
 
     var knappnr = 0;
@@ -66,7 +67,8 @@
         console.log(JSON.stringify(quiz));
 
         quiz.tittel = $("#navnInput").val();
-        quiz.startTidspunkt = $("#quizStartTid").val();
+        quiz.startDato = $("#quizStartDato").val();
+        quiz.startTid = $("#quizStartTid").val();
 
         console.log("Quiz stringified"+JSON.stringify(quiz));
 

@@ -9,8 +9,24 @@ public class Quiz implements Serializable{
     int id;
     Sporsmaal[] sporsmaalArray;
     int sporsmaalNaa; //Sier oss hvilket spørsmål vi er på, index til array.
-    String startTidspunkt;
+    String startDato;
+    String startTid;
 
+    public String getStartDato() {
+        return startDato;
+    }
+
+    public void setStartDato(String startDato) {
+        this.startDato = startDato;
+    }
+
+    public String getStartTid() {
+        return startTid;
+    }
+
+    public void setStartTid(String startTid) {
+        this.startTid = startTid;
+    }
 
     public int getSporsmaalNaa() {
         return sporsmaalNaa;
@@ -44,12 +60,6 @@ public class Quiz implements Serializable{
         this.sporsmaalArray = sporsmaalArray;
     }
 
-    public String getStartTidspunkt() {
-        return startTidspunkt;
-    }
 
-    public void setStartTidspunkt(String startTidspunkt) {
-        this.startTidspunkt = startTidspunkt;
-    }
 
 }

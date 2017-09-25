@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css"> <!-- Bootstrap -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> <!-- jQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    '
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
@@ -20,7 +20,8 @@
     <div class="form-group"> <label>Navn på quiz</label>
         <input id="navnInput" type="text" name="nick" class="form-control" placeholder="Skriv inn quiznavn"> </div>
     <div class="form-group"> <label>Tidspunkt for start</label>
-        <input type="text" id="quizStartTid" class="form-control"> </div>
+        <input type="Date" id="quizStartDato" class="form-control">
+        <input type="time" id="quizStartTid" class="form-control"></div>
     <button id="nyttSporsmaal" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Legg til spørsmål</button>
         <div class="list-group" id="quizSporsmaalListe">
 

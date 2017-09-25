@@ -1,17 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" type="text/css" href="css/quiz.css">
+    <!-- <link rel="stylesheet" type="text/css" href="css/quiz.css"> -->
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css"> <!-- Bootstrap -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> <!-- jQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    '
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-
+<div id="left">
+    <p id="poeng"> Poeng: 60 </p>
+</div>
+<div id="center">
+    <img src="http://www.petmd.com/sites/default/files/what-does-it-mean-when-cat-wags-tail.jpg" alt="Smiley face">
+    <h1 id="sporsmaalTekst"> Hvilket dyr er dette? </h1>
+    <section id="svar">
+        <ul class="list-group">
+            <li class="list-group-item">Yayaya</li>
+            <li class="list-group-item">Dapibus ac facilisis</li>
+        </ul>
+    </section>
+</div>
+<div id="right">
+    <p id="tid"> 6 </p>
+</div>
 <script src="javascript/quiz.js"></script>
+<style>
+    html, body {
+        height: 100%;
+        margin: 0;
+    }
+    div {
+        /*height: 100%;*/
+        background-color: #EEE;
+        float: left;
+    }
+    #left {
+        width:20%;
+        margin: 5px;
+        text-align:center;
+    }
+    #center {
+        margin: 5px 0;
+        width: 58%;
+        text-align:center;
+    }
+    #right {
+        margin: 5px;
+        width: 20%;
+        text-align:center;
+    }
+
+    #svar {
+        text-align:center;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    #svar {
+        width:80%
+    }
+
+    #tid {
+        margin-top:20%;
+        font-size: 5.5em;
+    }
+
+    #poeng {
+        margin-top:20%;
+        font-size: 2.5em;
+    }
+
+    img {
+        width:50%;
+        height:50;
+    }
+
+</style>
 </body>
 </html>

@@ -15,7 +15,9 @@ for (var i = 0, max = query.length; i < max; i++)
 }
 */
 var tid = window.setInterval(tellNed,1000);
+var tidIgjen = 0;
 
+//Objekt og variabler
 var quiz = {
     tittel:"",
     id:0,
@@ -24,8 +26,25 @@ var quiz = {
     startTidspunkt:""
 };
 
+var sporsmaal = {
+    sporsmaalTekst:"",
+    svarArray:[],
+    bildeURL:"",
+    riktigSvar:0,
+    varighet:0
+};
+
 var quizId = 0; //Lar denne være manuell for testing
 
+
+//Hent quizId fra localstorage
+function getQuizId() {
+    quizId = localStorage.getItem("quizId");
+    console.log("QuizID= "+quizId)
+}
+
+//Interaksjon med REST-server
+//Hent quiz-objekt fra server
 function hentQuiz(id) {
     $.ajax({
         url: 'rest/QuizService/'+id+'',
@@ -35,6 +54,7 @@ function hentQuiz(id) {
         success: function (result) {
             quiz = result;
             console.log("Hentet ut "+quiz.tittel);
+            setupLayout();
         }
     })
 }
@@ -52,11 +72,48 @@ function oppdaterSporsmaalNaa() {
     })
 }
 
-function tellNed() {
+//Generelle metoder
+function main() {
+    getQuizId();
+    hentQuiz(quizId);
+}
+
+main();
+
+//Oppdater layout
+
+function setupLayout() {
+    sporsmaal = quiz.sporsmaalArray[quiz.sporsmaalNaa];
+    tidIgjen = sporsmaal.varighet;
 
 }
 
-hentQuiz(quizId);
+function tellNed() {
+    tidIgjen = tidIgjen-1;
+    $("#tid").text(tidIgjen);
+
+    //Logikk for å gå til neste quiz, ish?
+    if (tidIgjen <= 0) {
+        //Gå til neste quiz
+    }
+}
+
+function fjernAlleSvar() {
+    $(".list-group").empty();
+}
+
+
+
+function byttSporsmaal() {
+    $("#sporsmaalTekst").text();
+}
+
+function nyeSvar() {
+    //For lengden av spørsmålsarray
+    var markup = "<li class='list-group-item'>Yayaya</li>";
+    $(".list-group").append(markup);
+    //For løke end
+}
 
 
 

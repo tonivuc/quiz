@@ -9,17 +9,16 @@ function setup() {
 }
 
 //Kan bruke det her til å få opp scoreboard senere
-/*
 $(document).on("click", ".quizButton", function(event){
     valgtQuiz = $(this).attr('id');
-
+    localStorage.setItem("quizId", valgtQuiz);
 });
-*/
 
 
 var tid = window.setInterval(refresh,2000)
 
 // Find and remove selected table rows
+/* WTF IS DIS
 $(".delete-row").click(function(){
     $("table tbody").find('input[name="record"]').each(function(){
         if($(this).is(":checked")){
@@ -27,6 +26,7 @@ $(".delete-row").click(function(){
         }
     });
 });
+*/
 
 function refresh() {
     $.ajax({
@@ -103,9 +103,9 @@ function sjekkMotLokalt() {
 
 function leggInnQuiz(quiz) {
     lokaleQuizzer.push(quiz);
-    //onclick="location.href='http://google.com';" value="Go to Google"
+    var startTid = new Date(quiz.startDato+"T"+quiz.startTid+":00+02:00");    //onclick="location.href='http://google.com';" value="Go to Google"
     //Alt herfra er bare for å få med hvilken quiz man har klikket på
-    var markupStart = "<tr><td>"+quiz.tittel+"</td><td>" + quiz.startTidspunkt + "</td><td>8/20</td><td class='knappfelt'><form action='quiz.html?id='><button id='";
+    var markupStart = "<tr><td>"+quiz.tittel+"</td><td>" + startTid.toDateString() + "</td><td>8/20</td><td class='knappfelt'><form action='quiz.html?id='><button id='";
     var markupMiddle = quiz.id;
     var markupLast = "' type='submit' class='btn btn-success btn-block quizButton' >Bli med!</button></form></td></tr>";
     var con1 = markupStart.concat(markupMiddle);
