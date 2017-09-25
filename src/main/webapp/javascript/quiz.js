@@ -40,7 +40,7 @@ var quizId = 0; //Lar denne være manuell for testing
 //Hent quizId fra localstorage
 function getQuizId() {
     quizId = localStorage.getItem("quizId");
-    console.log("QuizID= "+quizId)
+    console.log("QuizID= "+quizId);
 }
 
 //Interaksjon med REST-server
@@ -85,7 +85,8 @@ main();
 function setupLayout() {
     sporsmaal = quiz.sporsmaalArray[quiz.sporsmaalNaa];
     tidIgjen = sporsmaal.varighet;
-
+    $("#sporsmaalTekst").text(sporsmaal.sporsmaalTekst);
+    nyeSvar();
 }
 
 function tellNed() {
@@ -109,9 +110,13 @@ function byttSporsmaal() {
 }
 
 function nyeSvar() {
-    //For lengden av spørsmålsarray
-    var markup = "<li class='list-group-item'>Yayaya</li>";
-    $(".list-group").append(markup);
+    //For lengden av spørsm
+    for(i = 0; i < sporsmaal.svarArray.length; i++) {
+        var markup = "<li class='list-group-item'>"+sporsmaal.svarArray[i]+"</li>";
+        $(".list-group").append(markup);
+    }
+
+
     //For løke end
 }
 

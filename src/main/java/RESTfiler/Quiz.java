@@ -1,6 +1,7 @@
 package RESTfiler;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Quiz implements Serializable{
@@ -11,6 +12,19 @@ public class Quiz implements Serializable{
     int sporsmaalNaa; //Sier oss hvilket spørsmål vi er på, index til array.
     String startDato;
     String startTid;
+    ArrayList<Spiller> spillere;
+
+    public void addSpiller(Spiller spiller) {
+        spillere.add(spiller);
+    }
+
+    public ArrayList<Spiller> getSpillere() {
+        return spillere;
+    }
+
+    public void setSpillere(ArrayList<Spiller> spillere) {
+        this.spillere = spillere;
+    }
 
     public String getStartDato() {
         return startDato;

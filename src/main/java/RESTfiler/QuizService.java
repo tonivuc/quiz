@@ -36,6 +36,8 @@ public class QuizService {
         return null;
     }
 
+
+
     //Metoden oppdaterer quizzen på serveren så den vet hvilket spørsmål den er på
     @POST
     @Path("/sporsmaal")

@@ -4,14 +4,12 @@
 var serverQuizzer; //Quiz[]
 var lokaleQuizzer = []; //Quiz[]
 
-function setup() {
-
-}
-
 //Kan bruke det her til å få opp scoreboard senere
 $(document).on("click", ".quizButton", function(event){
+    //Legg inn valgt quiz som en slags cookie
     valgtQuiz = $(this).attr('id');
     localStorage.setItem("quizId", valgtQuiz);
+    localStorage.setItem("kallenavn", $("#kallenavnInput").val());
 });
 
 
@@ -29,6 +27,7 @@ $(".delete-row").click(function(){
 */
 
 function refresh() {
+
     $.ajax({
         url: 'rest/QuizService',
         type: 'GET',
@@ -103,7 +102,10 @@ function sjekkMotLokalt() {
 
 function leggInnQuiz(quiz) {
     lokaleQuizzer.push(quiz);
-    var startTid = new Date(quiz.startDato+"T"+quiz.startTid+":00+02:00");    //onclick="location.href='http://google.com';" value="Go to Google"
+
+    var startTid = new Date(quiz.startDato+"T"+quiz.startTid+":00+02:00");
+    //Legacy-kode: onclick="location.href='http://google.com';" value="Go to Google"
+
     //Alt herfra er bare for å få med hvilken quiz man har klikket på
     var markupStart = "<tr><td>"+quiz.tittel+"</td><td>" + startTid.toDateString() + "</td><td>8/20</td><td class='knappfelt'><form action='quiz.html?id='><button id='";
     var markupMiddle = quiz.id;
