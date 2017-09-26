@@ -49,6 +49,7 @@ function getQuizId() {
 function getKallenavn() {
     kallenavn = localStorage.getItem("kallenavn");
     console.log("Kallenavn: "+kallenavn)
+    $("#kallenavnOutput").text(kallenavn);
 }
 
 //Interaksjon med REST-server
@@ -138,7 +139,6 @@ function setupLayout() {
     console.log(sporsmaal.varighet);
     tidIgjen = sporsmaal.varighet;
     $("#sporsmaalTekst").text(sporsmaal.sporsmaalTekst);
-    $("#kallenavnOutput").text(sporsmaal.sporsmaalTekst);
     $("#poeng").text("Poeng: "+poeng);
     nyeSvar();
 }
