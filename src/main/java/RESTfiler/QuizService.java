@@ -57,6 +57,21 @@ public class QuizService {
     }
 
     @GET
+    @Path("/quiz/{quizId}/spillere")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Spiller[] getSpillere(@PathParam("quizId") int id) {
+        //Produser tekstbeskjed
+        for (int i = 0; i < quizArray.size(); i++) {
+            if (quizArray.get(i).getId() == id) {
+                Spiller[] spillere = new Spiller[quizArray.get(i).getSpillere().size()];
+                spillere = quizArray.get(i).getSpillere().toArray(spillere);
+                return spillere;
+            }
+        }
+        return null;
+    }
+
+    @GET
     @Path("/quiz/{quizId}")
     @Produces(MediaType.APPLICATION_JSON)
     public Quiz getQuiz(@PathParam("quizId") int quizId) {
