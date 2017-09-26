@@ -6,10 +6,14 @@ var lokaleQuizzer = []; //Quiz[]
 
 //Kan bruke det her til å få opp scoreboard senere
 $(document).on("click", ".quizButton", function(event){
-    //Legg inn valgt quiz som en slags cookie
-    valgtQuiz = $(this).attr('id');
-    localStorage.setItem("quizId", valgtQuiz);
-    localStorage.setItem("kallenavn", $("#kallenavnInput").val());
+    if ($("#kallenavnInput") != "" || $("#kallenavnInput") != " ") {
+        //Legg inn valgt quiz som en slags cookie
+        valgtQuiz = $(this).attr('id');
+        localStorage.setItem("quizId", valgtQuiz);
+        localStorage.setItem("kallenavn", $("#kallenavnInput").val());
+        document.location.href = "quiz.html";
+    }
+
 });
 
 

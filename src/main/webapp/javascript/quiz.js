@@ -133,6 +133,7 @@ function main() {
     getQuizId();
     getKallenavn();
     hentQuiz(quizId);
+
 }
 $(document).on("click", ".funkyradio-primary", function(event){
     //Legg inn valgt quiz som en slags cookie
@@ -204,7 +205,7 @@ function nesteSporsmaal() {
 
 function fjernAlleSvar() {
     //$(".listgroup").empty(); Funker ikke på custom listen
-    for (i=0; i < sporsmaal.svarArray.length; i++) {
+    for (i=0; i < sporsmaal.svarArray.length-1; i++) {
         $("#radioParent"+i).remove();
     }
 }

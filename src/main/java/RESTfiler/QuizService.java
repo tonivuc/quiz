@@ -121,12 +121,9 @@ public class QuizService {
 
         quiz.setId(antQuizGenerert);
         antQuizGenerert = antQuizGenerert +1;
-        System.out.println("Tester litt:");
         quizArray.add(quiz);
         System.out.println("Quiz lagt inn");
         System.out.println("Lengde på spørsmålarray"+quizArray.get(antQuizGenerert-1).getSporsmaalArray().length);
-        System.out.println("Lengde på svarArray 0"+quizArray.get(antQuizGenerert-1).getSporsmaalArray()[0].svarArray.length);
-        System.out.println("Lengde på svarArray 1"+quizArray.get(antQuizGenerert-1).getSporsmaalArray()[1].svarArray.length); //16???
         System.out.println(quiz.getTittel()+" sin ID = "+quiz.getId());
     }
 

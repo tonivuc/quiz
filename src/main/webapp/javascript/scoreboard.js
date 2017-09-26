@@ -21,6 +21,8 @@ function getKallenavn() {
 }
 
 
+//HUSK: Trenger metode for sortering av spillere etter score!
+
 function addSpillere() {
     for (i=0; i < spillere.length; i++) {
         var markup = "<li class='list-group-item justify-contentbetween'>"+spillere[i].kallenavn+"<span class='badge badge-default badge-pill'>"+spillere[i].poeng+"</span></li>";

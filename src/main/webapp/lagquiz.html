@@ -27,7 +27,9 @@
 
         </div>
 
-        <button id="submitQuiz" type="button" class="btn btn-success">Ferdig</button>
+        <button id="submitQuiz" type="submit" class="btn btn-success">Ferdig</button>
+
+
     </form>
 
 
@@ -39,7 +41,7 @@
     <div class="modal-dialog">
 
         <!-- Modal content-->
-        <div class="modal-content">
+        <div class="modal-content" id="hovedModal">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">Modal Header</h4>
@@ -60,7 +62,23 @@
                 <div class="funkyradio">
 
                 </div>
-                <button id="sporsmaalFerdig" type="submit" class="btn btn-success" data-dismiss="modal">Ferdig</button>
+                <button id="sporsmaalFerdig" type="submit" class="btn btn-success">Ferdig</button>
+
+                <!-- Alert! Mangler svar -->
+                <div id="manglerSvar" class="alert alert-danger" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+                <h4 class="alert-heading">Mangler svar!</h4>
+                <p>Du må legge inn minst to svaralternativer! </p>
+                </div>
+
+                <!-- Alert! Mangler å velge riktig svar! -->
+                <div id="manglerRiktig" class="alert alert-danger" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+                    <h4 class="alert-heading">Mangler riktig svar!</h4>
+                    <p>Du har glemt å velge hvilket svar som er riktig.</p>
+                    <p class="mb-0">Klikk på et svar du har lagt inn for å markere det som rett</p>
+                </div>
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
