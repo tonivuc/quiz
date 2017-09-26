@@ -2,7 +2,6 @@ package RESTfiler;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class Quiz implements Serializable{
 

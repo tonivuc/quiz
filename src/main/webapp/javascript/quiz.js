@@ -63,6 +63,7 @@ function hentQuiz(id) {
             quiz = result;
             console.log("Hentet ut "+quiz.tittel);
             setupLayout();
+            leggInnSpiller();
         }
     })
 }
@@ -102,7 +103,6 @@ function oppdaterSpillerPoeng() {
     poeng=poeng+10;
 
 
-
     $.ajax({
         url: 'rest/QuizService/quiz/'+quizId+'',
         type: 'PUT',
@@ -135,11 +135,12 @@ main();
 
 function setupLayout() {
     sporsmaal = quiz.sporsmaalArray[quiz.sporsmaalNaa];
+    console.log(sporsmaal.varighet);
     tidIgjen = sporsmaal.varighet;
     $("#sporsmaalTekst").text(sporsmaal.sporsmaalTekst);
     $("#kallenavnOutput").text(sporsmaal.sporsmaalTekst);
+    $("#poeng").text("Poeng: "+poeng);
     nyeSvar();
-    leggInnSpiller();
 }
 
 function tellNed() {
@@ -154,27 +155,31 @@ function tellNed() {
 
 function nesteSporsmaal() {
     oppdaterSpillerPoeng();
-    /*quiz.sporsmaalNaa++;
-    sporsmaal = quiz.sporsmaalArray[quiz.sporsmaalNaa];
-    oppdaterSporsmaalNaa();
+    quiz.sporsmaalNaa++;
+    console.log("Vi er næ på spørsmål: "+quiz.sporsmaalNaa);
+    setupLayout();
+
+    console.log("Spørsmåltittel: "+sporsmaal.sporsmaalTekst);
+    oppdaterSporsmaalNaa(); //Fortell serveren hvilket spørsmål vi er på
     fjernAlleSvar();
     nyeSvar();
-    */
 }
 
 function fjernAlleSvar() {
-    $(".list-group").empty();
+    $("#listgroup").empty();
 }
 
 
 
 function byttSporsmaal() {
-    $("#sporsmaalTekst").text();
+    $("#sporsmaalTekst").text(sporsmaal.sporsmaalTekst);
 }
 
 function nyeSvar() {
     //For lengden av spørsm
+    console.log("Legger inn nye svar")
     for(i = 0; i < sporsmaal.svarArray.length; i++) {
+        console.log(sporsmaal.svarArray[i]);
         var markup = "<li class='list-group-item'>"+sporsmaal.svarArray[i]+"</li>";
         $(".list-group").append(markup);
     }

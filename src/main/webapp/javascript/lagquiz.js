@@ -46,6 +46,7 @@
             $("#radioParent"+i+"").remove();
             sporsmaal.svarArray[i] = midlertidligSvarArray[i];
         }
+        midlertidligSvarArray = [];
 
         $("#nyttSporsmaalInput").val("");
         $("#spmVarighet").val("");

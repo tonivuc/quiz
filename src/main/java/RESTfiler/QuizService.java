@@ -75,7 +75,7 @@ public class QuizService {
     @POST
     @Path("/sporsmaal")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void addKunde(Quiz quizInn) {
+    public void oppdaterSporsmaalNr(Quiz quizInn) {
         for (int i = 0; i < quizArray.size(); i++) {
             if (quizInn.getId() == quizArray.get(i).getId()) {
                 quizArray.get(i).setSporsmaalNaa(quizInn.getSporsmaalNaa());
@@ -102,15 +102,16 @@ public class QuizService {
     @Consumes(MediaType.APPLICATION_JSON)
     public void leggInQuiz(Quiz quiz) {
 
-        System.out.println(quiz.getTittel());
-        System.out.println("WE HAVE ENTERED THE QUIZ METHOD!");
+        System.out.println("Quiz med tittel: "+quiz.getTittel()+" legges inn");
 
-        System.out.println("antQuizGenerert: "+antQuizGenerert);
         quiz.setId(antQuizGenerert);
         antQuizGenerert = antQuizGenerert +1;
-        System.out.println("antQuizGenerert (andre linje): "+antQuizGenerert);
-
+        System.out.println("Tester litt:");
         quizArray.add(quiz);
+        System.out.println("Quiz lagt inn");
+        System.out.println("Lengde på spørsmålarray"+quizArray.get(antQuizGenerert-1).getSporsmaalArray().length);
+        System.out.println("Lengde på svarArray 0"+quizArray.get(antQuizGenerert-1).getSporsmaalArray()[0].svarArray.length);
+        System.out.println("Lengde på svarArray 1"+quizArray.get(antQuizGenerert-1).getSporsmaalArray()[1].svarArray.length); //16???
         System.out.println(quiz.getTittel()+" sin ID = "+quiz.getId());
     }
 
