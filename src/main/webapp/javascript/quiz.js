@@ -1,9 +1,13 @@
-// www.mysite.com/my_app.html?Use_Id=abc
+
 
 
 //Kan bruke det her til å få ut QuizID fra URLen
-//var GET = {};
+//Dette ble erstattet med LocalStorage
 /*
+www.mysite.com/my_app.html?Use_Id=abc
+
+var GET = {};
+
 var query = window.location.search.substring(1).split("&");
 for (var i = 0, max = query.length; i < max; i++)
 {
@@ -14,8 +18,8 @@ for (var i = 0, max = query.length; i < max; i++)
     //GET[decodeURIComponent(param[0])] = decodeURIComponent(param[1] || "");
 }
 */
-var tid = window.setInterval(tellNed,1000);
 
+var tid = window.setInterval(tellNed,1000);
 
 //Objekt og variabler
 var quiz = {
@@ -147,6 +151,7 @@ function sjekkRiktigSvar() {
     }
 }
 
+//Kjør javascript
 main();
 
 //Oppdater layout
@@ -179,16 +184,22 @@ function tellNed() {
     }
 }
 
+//Gå videre til neste spørsmål
 function nesteSporsmaal() {
     oppdaterSpillerPoeng();
-    quiz.sporsmaalNaa++;
-    console.log("Vi er næ på spørsmål: "+quiz.sporsmaalNaa);
-    setupLayout();
 
-    console.log("Spørsmåltittel: "+sporsmaal.sporsmaalTekst);
-    oppdaterSporsmaalNaa(); //Fortell serveren hvilket spørsmål vi er på
-    fjernAlleSvar();
+    if (quiz.sporsmaalNaa >= quiz.sporsmaalArray.length-1) {
+        document.location.href = "scoreboard.html";
+    }
+    else {
+        quiz.sporsmaalNaa++;
+        console.log("Vi er næ på spørsmål: "+quiz.sporsmaalNaa);
+        setupLayout();
 
+        console.log("Spørsmåltittel: "+sporsmaal.sporsmaalTekst);
+        oppdaterSporsmaalNaa(); //Fortell serveren hvilket spørsmål vi er på
+        fjernAlleSvar();
+    }
 }
 
 function fjernAlleSvar() {
@@ -198,10 +209,6 @@ function fjernAlleSvar() {
     }
 }
 
-function byttSporsmaal() {
-    $("#sporsmaalTekst").text(sporsmaal.sporsmaalTekst);
-}
-
 function nyeSvar() {
     //For lengden av spørsm
     console.log("Legger inn nye svar");
@@ -209,9 +216,6 @@ function nyeSvar() {
         console.log(sporsmaal.svarArray[i]);
         $(".funkyradio").append("<div class='funkyradio-primary' id='radioParent"+i+"'> <input class='radioknapp' type='radio' name='radio' id='radio"+i+"'/> <label for='radio"+i+"'>"+sporsmaal.svarArray[i]+"</label></div>");
     }
-
-
-    //For løke end
 }
 
 
