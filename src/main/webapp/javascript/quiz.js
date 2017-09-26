@@ -38,6 +38,7 @@ var tidIgjen = 0;
 var quizId = 0; //Lar denne være manuell for testing
 var kallenavn;
 var poeng = 0;
+var valgtSvar = 0;
 
 
 //Hent stuff fra localstorage
@@ -101,26 +102,26 @@ function leggInnSpiller() {
 
 function oppdaterSpillerPoeng() {
     //Hvis svar er riktig
-    poeng=poeng+10;
-
-
-    $.ajax({
-        url: 'rest/QuizService/quiz/'+quizId+'',
-        type: 'PUT',
-        data: JSON.stringify({
-            kallenavn:kallenavn,
-            poeng:poeng,
-        }),
-        contentType: 'application/json; charset=utf-8',
-        dataType: 'json',
-        success: function(result) {
-            console.log("OppdaterPoeng returnerte "+result);
-            //Kan returnere ID til spilleren kanskje?/quiz/{quizId}
-        },
-        error: function(error) {
-            console.log(error);
-        }
-    })
+    if (sjekkRiktigSvar() === true) {
+        poeng=poeng+10;
+        $.ajax({
+            url: 'rest/QuizService/quiz/'+quizId+'',
+            type: 'PUT',
+            data: JSON.stringify({
+                kallenavn:kallenavn,
+                poeng:poeng,
+            }),
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            success: function(result) {
+                console.log("OppdaterPoeng returnerte "+result);
+                //Kan returnere ID til spilleren kanskje?/quiz/{quizId}
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        })
+    }
 }
 
 //Generelle metoder
@@ -129,9 +130,21 @@ function main() {
     getKallenavn();
     hentQuiz(quizId);
 }
+$(document).on("click", ".funkyradio-primary", function(event){
+    //Legg inn valgt quiz som en slags cookie
+    valgtSvarKnapp = $(this).attr('id');
+    valgtSvar= valgtSvarKnapp.substr(valgtSvarKnapp.length - 1); //Få tak i indeksen som kan brukes i sporsmaal.sporsmaalArray
+});
 
-function sjekkSvar() {
-
+function sjekkRiktigSvar() {
+    if(valgtSvar == sporsmaal.riktigSvar) {
+        console.log("Riktig svar!");
+        return true;
+    }
+    else {
+        console.log("Feil svar!");
+        return false;
+    }
 }
 
 main();
@@ -151,7 +164,7 @@ function setupLayout() {
 
 function leggInnSvarAlternativer() {
     for (i=0; i < sporsmaal.svarArray.length; i++) {
-        $(".list-group").append("<div class='funkyradio-primary' id='radioParent"+i+"'> <input class='radioknapp' type='radio' name='radio' id='radio"+i+"'/> <label for='radio"+i+"'>"+sporsmaal.svarArray[i]+"</label></div>");
+        $(".list-group").append("<div class='funkyradio-primary'  id='radioParent"+i+"'> <input class='radioknapp' type='radio' name='radio' id='radio"+i+"'/> <label for='radio"+i+"'>"+sporsmaal.svarArray[i]+"</label></div>");
     }
 
 }
