@@ -90,7 +90,7 @@ function leggInnSpiller() {
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
         success: function(result) {
-            alert("Kallenavn "+kallenavn+" lagt på server!")
+            console.log("Kallenavn "+kallenavn+" lagt på server!")
             //Kan returnere ID til spilleren kanskje?/quiz/{quizId}
         },
         error: function(error) {
@@ -114,7 +114,7 @@ function oppdaterSpillerPoeng() {
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
         success: function(result) {
-            alert("OppdaterPoeng returnerte "+result);
+            console.log("OppdaterPoeng returnerte "+result);
             //Kan returnere ID til spilleren kanskje?/quiz/{quizId}
         },
         error: function(error) {
@@ -130,6 +130,10 @@ function main() {
     hentQuiz(quizId);
 }
 
+function sjekkSvar() {
+
+}
+
 main();
 
 //Oppdater layout
@@ -140,7 +144,16 @@ function setupLayout() {
     tidIgjen = sporsmaal.varighet;
     $("#sporsmaalTekst").text(sporsmaal.sporsmaalTekst);
     $("#poeng").text("Poeng: "+poeng);
+    console.log("BildeURL: "+sporsmaal.bildeURL);
+    $("#quizbilde").attr("src",sporsmaal.bildeURL);
     nyeSvar();
+}
+
+function leggInnSvarAlternativer() {
+    for (i=0; i < sporsmaal.svarArray.length; i++) {
+        $(".list-group").append("<div class='funkyradio-primary' id='radioParent"+i+"'> <input class='radioknapp' type='radio' name='radio' id='radio"+i+"'/> <label for='radio"+i+"'>"+sporsmaal.svarArray[i]+"</label></div>");
+    }
+
 }
 
 function tellNed() {
@@ -162,14 +175,15 @@ function nesteSporsmaal() {
     console.log("Spørsmåltittel: "+sporsmaal.sporsmaalTekst);
     oppdaterSporsmaalNaa(); //Fortell serveren hvilket spørsmål vi er på
     fjernAlleSvar();
-    nyeSvar();
+
 }
 
 function fjernAlleSvar() {
-    $("#listgroup").empty();
+    //$(".listgroup").empty(); Funker ikke på custom listen
+    for (i=0; i < sporsmaal.svarArray.length; i++) {
+        $("#radioParent"+i).remove();
+    }
 }
-
-
 
 function byttSporsmaal() {
     $("#sporsmaalTekst").text(sporsmaal.sporsmaalTekst);
@@ -177,11 +191,10 @@ function byttSporsmaal() {
 
 function nyeSvar() {
     //For lengden av spørsm
-    console.log("Legger inn nye svar")
+    console.log("Legger inn nye svar");
     for(i = 0; i < sporsmaal.svarArray.length; i++) {
         console.log(sporsmaal.svarArray[i]);
-        var markup = "<li class='list-group-item'>"+sporsmaal.svarArray[i]+"</li>";
-        $(".list-group").append(markup);
+        $(".funkyradio").append("<div class='funkyradio-primary' id='radioParent"+i+"'> <input class='radioknapp' type='radio' name='radio' id='radio"+i+"'/> <label for='radio"+i+"'>"+sporsmaal.svarArray[i]+"</label></div>");
     }
 
 

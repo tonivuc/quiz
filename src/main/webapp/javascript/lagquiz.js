@@ -56,8 +56,6 @@
         quiz.sporsmaalArray.push(sporsmaal);
         console.log(quiz.sporsmaalArray[quiz.sporsmaalArray.length-1]);
         $("#quizSporsmaalListe").append("<a href='' class='list-group-item'>"+sporsmaal.sporsmaalTekst+"</a>");
-
-
     });
 
 
