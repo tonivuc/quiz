@@ -7,6 +7,7 @@ var spiller = {
 
 var quiId = 0;
 var kallenavn = "";
+var spillereLagtTil = 0;
 
 //Hent stuff fra localstorage
 function getQuizId() {
@@ -23,10 +24,10 @@ function getKallenavn() {
 
 //HUSK: Trenger metode for sortering av spillere etter score!
 
-function addSpillere() {
-    for (i=0; i < spillere.length; i++) {
-        var markup = "<li class='list-group-item justify-contentbetween'>"+spillere[i].kallenavn+"<span class='badge badge-default badge-pill'>"+spillere[i].poeng+"</span></li>";
-        var spesialMarkup = "<li class='list-group-item justify-contentbetween active'>"+spillere[i].kallenavn+"<span class='badge badge-default badge-pill'>"+spillere[i].poeng+"</span></li>";
+function addSpillere(startInt) {
+    for (i=startInt; i < spillere.length; i++) {
+        var markup = "<li class='list-group-item justify-contentbetween'>"+spillere[i].kallenavn+"<span class='badge badge-default badge-pill' id='"+i+"'>"+spillere[i].poeng+"</span></li>";
+        var spesialMarkup = "<li class='list-group-item justify-contentbetween active'>"+spillere[i].kallenavn+"<span class='badge badge-default badge-pill' id='"+i+">"+spillere[i].poeng+"</span></li>";
         console.log(spillere[i].kallenavn);
 
         //Gjør så kallenavnavn kan sammenlignes
@@ -46,6 +47,14 @@ function addSpillere() {
     }
 }
 
+//Live oppdatering av poeng
+function oppdaterSpillerPoeng() {
+    for (i=0; i < spillere.length; i++) {
+        var selector = "#"+i;
+        $(selector).text(spillere[i].poeng);
+    }
+}
+
 getKallenavn();
 getQuizId();
 hentSpillere();
@@ -60,7 +69,7 @@ function hentSpillere() {
         dataType: 'json',
         success: function(result) {
             spillere = result;
-            addSpillere();
+            addSpillere(startInt);
             console.log("Returnerte spiller med kallenavn "+spillere[0].kallenavn);
             //Kan returnere ID til spilleren kanskje?/quiz/{quizId}
         },

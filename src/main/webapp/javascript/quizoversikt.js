@@ -6,12 +6,15 @@ var lokaleQuizzer = []; //Quiz[]
 
 //Kan bruke det her til å få opp scoreboard senere
 $(document).on("click", ".quizButton", function(event){
-    if ($("#kallenavnInput") != "" || $("#kallenavnInput") != " ") {
+    if (!($("#kallenavnInput").val().length === 0)) {
         //Legg inn valgt quiz som en slags cookie
         valgtQuiz = $(this).attr('id');
         localStorage.setItem("quizId", valgtQuiz);
         localStorage.setItem("kallenavn", $("#kallenavnInput").val());
         document.location.href = "quiz.html";
+    }
+    else {
+        alert("Skriv inn et kallenavn :)")
     }
 
 });
@@ -31,7 +34,6 @@ $(".delete-row").click(function(){
 */
 
 function refresh() {
-
     $.ajax({
         url: 'rest/QuizService/quiz',
         type: 'GET',
@@ -111,7 +113,7 @@ function leggInnQuiz(quiz) {
     //Legacy-kode: onclick="location.href='http://google.com';" value="Go to Google"
 
     //Alt herfra er bare for å få med hvilken quiz man har klikket på
-    var markupStart = "<tr><td>"+quiz.tittel+"</td><td>" + startTid.toDateString() + "</td><td>8/20</td><td class='knappfelt'><form action='quiz.html?id='><button id='";
+    var markupStart = "<tr><td>"+quiz.tittel+"</td><td>" + startTid.toDateString() + "</td><td>8/20</td><td class='knappfelt'><button id='";
     var markupMiddle = quiz.id;
     var markupLast = "' type='submit' class='btn btn-success btn-block quizButton' >Bli med!</button></form></td></tr>";
     var con1 = markupStart.concat(markupMiddle);
