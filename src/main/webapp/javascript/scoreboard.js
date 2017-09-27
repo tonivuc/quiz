@@ -96,3 +96,14 @@ function hentSpillere() {
         }
     })
 }
+
+function fjernQuiz() {
+    $.ajax({
+        url: 'rest/QuizService/quiz/'+quizId+'',
+        type: 'DELETE',
+        success: function(result) {
+            $('#myTable').DataTable().ajax.reload();
+            $('#output').html(result);
+        }
+    });
+}

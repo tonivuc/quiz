@@ -96,6 +96,10 @@
         console.log(quiz);
         console.log("Quiz stringified"+JSON.stringify(quiz));
 
+        var link = "<a href='quizoversikt.html'>Se live quizzer! </a>"
+        console.log("Dette skjer!");
+        $("#hovedSkjema").append(link);
+
         submitAjax();
 
         /*

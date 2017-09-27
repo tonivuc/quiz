@@ -71,8 +71,17 @@ function oppdaterTid() {
         var selector = "#tidFelt";
         selector += i;
         var tidNaa = $(selector).text();
-        tidNaa--;
-        $(selector).text(tidNaa);
+        if (tidNaa < -1000 || tidNaa === "Ugyldig tid") {
+            $(selector).text("Ugyldig tid");
+        }
+        else if (tidNaa < 0 || tidNaa === "Startet") {
+            $(selector).text("Startet");
+        }
+        else {
+            tidNaa--;
+            $(selector).text(tidNaa);
+        }
+
     }
 }
 
@@ -101,18 +110,6 @@ $(document).on("click", ".scoreboardKnapp", function(event){
 });
 
 
-// Find and remove selected table rows
-/* WTF IS DIS
-$(".delete-row").click(function(){
-    $("table tbody").find('input[name="record"]').each(function(){
-        if($(this).is(":checked")){
-            $(this).parents("tr").remove();
-        }
-    });
-});
-*/
-
-
 //Legg inn en quiz i tabellen
 function leggInnQuiz(quiz) {
     lokaleQuizzer.push(quiz);
@@ -120,8 +117,7 @@ function leggInnQuiz(quiz) {
     var startTid = new Date(quiz.startDate);
     var tidnaa = new Date();
     var sekundertil = startTid.getTime() - tidnaa.getTime();
-    sekundertil = sekundertil/1000;
-    //Legacy-kode: onclick="location.href='http://google.com';" value="Go to Google"
+    sekundertil = Math.round(sekundertil/1000);
 
     //Brukes til å finne <td> som skal oppdateres
     var tidFeltId = "tidFelt";
@@ -138,7 +134,7 @@ function leggInnQuiz(quiz) {
 
 //Fjern quiz fra tabellen
 function fjernQuiz() {
-
+    //$("id").remove()
 }
 
 //AJAX, koding mot serveren
@@ -161,3 +157,15 @@ function refresh() {
         }
     })
 }
+
+
+// Find and remove selected table rows
+/* WTF IS DIS
+$(".delete-row").click(function(){
+    $("table tbody").find('input[name="record"]').each(function(){
+        if($(this).is(":checked")){
+            $(this).parents("tr").remove();
+        }
+    });
+});
+*/

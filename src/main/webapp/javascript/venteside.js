@@ -61,7 +61,7 @@ function finnTidTilStart() {
         var startTid = new Date(quiz.startDate);
         var tidnaa = new Date();
         var sekundertil = startTid.getTime() - tidnaa.getTime();
-        sekunderTilStart = sekundertil/1000;
+        sekunderTilStart = Math.round(sekundertil/1000);
 
         console.log("Sekunder til start satt til: "+sekunderTilStart);
     }

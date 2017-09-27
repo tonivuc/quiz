@@ -113,7 +113,7 @@ function leggInnSvarAlternativer() {
 */
 
 function tellNed() {
-    tidIgjen = tidIgjen-1;
+    tidIgjen--;
     $("#tid").text(tidIgjen);
 
     //Logikk for å gå til neste quiz, ish?
