@@ -169,12 +169,14 @@ function setupLayout() {
     nyeSvar();
 }
 
+/*
 function leggInnSvarAlternativer() {
     for (i=0; i < sporsmaal.svarArray.length; i++) {
         $(".list-group").append("<div class='funkyradio-primary'  id='radioParent"+i+"'> <input class='radioknapp' type='radio' name='radio' id='radio"+i+"'/> <label for='radio"+i+"'>"+sporsmaal.svarArray[i]+"</label></div>");
     }
 
 }
+*/
 
 function tellNed() {
     tidIgjen = tidIgjen-1;
@@ -200,6 +202,8 @@ function nesteSporsmaal() {
 
         console.log("Spørsmåltittel: "+sporsmaal.sporsmaalTekst);
         oppdaterSporsmaalNaa(); //Fortell serveren hvilket spørsmål vi er på
+        //Setup layout?
+        setupLayout();
 
     }
 }
