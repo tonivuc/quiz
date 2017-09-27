@@ -1,68 +1,15 @@
 
-//Placeholder metode for å vise at det går an å legge inn rader
-//Skal hente inn rad-informasjon v.h.a. AJAX senere.
+//Variabler
 var serverQuizzer; //Quiz[]
 var lokaleQuizzer = []; //Quiz[]
+var tid = window.setInterval(refresh,2000);
+var tid2 = window.setInterval(oppdaterTid,1000);
 
-//Kan bruke det her til å få opp scoreboard senere
-$(document).on("click", ".quizButton", function(event){
-    if (!($("#kallenavnInput").val().length === 0)) {
-        //Legg inn valgt quiz som en slags cookie
-        valgtQuiz = $(this).attr('id');
-        localStorage.setItem("quizId", valgtQuiz);
-        localStorage.setItem("kallenavn", $("#kallenavnInput").val());
-        document.location.href = "quiz.html";
-    }
-    else {
-        alert("Skriv inn et kallenavn :)")
-    }
+//Generelle metoder
 
-});
-
-$(document).on("click", ".scoreboardKnapp", function(event){
-
-        valgtQuiz = $(this).attr('id');
-        localStorage.setItem("quizId", valgtQuiz);
-        localStorage.setItem("kallenavn", $("#kallenavnInput").val());
-        document.location.href = "scoreboard.html";
-
-});
-
-
-var tid = window.setInterval(refresh,2000)
-
-// Find and remove selected table rows
-/* WTF IS DIS
-$(".delete-row").click(function(){
-    $("table tbody").find('input[name="record"]').each(function(){
-        if($(this).is(":checked")){
-            $(this).parents("tr").remove();
-        }
-    });
-});
-*/
-
-function refresh() {
-    $.ajax({
-        url: 'rest/QuizService/quiz',
-        type: 'GET',
-        contentType: 'application/json; charset=utf-8',
-        dataType: 'json',
-        success: function (result) {
-            serverQuizzer = result; //Dette er en array med quizzer
-            console.log("Lengde serverquiz: "+serverQuizzer.length);
-            if (typeof lokaleQuizzer == 'undefined') {
-                console.log("Undefined found. Setting to serverquizzer!")
-                //lokaleQuizzer = serverQuizzer;
-            }
-            sjekkMotLokalt();
-        }
-    })
-}
-
+//Legger til og fjerner quizzer lokalt avhengig av hvordan det ser ut på serveren
 function sjekkMotLokalt() {
     //Sletter først, mindre å gå gjennom etterpå
-
 
     var fant2 = false;
     //Sjekk om det finnes et element i lokaleQuizzer som ikke finnes i serverQuizzer
@@ -89,10 +36,10 @@ function sjekkMotLokalt() {
     var fant = false;
     //Gå gjennom alle quizzer i serverQuizzer
     for (i = 0; i < serverQuizzer.length; i++) {
-        console.log("Går inn i loop "+i);
+
         //Sammenlign element i i serverquizzer, med alle element i lokalequizzer
         for (j = 0; j < lokaleQuizzer.length; j++) {
-            console.log("Går inn i indre loop "+j)
+
             fant = false;
             //Hvis element j har en match i lokaleQuizzer
             if (serverQuizzer[i].id == lokaleQuizzer[j].id) {
@@ -101,20 +48,72 @@ function sjekkMotLokalt() {
                 //Når den har funnet en instans av serverQuiz[0] i lokalequiz
                 //Ikke sjekk serverQuiz[0] igjen
                 fant = true;
-                console.log("Vi sjekker om "+serverQuizzer[i].tittel+" er lik "+lokaleQuizzer[j].tittel)
-                console.log("Fant quiz "+lokaleQuizzer[j].tittel+" i lokale quizzer");
                 break;
             }
         }
         //Hvis det ikke har en match i lokale quizzer
         if (fant != true) {
-            console.log("Legger inn quiz "+serverQuizzer[i].tittel+" i websiden")
+
             //Legg inn ny quiz i lokaleQuizzer array og i HTML
             leggInnQuiz(serverQuizzer[i]);
         }
     }
 }
 
+//Endre layout/html
+
+//Oppdater tiden det er igjen til quizzen starter
+function oppdaterTid() {
+
+    //If (tidfelt regn ut hvor mange sekunder som er igjen) < 100
+
+    for (i=0; i < lokaleQuizzer.length; i++) {
+        var selector = "#tidFelt";
+        selector += i;
+        var tidNaa = $(selector).text();
+        tidNaa--;
+        $(selector).text(tidNaa);
+    }
+}
+
+//Knapp for å navigere til quiz
+$(document).on("click", ".quizButton", function(event){
+    if (!($("#kallenavnInput").val().length === 0)) {
+        //Legg inn valgt quiz som en slags cookie
+        valgtQuiz = $(this).attr('id');
+        localStorage.setItem("quizId", valgtQuiz);
+        localStorage.setItem("kallenavn", $("#kallenavnInput").val());
+        document.location.href = "quiz.html";
+    }
+    else {
+        alert("Skriv inn et kallenavn :)")
+    }
+
+});
+
+//Knapp for å åpne scoreboardet til en quiz
+$(document).on("click", ".scoreboardKnapp", function(event){
+        valgtQuiz = $(this).attr('id');
+        localStorage.setItem("quizId", valgtQuiz);
+        localStorage.setItem("kallenavn", $("#kallenavnInput").val());
+        document.location.href = "scoreboard.html";
+
+});
+
+
+// Find and remove selected table rows
+/* WTF IS DIS
+$(".delete-row").click(function(){
+    $("table tbody").find('input[name="record"]').each(function(){
+        if($(this).is(":checked")){
+            $(this).parents("tr").remove();
+        }
+    });
+});
+*/
+
+
+//Legg inn en quiz i tabellen
 function leggInnQuiz(quiz) {
     lokaleQuizzer.push(quiz);
 
@@ -123,8 +122,12 @@ function leggInnQuiz(quiz) {
     var sekundertil = tidnaa - startTid.getTime();
     //Legacy-kode: onclick="location.href='http://google.com';" value="Go to Google"
 
+    //Brukes til å finne <td> som skal oppdateres
+    var tidFeltId = "tidFelt";
+    tidFeltId += quiz.id;
+
     //Alt herfra er bare for å få med hvilken quiz man har klikket på
-    var markupStart = "<tr><td><img style='margin-left:5px; float:left' class='scoreboardKnapp' id='"+i+"' border='0' alt='scorebaord' src='img/scoreboard-symbol.png' width='20' height='20'>"+quiz.tittel+"</td><td>" + startTid.getTime() + "</td><td>8/20</td><td class='knappfelt'><button id='";
+    var markupStart = "<tr><td><img style='margin-left:5px; float:left' class='scoreboardKnapp' id='"+i+"' border='0' alt='scorebaord' src='img/scoreboard-symbol.png' width='20' height='20'>"+quiz.tittel+"</td><td id='"+tidFeltId+"'>" + sekundertil + "</td><td>8/20</td><td class='knappfelt'><button id='";
     var markupMiddle = quiz.id;
     var markupLast = "' type='submit' class='btn btn-success btn-block quizButton' >Bli med!</button></form></td></tr>";
     var con1 = markupStart.concat(markupMiddle);
@@ -132,6 +135,28 @@ function leggInnQuiz(quiz) {
     $("table tbody").append(con2);
 }
 
+//Fjern quiz fra tabellen
 function fjernQuiz() {
 
+}
+
+//AJAX, koding mot serveren
+
+//Henter inn en array med quizzer fra serveren
+function refresh() {
+    $.ajax({
+        url: 'rest/QuizService/quiz',
+        type: 'GET',
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        success: function (result) {
+            serverQuizzer = result; //Dette er en array med quizzer
+            console.log("Lengde serverquiz: "+serverQuizzer.length);
+            if (typeof lokaleQuizzer == 'undefined') {
+                console.log("Undefined found. Setting to serverquizzer!")
+                //lokaleQuizzer = serverQuizzer;
+            }
+            sjekkMotLokalt();
+        }
+    })
 }
