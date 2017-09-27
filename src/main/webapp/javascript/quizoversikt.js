@@ -119,10 +119,12 @@ function leggInnQuiz(quiz) {
     lokaleQuizzer.push(quiz);
 
     var startTid = new Date(quiz.startDato+"T"+quiz.startTid+":00+02:00");
+    var tidnaa = new Date().getTime();
+    var sekundertil = tidnaa - startTid.getTime();
     //Legacy-kode: onclick="location.href='http://google.com';" value="Go to Google"
 
     //Alt herfra er bare for å få med hvilken quiz man har klikket på
-    var markupStart = "<tr><td><img style='margin-left:5px; float:left' class='scoreboardKnapp' id='"+i+"' border='0' alt='scorebaord' src='img/scoreboard-symbol.png' width='20' height='20'>"+quiz.tittel+"</td><td>" + startTid.toDateString() + "</td><td>8/20</td><td class='knappfelt'><button id='";
+    var markupStart = "<tr><td><img style='margin-left:5px; float:left' class='scoreboardKnapp' id='"+i+"' border='0' alt='scorebaord' src='img/scoreboard-symbol.png' width='20' height='20'>"+quiz.tittel+"</td><td>" + startTid.getTime() + "</td><td>8/20</td><td class='knappfelt'><button id='";
     var markupMiddle = quiz.id;
     var markupLast = "' type='submit' class='btn btn-success btn-block quizButton' >Bli med!</button></form></td></tr>";
     var con1 = markupStart.concat(markupMiddle);
