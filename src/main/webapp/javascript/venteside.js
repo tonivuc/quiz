@@ -1,7 +1,7 @@
 ///VIKTIG///
 //Hvis dette er true, er countdown alltid 6 sekunder
-var testerProgram = true;
-var testSekunderTilStart = 6;
+var testerProgram = false;
+var testSekunderTilStart = 12;
 
 ///VIKTIG///
 
@@ -9,13 +9,15 @@ var testSekunderTilStart = 6;
 var quizId ;
 var kallenavn;
 var tid2 = window.setInterval(ventTilStartTid,1000);
+var sekunderTilStart;
 
 var quiz = {
     tittel:"",
     id:0,
     sporsmaalArray:[],
     sporsmaalNaa:0,
-    startTidspunkt:""
+    startDato:"",
+    startTid:"",
 };
 
 //Hent stuff fra localstorage
@@ -31,12 +33,19 @@ function getKallenavn() {
 }
 
 //Kjør javascript
+getQuizId();
+getKallenavn();
 hentQuiz(quizId);
-finnTidTilStart();
+
+
+//Set opp layout
+$("#tittel").text("Hei "+kallenavn+", velkommen til ventesiden")
 
 function ventTilStartTid() {
     if (sekunderTilStart > 0) {
         sekunderTilStart--;
+        console.log("Sekunder til start satt til: "+sekunderTilStart);
+        $("#tidIgjenOutput").text("Det er "+sekunderTilStart+" sekunder til quizzen begynner")
     }
     //Har en if her så dette bare kjøres én gang
     else if (sekunderTilStart === 0) {
@@ -45,7 +54,7 @@ function ventTilStartTid() {
 }
 
 function finnTidTilStart() {
-    if (tester === true) {
+    if (testerProgram === true) {
         sekunderTilStart = testSekunderTilStart;
         console.log(sekunderTilStart);
     }
@@ -53,22 +62,8 @@ function finnTidTilStart() {
         var startTid = new Date(quiz.startDato+"T"+quiz.startTid+":00+02:00");
         var tidnaa = new Date().getTime();
         sekunderTilStart = tidnaa - startTid.getTime();
-    }
 
-}
-
-function tellNed() {
-    if (startet === true) {
-        tidIgjen = tidIgjen-1;
-        $("#tid").text(tidIgjen);
-
-        //Logikk for å gå til neste quiz, ish?
-        if (tidIgjen === 0) {
-            nesteSporsmaal();
-        }
-    }
-    else {
-        //Ingen ting
+        console.log("Sekunder til start satt til: "+sekunderTilStart);
     }
 
 }
@@ -84,8 +79,9 @@ function hentQuiz(id) {
         success: function (result) {
             quiz = result;
             console.log("Hentet ut "+quiz.tittel);
-            setupLayout();
-            leggInnSpiller();
+            console.log("Hentet ut "+quiz.startDato);
+            console.log("Hentet ut "+quiz.startTid);
+            finnTidTilStart();
         }
     })
 }

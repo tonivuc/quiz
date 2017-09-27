@@ -83,7 +83,7 @@ $(document).on("click", ".quizButton", function(event){
         valgtQuiz = $(this).attr('id');
         localStorage.setItem("quizId", valgtQuiz);
         localStorage.setItem("kallenavn", $("#kallenavnInput").val());
-        document.location.href = "quiz.html";
+        document.location.href = "venteside.html";
     }
     else {
         alert("Skriv inn et kallenavn :)")
