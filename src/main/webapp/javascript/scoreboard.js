@@ -1,7 +1,7 @@
 var spillere=[];
 
 //IF quiz spørsmål er siste spørsmål, slett quiz.
-var tid = window.setInterval(hentSpillere,1500);
+var tid = window.setInterval(hentSpillere,2000);
 
 var spiller = {
     kallenavn:"",
@@ -12,6 +12,7 @@ var quiId = 0;
 var kallenavn = "";
 var spillereLagtTil = 0;
 var quizferdig = false;
+var lagtTilAllerede = false; //Sier oss
 
 //Hent stuff fra localstorage
 function getQuizId() {
@@ -28,8 +29,12 @@ function getKallenavn() {
 
 //HUSK: Trenger metode for sortering av spillere etter score!
 
-function addSpillere(spillereLagtTil) {
-    for (i=spillereLagtTil; i < spillere.length; i++) {
+function addSpillere(slt) {
+    var startIndeks = slt;
+    for (i=startIndeks; i < spillere.length; i++) {
+        console.log("Legger spiller inn i HTML, spiller nr. "+spillereLagtTil)
+        spillereLagtTil++; //Holder oversikt over hvor mange spillere vi har lagt til
+        console.log("SpillerereLagtTil er np: "+spillereLagtTil);
         console.log("Spiller sine poeng: "+spillere[i].poeng)
         var markup = "<li class='list-group-item justify-contentbetween'>"+spillere[i].kallenavn+"<span class='badge badge-default badge-pill' id='"+i+"'>"+spillere[i].poeng+"</span></li>";
         var spesialMarkup = "<li class='list-group-item justify-contentbetween active'>"+spillere[i].kallenavn+"<span class='badge badge-default badge-pill' id='"+i+">"+spillere[i].poeng+"</span></li>";
@@ -64,7 +69,7 @@ getKallenavn();
 getQuizId();
 hentSpillere();
 
-var lagtTilAllerede = false;
+
 
 function hentSpillere() {
     $.ajax({
@@ -74,12 +79,11 @@ function hentSpillere() {
         dataType: 'json',
         success: function(result) {
             spillere = result;
-            if (lagtTilAllerede == false) {
-                addSpillere(spillereLagtTil);
-                lagtTilAllerede = true;
-            }
-
-            console.log("Returnerte spiller med kallenavn "+spillere[0].kallenavn);
+            //if (lagtTilAllerede === false) {
+            console.log("Vi er i hentSpillere. Spillere lagt til: "+spillereLagtTil)
+            addSpillere(spillereLagtTil); //Legg inn de spillerne som ikke allerede er der
+            lagtTilAllerede = true;
+            //}
             //Kan returnere ID til spilleren kanskje?/quiz/{quizId}
         },
         error: function(error) {
