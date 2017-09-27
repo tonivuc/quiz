@@ -18,7 +18,7 @@ h1 {
 #mainBody {
     margin-left: auto;
     margin-right: auto;
-    width: 50%;
+    width: 60%;
 }
 
 table, th, td {
@@ -28,8 +28,8 @@ table, th, td {
 }
 
 table {
-
     border-collapse: collapse;
+    width:100%;
 }
 
 th {
@@ -55,6 +55,7 @@ th {
 }
 
 .navnfelt {
+    width:50%;
     text-align: center;
 }
 
