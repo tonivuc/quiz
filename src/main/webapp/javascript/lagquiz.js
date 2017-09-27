@@ -5,8 +5,7 @@
         id:0,
         sporsmaalArray:[],
         sporsmaalNaa:0,
-        startDato:"",
-        startTid:"",
+        startDate:""
     };
 
     $('#manglerRiktig').hide();
@@ -91,25 +90,13 @@
         console.log(JSON.stringify(quiz));
 
         quiz.tittel = $("#navnInput").val();
-        quiz.startDato = $("#quizStartDato").val();
-        quiz.startTid = $("#quizStartTid").val();
+        quiz.startDate = new Date($("#quizStartDato").val());
+        console.log("Skriver ut dato: "+quiz.startDate);
 
+        console.log(quiz);
         console.log("Quiz stringified"+JSON.stringify(quiz));
 
-        //AJAX
-        $.ajax({
-            url: 'rest/QuizService',
-            type: 'POST',
-            data: JSON.stringify(quiz),
-            contentType: 'application/json; charset=utf-8',
-            dataType: 'json',
-            success: function (result) {
-                alert("Stringify success!");
-            },
-            error: function (err) {
-                console.log(err)
-            }
-        })
+        submitAjax();
 
         /*
         $.ajax({
@@ -124,3 +111,20 @@
 
         */
     });
+
+    function submitAjax() {
+        //AJAX
+        $.ajax({
+            url: 'rest/QuizService',
+            type: 'POST',
+            data: JSON.stringify(quiz),
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            success: function (result) {
+                alert("Stringify success!");
+            },
+            error: function (err) {
+                console.log(err)
+            }
+        })
+    }

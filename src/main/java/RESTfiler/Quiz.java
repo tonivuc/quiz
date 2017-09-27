@@ -2,6 +2,7 @@ package RESTfiler;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Quiz implements Serializable{
 
@@ -9,9 +10,9 @@ public class Quiz implements Serializable{
     int id;
     Sporsmaal[] sporsmaalArray;
     int sporsmaalNaa; //Sier oss hvilket spørsmål vi er på, index til array.
-    String startDato;
-    String startTid;
+    Date startDate;
     ArrayList<Spiller> spillere = new ArrayList<>();
+
 
     public void addSpiller(Spiller spiller) {
         spillere.add(spiller);
@@ -29,6 +30,14 @@ public class Quiz implements Serializable{
         }
         return -1;
     }
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
 
     public ArrayList<Spiller> getSpillere() {
         return spillere;
@@ -36,22 +45,6 @@ public class Quiz implements Serializable{
 
     public void setSpillere(ArrayList<Spiller> spillere) {
         this.spillere = spillere;
-    }
-
-    public String getStartDato() {
-        return startDato;
-    }
-
-    public void setStartDato(String startDato) {
-        this.startDato = startDato;
-    }
-
-    public String getStartTid() {
-        return startTid;
-    }
-
-    public void setStartTid(String startTid) {
-        this.startTid = startTid;
     }
 
     public int getSporsmaalNaa() {
