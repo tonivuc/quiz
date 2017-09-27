@@ -16,8 +16,7 @@ var quiz = {
     id:0,
     sporsmaalArray:[],
     sporsmaalNaa:0,
-    startDato:"",
-    startTid:"",
+    startDate:""
 };
 
 //Hent stuff fra localstorage
@@ -48,7 +47,7 @@ function ventTilStartTid() {
         $("#tidIgjenOutput").text("Det er "+sekunderTilStart+" sekunder til quizzen begynner")
     }
     //Har en if her så dette bare kjøres én gang
-    else if (sekunderTilStart === 0) {
+    else if (sekunderTilStart <= 0) {
         document.location.href = "quiz.html";
     }
 }
@@ -59,9 +58,10 @@ function finnTidTilStart() {
         console.log(sekunderTilStart);
     }
     else {
-        var startTid = new Date(quiz.startDato+"T"+quiz.startTid+":00+02:00");
-        var tidnaa = new Date().getTime();
-        sekunderTilStart = tidnaa - startTid.getTime();
+        var startTid = new Date(quiz.startDate);
+        var tidnaa = new Date();
+        var sekundertil = startTid.getTime() - tidnaa.getTime();
+        sekunderTilStart = sekundertil/1000;
 
         console.log("Sekunder til start satt til: "+sekunderTilStart);
     }
@@ -78,9 +78,6 @@ function hentQuiz(id) {
         dataType: 'json',
         success: function (result) {
             quiz = result;
-            console.log("Hentet ut "+quiz.tittel);
-            console.log("Hentet ut "+quiz.startDato);
-            console.log("Hentet ut "+quiz.startTid);
             finnTidTilStart();
         }
     })

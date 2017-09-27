@@ -117,12 +117,10 @@ $(".delete-row").click(function(){
 function leggInnQuiz(quiz) {
     lokaleQuizzer.push(quiz);
 
-    //var startTid = new Date(quiz.startDato+"T"+quiz.startTid+":00+02:00");
-    var startTid = new Date(quiz.startDato+"T"+quiz.startTid+":00+02:00");
-    alert(startTid.toDateString() +startTid.toTimeString());
-    var tidnaa = new Date().getTime();
-    alert(tidnaa);
-    var sekundertil = tidnaa - startTid.getTime();
+    var startTid = new Date(quiz.startDate);
+    var tidnaa = new Date();
+    var sekundertil = startTid.getTime() - tidnaa.getTime();
+    sekundertil = sekundertil/1000;
     //Legacy-kode: onclick="location.href='http://google.com';" value="Go to Google"
 
     //Brukes til å finne <td> som skal oppdateres

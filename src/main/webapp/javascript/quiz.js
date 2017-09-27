@@ -28,8 +28,7 @@ var quiz = {
     id:0,
     sporsmaalArray:[],
     sporsmaalNaa:0,
-    startDato:"",
-    startTid:"",
+    startDate:""
 };
 
 var sporsmaal = {
