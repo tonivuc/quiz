@@ -165,6 +165,7 @@ function setupLayout() {
     $("#poeng").text("Poeng: "+poeng);
     console.log("BildeURL: "+sporsmaal.bildeURL);
     $("#quizbilde").attr("src",sporsmaal.bildeURL);
+    fjernAlleSvar();
     nyeSvar();
 }
 
@@ -195,17 +196,17 @@ function nesteSporsmaal() {
     else {
         quiz.sporsmaalNaa++;
         console.log("Vi er næ på spørsmål: "+quiz.sporsmaalNaa);
-        setupLayout();
+
 
         console.log("Spørsmåltittel: "+sporsmaal.sporsmaalTekst);
         oppdaterSporsmaalNaa(); //Fortell serveren hvilket spørsmål vi er på
-        fjernAlleSvar();
+
     }
 }
 
 function fjernAlleSvar() {
     //$(".listgroup").empty(); Funker ikke på custom listen
-    for (i=0; i < sporsmaal.svarArray.length-1; i++) {
+    for (i=0; i < sporsmaal.svarArray.length; i++) {
         $("#radioParent"+i).remove();
     }
 }
