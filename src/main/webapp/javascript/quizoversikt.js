@@ -66,6 +66,7 @@ function sjekkMotLokalt() {
 
 //Oppdater tiden det er igjen til quizzen starter
 function oppdaterTid() {
+    console.log("Countern virker");
 
     //If (tidfelt regn ut hvor mange sekunder som er igjen) < 100
 
@@ -80,6 +81,7 @@ function oppdaterTid() {
             $(selector).text("Startet");
         }
         else {
+            console.log("Tidnaa"+tidNaa);
             tidNaa--;
             $(selector).text(tidNaa);
         }

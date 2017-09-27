@@ -56,6 +56,7 @@ function finnTidTilStart() {
         sekunderTilStart = testSekunderTilStart;
     }
     else {
+        console.log(quiz.startDate);
         var startTid = new Date(quiz.startDate);
         var tidnaa = new Date();
         var sekundertil = startTid.getTime() - tidnaa.getTime();
@@ -76,6 +77,9 @@ function hentQuiz(id) {
         dataType: 'json',
         success: function (result) {
             quiz = result;
+            console.log(quiz);
+            console.log(quiz.tittel);
+            console.log(quiz.startDate);
             finnTidTilStart();
         }
     })
