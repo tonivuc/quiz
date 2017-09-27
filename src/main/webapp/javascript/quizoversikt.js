@@ -30,7 +30,7 @@ function sjekkMotLokalt() {
             fjernQuiz(lokaleQuizzer[i].id);
         }
     }
-    /*
+    */
 
 
     //Sammenlign alle quizIDer i serverquizzer med quizIDer i lokaleQuizzer
@@ -153,7 +153,6 @@ function refresh() {
         dataType: 'json',
         success: function (result) {
             serverQuizzer = result; //Dette er en array med quizzer
-            console.log("Lengde serverquiz: "+serverQuizzer.length);
             if (typeof lokaleQuizzer == 'undefined') {
                 console.log("Undefined found. Setting to serverquizzer!")
                 //lokaleQuizzer = serverQuizzer;

@@ -43,7 +43,6 @@ $("#tittel").text("Hei "+kallenavn+", velkommen til ventesiden")
 function ventTilStartTid() {
     if (sekunderTilStart > 0) {
         sekunderTilStart--;
-        console.log("Sekunder til start satt til: "+sekunderTilStart);
         $("#tidIgjenOutput").text("Det er "+sekunderTilStart+" sekunder til quizzen begynner")
     }
     //Har en if her så dette bare kjøres én gang
@@ -55,7 +54,6 @@ function ventTilStartTid() {
 function finnTidTilStart() {
     if (testerProgram === true) {
         sekunderTilStart = testSekunderTilStart;
-        console.log(sekunderTilStart);
     }
     else {
         var startTid = new Date(quiz.startDate);
