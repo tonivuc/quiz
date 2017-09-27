@@ -29,13 +29,12 @@ function getKallenavn() {
 
 //HUSK: Trenger metode for sortering av spillere etter score!
 
-function addSpillere(slt) {
-    var startIndeks = slt;
+function addSpillere(startIndeks) {
     for (i=startIndeks; i < spillere.length; i++) {
-        console.log("Legger spiller inn i HTML, spiller nr. "+spillereLagtTil)
+        //console.log("Legger spiller inn i HTML, spiller nr. "+spillereLagtTil)
         spillereLagtTil++; //Holder oversikt over hvor mange spillere vi har lagt til
-        console.log("SpillerereLagtTil er np: "+spillereLagtTil);
-        console.log("Spiller sine poeng: "+spillere[i].poeng)
+        //console.log("SpillerereLagtTil er np: "+spillereLagtTil);
+        console.log("Spiller sine poeng: "+spillere[i].poeng);
         var markup = "<li class='list-group-item justify-contentbetween'>"+spillere[i].kallenavn+"<span class='badge badge-default badge-pill' id='"+i+"'>"+spillere[i].poeng+"</span></li>";
         var spesialMarkup = "<li class='list-group-item justify-contentbetween active'>"+spillere[i].kallenavn+"<span class='badge badge-default badge-pill' id='"+i+">"+spillere[i].poeng+"</span></li>";
         console.log(spillere[i].kallenavn);
@@ -55,6 +54,7 @@ function addSpillere(slt) {
         }
 
     }
+    oppdaterSpillerPoeng();
 }
 
 //Live oppdatering av poeng
