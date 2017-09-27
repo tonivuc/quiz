@@ -20,17 +20,7 @@ for (var i = 0, max = query.length; i < max; i++)
 */
 
 var tid = window.setInterval(tellNed,1000);
-var tid2 = window.setInterval(ventTilStartTid,1000);
 
-var sekunderTilStart = 0;
-var startet = false;
-
-///VIKTIG///
-//Hvis dette er true, er countdown alltid 6 sekunder
-var testerProgram = true;
-var testSekunderTilStart = 6;
-
-///VIKTIG///
 
 //Objekt og variabler
 var quiz = {
@@ -71,37 +61,14 @@ function getKallenavn() {
 
 //Generelle metoder
 function main() {
+
     getQuizId();
     getKallenavn();
     hentQuiz(quizId);
 }
 
 //Kjør javascript
-finnTidTilStart();
-
-function ventTilStartTid() {
-    if (sekunderTilStart > 0) {
-        sekunderTilStart--;
-    }
-    //Har en if her så dette bare kjøres én gang
-    else if (sekunderTilStart === 0) {
-        startet = true;
-        main();
-    }
-}
-
-function finnTidTilStart() {
-    if (tester === true) {
-        sekunderTilStart = testSekunderTilStart;
-        console.log(sekunderTilStart);
-    }
-    else {
-        var startTid = new Date(quiz.startDato+"T"+quiz.startTid+":00+02:00");
-        var tidnaa = new Date().getTime();
-        sekunderTilStart = tidnaa - startTid.getTime();
-    }
-
-}
+main();
 
 $(document).on("click", ".funkyradio-primary", function(event){
     //Legg inn valgt quiz som en slags cookie
@@ -146,19 +113,13 @@ function leggInnSvarAlternativer() {
 */
 
 function tellNed() {
-    if (startet === true) {
-        tidIgjen = tidIgjen-1;
-        $("#tid").text(tidIgjen);
+    tidIgjen = tidIgjen-1;
+    $("#tid").text(tidIgjen);
 
-        //Logikk for å gå til neste quiz, ish?
-        if (tidIgjen === 0) {
-            nesteSporsmaal();
-        }
+    //Logikk for å gå til neste quiz, ish?
+    if (tidIgjen === 0) {
+        nesteSporsmaal();
     }
-    else {
-        //Ingen ting
-    }
-
 }
 
 //Gå videre til neste spørsmål
