@@ -12,7 +12,6 @@ var quiId = 0;
 var kallenavn = "";
 var spillereLagtTil = 0;
 var quizferdig = false;
-var lagtTilAllerede = false; //Sier oss
 
 //Hent stuff fra localstorage
 function getQuizId() {
@@ -26,8 +25,21 @@ function getKallenavn() {
     $("#kallenavnOutput").text(kallenavn);
 }
 
+//Generelle metoder
+getKallenavn();
+getQuizId();
+hentSpillere();
+setTittel();
+
 
 //HUSK: Trenger metode for sortering av spillere etter score!
+
+//Endre layout/html
+
+function setTittel() {
+    $("#tittel").text("Scoreboard");
+    //Dette burde egentlig være tittelen til quizen. Some other time.
+}
 
 function addSpillere(startIndeks) {
     for (i=startIndeks; i < spillere.length; i++) {
@@ -47,7 +59,7 @@ function addSpillere(startIndeks) {
 
         if (spillere[i].kallenavn === fiksetKallenavn) {
             $(".list-group").append(spesialMarkup);
-            $("#tittel").text("Din score: "+spillere[i].poeng);
+            $("#tittelPoeng").text("Din score: "+spillere[i].poeng);
         }
         else {
             $(".list-group").append(markup);
@@ -65,12 +77,9 @@ function oppdaterSpillerPoeng() {
     }
 }
 
-getKallenavn();
-getQuizId();
-hentSpillere();
 
 
-
+//Backend-metoder
 function hentSpillere() {
     $.ajax({
         url: 'rest/QuizService/quiz/'+quizId+'/spillere',
@@ -79,12 +88,8 @@ function hentSpillere() {
         dataType: 'json',
         success: function(result) {
             spillere = result;
-            //if (lagtTilAllerede === false) {
             console.log("Vi er i hentSpillere. Spillere lagt til: "+spillereLagtTil)
             addSpillere(spillereLagtTil); //Legg inn de spillerne som ikke allerede er der
-            lagtTilAllerede = true;
-            //}
-            //Kan returnere ID til spilleren kanskje?/quiz/{quizId}
         },
         error: function(error) {
             console.log(error);

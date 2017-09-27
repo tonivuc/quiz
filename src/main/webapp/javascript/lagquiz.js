@@ -23,7 +23,9 @@
         midlertidligSvarArray.push(svar);
         $(".funkyradio").append("<div class='funkyradio-primary' id='radioParent"+knappnr+"'> <input class='radioknapp' type='radio' name='radio' id='radio"+knappnr+"'/> <label for='radio"+knappnr+"'>"+svar+"</label></div>");
         knappnr++;
+
         $('#manglerSvar').hide();
+        $("#nyttSvar").val("");
     });
 
     $(document).on("click", ".radioknapp", function(event){
@@ -51,11 +53,17 @@
                 riktigSvar:0,
                 varighet:0
             };
+            var value1=$.trim($("#nyttSporsmaalInput").val());
+            var value2=$.trim($("#spmVarighet").val());
 
-            sporsmaal.sporsmaalTekst =$("#nyttSporsmaalInput").val();
-            sporsmaal.riktigSvar = selectedKnappNr;
-            sporsmaal.varighet = $("#spmVarighet").val();
+
+            if(value1.length>0) {sporsmaal.sporsmaalTekst =value1;}
+            else {sporsmaal.sporsmaalTekst = "Stefortredende tekst"}
+            if(value2.length>0) {sporsmaal.varighet = value2;}
+            else { sporsmaal.varighet = 10;}
             sporsmaal.bildeURL = $("#spmBildeURL").val();
+            sporsmaal.riktigSvar = selectedKnappNr;
+
             //Fyll spørsmål-objektet  med svar og fjern stuff fra "Modal"
             for(i = 0; i < midlertidligSvarArray.length; i++){
                 $("#radioParent"+i+"").remove();
@@ -66,10 +74,10 @@
             $("#nyttSporsmaalInput").val("");
             $("#spmVarighet").val("");
             $("#nyttSvar").val("");
-            $("#spmBildeURL").val("http://www.petmd.com/sites/default/files/what-does-it-mean-when-cat-wags-tail.jpg")
+            $("#spmBildeURL").val("");
             console.log("Array length: "+quiz.sporsmaalArray.length);
             quiz.sporsmaalArray.push(sporsmaal);
-            console.log(quiz.sporsmaalArray[quiz.sporsmaalArray.length-1]);
+            console.log("Array length etter: "+quiz.sporsmaalArray[quiz.sporsmaalArray.length-1]);
             $("#quizSporsmaalListe").append("<a href='' class='list-group-item'>"+sporsmaal.sporsmaalTekst+"</a>");
             knappnr = 0;
         }
