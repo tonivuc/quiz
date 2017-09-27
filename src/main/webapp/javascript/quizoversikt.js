@@ -117,8 +117,11 @@ $(".delete-row").click(function(){
 function leggInnQuiz(quiz) {
     lokaleQuizzer.push(quiz);
 
+    //var startTid = new Date(quiz.startDato+"T"+quiz.startTid+":00+02:00");
     var startTid = new Date(quiz.startDato+"T"+quiz.startTid+":00+02:00");
+    alert(startTid.toDateString() +startTid.toTimeString());
     var tidnaa = new Date().getTime();
+    alert(tidnaa);
     var sekundertil = tidnaa - startTid.getTime();
     //Legacy-kode: onclick="location.href='http://google.com';" value="Go to Google"
 
