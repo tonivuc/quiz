@@ -102,7 +102,6 @@ public class QuizService {
     @Path("/quiz/{quizId}")
     @Consumes(MediaType.APPLICATION_JSON)
     public void addSpiller(@PathParam("quizId") int quizId, String kallenavn) {
-        System.out.println("Vi er inne i LEGG INN SPILLER I JAVA!");
         Spiller nySpiller = new Spiller();
         nySpiller.setKallenavn(kallenavn);
         for (int i = 0; i < quizArray.size(); i++) {
@@ -116,15 +115,21 @@ public class QuizService {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public void leggInQuiz(Quiz quiz) {
-
-        System.out.println("Quiz med tittel: "+quiz.getTittel()+" legges inn");
-
         quiz.setId(antQuizGenerert);
         antQuizGenerert = antQuizGenerert +1;
         quizArray.add(quiz);
-        System.out.println("Quiz lagt inn");
-        System.out.println("Lengde på spørsmålarray"+quizArray.get(antQuizGenerert-1).getSporsmaalArray().length);
-        System.out.println(quiz.getTittel()+" sin ID = "+quiz.getId());
+    }
+
+    @DELETE
+    @Path("quiz/{quizId}")
+    public int slettKunde(@PathParam("quizId") int quizId) {
+        for (int i = 0; i < quizArray.size(); i++) {
+            if (quizArray.get(i).getId() == quizId) {
+                quizArray.remove(i);
+                return i;
+            }
+        }
+        return -1;
     }
 
 }

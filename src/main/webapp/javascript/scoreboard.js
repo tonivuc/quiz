@@ -2,6 +2,7 @@ var spillere=[];
 
 //IF quiz spørsmål er siste spørsmål, slett quiz.
 var tid = window.setInterval(hentSpillere,2000);
+var tid2 = window.setInterval(fjernQuiz,5000); //Setter hvor lenge man venter før man fjerner quizzen. I millisekunder.
 
 var spiller = {
     kallenavn:"",
@@ -102,8 +103,7 @@ function fjernQuiz() {
         url: 'rest/QuizService/quiz/'+quizId+'',
         type: 'DELETE',
         success: function(result) {
-            $('#myTable').DataTable().ajax.reload();
-            $('#output').html(result);
+            console.log("Fjernet quiz fra indeks "+result);
         }
     });
 }

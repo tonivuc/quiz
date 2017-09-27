@@ -11,6 +11,7 @@ var tid2 = window.setInterval(oppdaterTid,1000);
 function sjekkMotLokalt() {
     //Sletter først, mindre å gå gjennom etterpå
 
+    /* Fjernekoden fungerer ikke enda. Men man kan refreshe for å fjerne
     var fant2 = false;
     //Sjekk om det finnes et element i lokaleQuizzer som ikke finnes i serverQuizzer
     //Gå gjennom alle elementer i lokaleQuizzer
@@ -26,9 +27,10 @@ function sjekkMotLokalt() {
         //Hvis vi ikke fant den lokale quizzen i serverQuizzlisten
         if (fant2 != true) {
             //Fjern den lokale quizzen fra den lokale quizlisten og HTML
-            fjernQuiz();
+            fjernQuiz(lokaleQuizzer[i].id);
         }
     }
+    /*
 
 
     //Sammenlign alle quizIDer i serverquizzer med quizIDer i lokaleQuizzer
@@ -71,7 +73,7 @@ function oppdaterTid() {
         var selector = "#tidFelt";
         selector += i;
         var tidNaa = $(selector).text();
-        if (tidNaa < -1000 || tidNaa === "Ugyldig tid") {
+        if (tidNaa < -30000 || tidNaa === "Ugyldig tid") {
             $(selector).text("Ugyldig tid");
         }
         else if (tidNaa < 0 || tidNaa === "Startet") {
@@ -124,7 +126,7 @@ function leggInnQuiz(quiz) {
     tidFeltId += quiz.id;
 
     //Alt herfra er bare for å få med hvilken quiz man har klikket på
-    var markupStart = "<tr><td><img style='margin-left:5px; float:left' class='scoreboardKnapp' id='"+i+"' border='0' alt='scorebaord' src='img/scoreboard-symbol.png' width='20' height='20'>"+quiz.tittel+"</td><td id='"+tidFeltId+"'>" + sekundertil + "</td><td>8/20</td><td class='knappfelt'><button id='";
+    var markupStart = "<tr id='rad"+quiz.id+"'><td><img style='margin-left:5px; float:left' class='scoreboardKnapp' id='"+i+"' border='0' alt='scorebaord' src='img/scoreboard-symbol.png' width='20' height='20'>"+quiz.tittel+"</td><td id='"+tidFeltId+"'>" + sekundertil + "</td><td>8/20</td><td class='knappfelt'><button id='";
     var markupMiddle = quiz.id;
     var markupLast = "' type='submit' class='btn btn-success btn-block quizButton' >Bli med!</button></form></td></tr>";
     var con1 = markupStart.concat(markupMiddle);
@@ -133,8 +135,11 @@ function leggInnQuiz(quiz) {
 }
 
 //Fjern quiz fra tabellen
-function fjernQuiz() {
-    //$("id").remove()
+function fjernQuiz(quizID) {
+    console.log("Inne i fjernQuiz");
+    var rad = "#rad"+quizID;
+    console.log("Rad: "+rad);
+    $(rad).remove();
 }
 
 //AJAX, koding mot serveren
