@@ -31,7 +31,6 @@
     });
 
     $("#sporsmaalFerdig").click(function () {
-        console.log(knappnr);
         if (knappnr <= 1) {
             $('#manglerSvar').show();
         }
@@ -39,8 +38,6 @@
             $('#manglerRiktig').show();
         }
         else {
-            console.log("Else kjører")
-            //$("#hovedModal").modal('hide');
 
             var sporsmaal = {
                 sporsmaalTekst:"",
@@ -72,9 +69,7 @@
             $("#spmVarighet").val("");
             $("#nyttSvar").val("");
             $("#spmBildeURL").val("");
-            console.log("Array length: "+quiz.sporsmaalArray.length);
             quiz.sporsmaalArray.push(sporsmaal);
-            console.log("Array length etter: "+quiz.sporsmaalArray[quiz.sporsmaalArray.length-1]);
             $("#quizSporsmaalListe").append("<a href='' class='list-group-item'>"+sporsmaal.sporsmaalTekst+"</a>");
             knappnr = 0;
             selectedKnappNr = -1;

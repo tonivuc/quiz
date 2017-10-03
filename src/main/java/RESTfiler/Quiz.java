@@ -19,7 +19,6 @@ public class Quiz implements Serializable{
     }
 
     public int oppdaterPoeng(Spiller spiller) {
-        System.out.println("Size på spillere tabell: "+spillere.size());
         for (int i = 0; i < spillere.size(); i++) {
             //Når man sammenligner strings fra serveren med vanlige strings må serverstring sine /" fjernes.
             String omformetServerNavn = spillere.get(i).getKallenavn().replaceAll("\"","");
@@ -30,6 +29,7 @@ public class Quiz implements Serializable{
         }
         return -1;
     }
+
     public Date getStartDate() {
         return startDate;
     }
@@ -37,7 +37,6 @@ public class Quiz implements Serializable{
     public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
-
 
     public ArrayList<Spiller> getSpillere() {
         return spillere;

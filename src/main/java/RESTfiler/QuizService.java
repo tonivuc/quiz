@@ -60,8 +60,6 @@ public class QuizService {
     @Path("/quiz/{quizId}/spillere")
     @Produces(MediaType.APPLICATION_JSON)
     public Spiller[] getSpillere(@PathParam("quizId") int id) {
-        //Produser tekstbeskjed
-        System.out.println("Vi er inne i getSpillere");
         for (int i = 0; i < quizArray.size(); i++) {
             if (quizArray.get(i).getId() == id) {
                 Spiller[] spillere = new Spiller[quizArray.get(i).getSpillere().size()];
@@ -69,7 +67,7 @@ public class QuizService {
                 return spillere;
             }
         }
-        System.out.println("Vi returnerer en tom spiller-array");
+        //Returnerer tom spiller-array
         return new Spiller[0];
     }
 
@@ -79,7 +77,7 @@ public class QuizService {
     public Quiz getQuiz(@PathParam("quizId") int quizId) {
         for (int i = 0; i < quizArray.size(); i++) {
             if (quizArray.get(i).getId() == quizId) {
-                System.out.println("Returnerer "+quizArray.get(i).getTittel());
+                System.out.println("Returnerer quiz: "+quizArray.get(i).getTittel());
                 return quizArray.get(i);
             }
         }
