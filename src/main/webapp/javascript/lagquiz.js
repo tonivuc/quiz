@@ -32,7 +32,7 @@
 
     $("#sporsmaalFerdig").click(function () {
         console.log(knappnr);
-        if (knappnr <= 0) {
+        if (knappnr <= 1) {
             $('#manglerSvar').show();
         }
         else if (selectedKnappNr == -1) {
@@ -77,6 +77,7 @@
             console.log("Array length etter: "+quiz.sporsmaalArray[quiz.sporsmaalArray.length-1]);
             $("#quizSporsmaalListe").append("<a href='' class='list-group-item'>"+sporsmaal.sporsmaalTekst+"</a>");
             knappnr = 0;
+            selectedKnappNr = -1;
         }
     });
 
@@ -89,13 +90,8 @@
 
         quiz.tittel = $("#navnInput").val();
         quiz.startDate = new Date($("#quizStartDato").val());
-        console.log("Skriver ut dato: "+quiz.startDate);
-
-        console.log(quiz);
-        console.log("Quiz stringified"+JSON.stringify(quiz));
 
         var link = "<a href='quizoversikt.html'>Se live quizzer! </a>"
-        console.log("Dette skjer!");
         $("#hovedSkjema").append(link);
 
         submitAjax();

@@ -9,7 +9,7 @@ var spiller = {
     poeng:0
 };
 
-var quiId = 0;
+var quiId = -1;
 var kallenavn = "";
 var spillereLagtTil = 0;
 var quizferdig = false;
@@ -44,13 +44,9 @@ function setTittel() {
 
 function addSpillere(startIndeks) {
     for (i=startIndeks; i < spillere.length; i++) {
-        //console.log("Legger spiller inn i HTML, spiller nr. "+spillereLagtTil)
         spillereLagtTil++; //Holder oversikt over hvor mange spillere vi har lagt til
-        //console.log("SpillerereLagtTil er np: "+spillereLagtTil);
-        console.log("Spiller sine poeng: "+spillere[i].poeng);
         var markup = "<li class='list-group-item justify-contentbetween'>"+spillere[i].kallenavn+"<span class='badge badge-default badge-pill' id='"+i+"'>"+spillere[i].poeng+"</span></li>";
         var spesialMarkup = "<li class='list-group-item justify-contentbetween active'>"+spillere[i].kallenavn+"<span class='badge badge-default badge-pill' id='"+i+">"+spillere[i].poeng+"</span></li>";
-        console.log(spillere[i].kallenavn);
 
         //Gjør så kallenavnavn kan sammenlignes
         var gaasoyne = '"';
@@ -89,7 +85,6 @@ function hentSpillere() {
         dataType: 'json',
         success: function(result) {
             spillere = result;
-            console.log("Vi er i hentSpillere. Spillere lagt til: "+spillereLagtTil)
             addSpillere(spillereLagtTil); //Legg inn de spillerne som ikke allerede er der
         },
         error: function(error) {
@@ -99,6 +94,7 @@ function hentSpillere() {
 }
 
 function fjernQuiz() {
+    //console.log("FjernQuiz er deaktivert av debug-grunner")
     $.ajax({
         url: 'rest/QuizService/quiz/'+quizId+'',
         type: 'DELETE',

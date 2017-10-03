@@ -61,6 +61,7 @@ public class QuizService {
     @Produces(MediaType.APPLICATION_JSON)
     public Spiller[] getSpillere(@PathParam("quizId") int id) {
         //Produser tekstbeskjed
+        System.out.println("Vi er inne i getSpillere");
         for (int i = 0; i < quizArray.size(); i++) {
             if (quizArray.get(i).getId() == id) {
                 Spiller[] spillere = new Spiller[quizArray.get(i).getSpillere().size()];
@@ -68,7 +69,8 @@ public class QuizService {
                 return spillere;
             }
         }
-        return null;
+        System.out.println("Vi returnerer en tom spiller-array");
+        return new Spiller[0];
     }
 
     @GET
