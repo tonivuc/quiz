@@ -8,9 +8,6 @@
         startDate:""
     };
 
-    $('#manglerRiktig').hide();
-    $('#manglerSvar').hide();
-
     var knappnr = 0;
     var midlertidligSvarArray = [];
     var selectedKnapp;
@@ -52,6 +49,7 @@
                 riktigSvar:0,
                 varighet:0
             };
+
             var value1=$.trim($("#nyttSporsmaalInput").val());
             var value2=$.trim($("#spmVarighet").val());
 
