@@ -106,7 +106,9 @@ $(document).on("click", ".quizButton", function(event){
 
 //Knapp for å åpne scoreboardet til en quiz
 $(document).on("click", ".scoreboardKnapp", function(event){
-        valgtQuiz = $(this).attr('id');
+    //Må ta substring her
+        valgtQuizString = $(this).attr('id');
+        valgtQuiz = valgtQuizString.slice(-1);
         localStorage.setItem("quizId", valgtQuiz);
         localStorage.setItem("kallenavn", "");
         document.location.href = "scoreboard.html";
@@ -126,9 +128,11 @@ function leggInnQuiz(quiz) {
     //Brukes til å finne <td> som skal oppdateres
     var tidFeltId = "tidFelt";
     tidFeltId += quiz.id;
+    var scoreBoardId = "scoreBoard";
+    scoreBoardId += quiz.id;
 
     //Alt herfra er bare for å få med hvilken quiz man har klikket på
-    var markupStart = "<tr id='rad"+quiz.id+"'><td><img style='margin-left:5px; float:left' class='scoreboardKnapp' id='"+i+"' border='0' alt='scorebaord' src='img/scoreboard-symbol.png' width='20' height='20'>"+quiz.tittel+"</td><td id='"+tidFeltId+"'>" + sekundertil + "</td><td>8/20</td><td class='knappfelt'><button id='";
+    var markupStart = "<tr id='rad"+quiz.id+"'><td><img style='margin-left:5px; float:left' class='scoreboardKnapp' id='"+scoreBoardId+"' border='0' alt='scorebaord' src='img/scoreboard-symbol.png' width='20' height='20'>"+quiz.tittel+"</td><td id='"+tidFeltId+"'>" + sekundertil + "</td><td>8/20</td><td class='knappfelt'><button id='";
     var markupMiddle = quiz.id;
     var markupLast = "' type='submit' class='btn btn-success btn-block quizButton' >Bli med!</button></form></td></tr>";
     var con1 = markupStart.concat(markupMiddle);

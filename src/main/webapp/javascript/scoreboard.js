@@ -64,9 +64,11 @@ function addSpillere(startIndeks) {
         else {
             $(".list-group").append(markup);
         }
+
         console.log("På slutten av loop nr: "+i+" Spillere.length = "+spillere.length);
         console.log("Startindekks: "+startIndeks);
         console.log("Spillere lagt til så langt: "+spillereLagtTil);
+
 
     }
     oppdaterSpillerPoeng();
