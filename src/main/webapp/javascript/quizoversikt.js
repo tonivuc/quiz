@@ -108,7 +108,7 @@ $(document).on("click", ".quizButton", function(event){
 $(document).on("click", ".scoreboardKnapp", function(event){
         valgtQuiz = $(this).attr('id');
         localStorage.setItem("quizId", valgtQuiz);
-        localStorage.setItem(""); //Trenger ikke kallenavn når man bare ser på quiz
+        localStorage.setItem("kallenavn", "");
         document.location.href = "scoreboard.html";
 
 });
