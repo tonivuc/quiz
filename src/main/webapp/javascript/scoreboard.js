@@ -95,11 +95,17 @@ function hentSpillere() {
 
 function fjernQuiz() {
     //console.log("FjernQuiz er deaktivert av debug-grunner")
-    $.ajax({
-        url: 'rest/QuizService/quiz/'+quizId+'',
-        type: 'DELETE',
-        success: function(result) {
-            console.log("Fjernet quiz fra indeks "+result);
-        }
-    });
+    if (kallenavn == "" || kallenavn == " " || kallenavn == "undefined")  {
+        console.log("Kallenavn er tomt, ikke slett quiz!")
+    }
+    else  {
+        $.ajax({
+            url: 'rest/QuizService/quiz/'+quizId+'',
+            type: 'DELETE',
+            success: function(result) {
+                console.log("Fjernet quiz fra indeks "+result);
+            }
+        });
+    }
+
 }

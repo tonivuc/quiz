@@ -23,6 +23,7 @@ var quizId = 0; //Lar denne være manuell for testing
 var kallenavn;
 var poeng = 0;
 var valgtSvar = 0;
+var antSvarForrigeSporsmaal = 0;
 
 
 //Hent stuff fra localstorage
@@ -71,12 +72,15 @@ function sjekkRiktigSvar() {
 //Oppdater layout
 
 function setupLayout() {
+    if (antSvarForrigeSporsmaal > 1) {
+        fjernAlleSvar();
+    }
     sporsmaal = quiz.sporsmaalArray[quiz.sporsmaalNaa];
+    antSvarForrigeSporsmaal = sporsmaal.svarArray.length;
     tidIgjen = sporsmaal.varighet;
     $("#sporsmaalTekst").text(sporsmaal.sporsmaalTekst);
     $("#poeng").text("Poeng: "+poeng);
     $("#quizbilde").attr("src",sporsmaal.bildeURL);
-    fjernAlleSvar();
     nyeSvar();
 }
 

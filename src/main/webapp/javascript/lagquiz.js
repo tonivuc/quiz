@@ -81,7 +81,6 @@
 
     //Send inn Quiz til REST-serveren
     $("#submitQuiz").click(function () {
-        console.log(JSON.stringify(quiz));
 
         quiz.tittel = $("#navnInput").val();
         quiz.startDate = new Date($("#quizStartDato").val());
@@ -90,19 +89,7 @@
         $("#hovedSkjema").append(link);
 
         submitAjax();
-
-        /*
-        $.ajax({
-            url: 'rest/lagquiz/' + $("#navnInput").val(),
-            type: 'POST',
-            success: function (result) {
-                alert("Post success!");
-            }
-        })
-
-        alert("test");
-
-        */
+        console.log(JSON.stringify(quiz));
     });
 
     function submitAjax() {
