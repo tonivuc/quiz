@@ -33,11 +33,8 @@
     $(document).on("click", ".fjern-knapp", function(event){
         var knappFjernet = $(this).parent().attr('id');
         var knappFjernetId = knappFjernet.substr(knappFjernet.length - 1); //Last index
-        quiz.sporsmaalArray.splice(knappFjernetId, 1);
+        quiz.sporsmaalArray.splice(knappFjernetId, 1);   //Må også fjernes fra spørsmålarray
         $(this).parent().remove();
-
-        //Må også fjernes fra spørsmålarray
-
     });
 
     $("#sporsmaalFerdig").click(function () {

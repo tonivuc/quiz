@@ -32,6 +32,10 @@ h1 {
 .customButtonList .date { float:right }
 .customButtonList .name { float:left }
 
+#submitQuiz {
+    margin-top:-7px;
+}
+
 
 /*
 Har lyst til å få en knapp inline
