@@ -86,15 +86,11 @@
             var linje5 = "</button></li>";
 
             $("#quizSporsmaalListe").append(linje1+linje2+linje3+linje4+linje5);
-            //$("#quizSporsmaalListe").append("<a href='' class='list-group-item' id='"+quiz.sporsmaalArray.length+"'>"+sporsmaal.sporsmaalTekst+"<span class='glyphicon glyphicon-remove'></span></a>");
 
             knappnr = 0;
             selectedKnappNr = -1;
         }
     });
-
-
-    //var myVar = setInterval(getFunksjon, 1000);
 
     //Send inn Quiz til REST-serveren
     $("#submitQuiz").click(function () {
@@ -107,6 +103,7 @@
 
         submitAjax();
         console.log(JSON.stringify(quiz));
+        document.location.href = "quizoversikt.html";
     });
 
     function submitAjax() {
@@ -118,7 +115,7 @@
             contentType: 'application/json; charset=utf-8',
             dataType: 'json',
             success: function (result) {
-                alert("Stringify success!");
+                console.log("Quiz posted!")
             },
             error: function (err) {
                 console.log(err)
