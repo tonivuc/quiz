@@ -30,6 +30,16 @@
         $('#manglerRiktig').hide();
     });
 
+    $(document).on("click", ".fjern-knapp", function(event){
+        var knappFjernet = $(this).parent().attr('id');
+        var knappFjernetId = knappFjernet.substr(knappFjernet.length - 1); //Last index
+        quiz.sporsmaalArray.splice(knappFjernetId, 1);
+        $(this).parent().remove();
+
+        //Må også fjernes fra spørsmålarray
+
+    });
+
     $("#sporsmaalFerdig").click(function () {
         if (knappnr <= 1) {
             $('#manglerSvar').show();
@@ -70,7 +80,17 @@
             $("#nyttSvar").val("");
             $("#spmBildeURL").val("");
             quiz.sporsmaalArray.push(sporsmaal);
-            $("#quizSporsmaalListe").append("<a href='' class='list-group-item'>"+sporsmaal.sporsmaalTekst+"</a>");
+
+            //Append av liste med fjern-knapp
+            var linje1 = "<li class='customButtonList list-group-item' id='sporsmaalOutput"+(quiz.sporsmaalArray.length-1)+"'>";
+            var linje2 = "<span class='name'>"+sporsmaal.sporsmaalTekst+"</span>";
+            var linje3 = "<button type='button' class='btn btn-default btn-sm date fjern-knapp'>";
+            var linje4 = "<span class='glyphicon glyphicon-remove fjern-knapp'></span> Fjern";
+            var linje5 = "</button></li>";
+
+            $("#quizSporsmaalListe").append(linje1+linje2+linje3+linje4+linje5);
+            //$("#quizSporsmaalListe").append("<a href='' class='list-group-item' id='"+quiz.sporsmaalArray.length+"'>"+sporsmaal.sporsmaalTekst+"<span class='glyphicon glyphicon-remove'></span></a>");
+
             knappnr = 0;
             selectedKnappNr = -1;
         }
