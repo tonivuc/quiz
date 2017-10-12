@@ -111,7 +111,6 @@ public class QuizService {
         }
     }
 
-
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public void leggInQuiz(Quiz quiz) {

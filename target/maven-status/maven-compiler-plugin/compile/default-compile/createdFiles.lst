@@ -1,4 +1,5 @@
-RESTfiler\Sporsmaal.class
-RESTfiler\Quiz.class
-RESTfiler\Spiller.class
-RESTfiler\QuizService.class
+RESTfiler/Sporsmaal.class
+RESTfiler/Quiz.class
+RESTfiler/QuizService.class
+RESTfiler/Spiller.class
+
