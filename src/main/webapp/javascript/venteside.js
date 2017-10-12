@@ -28,7 +28,7 @@ function getQuizId() {
 function getKallenavn() {
     kallenavn = localStorage.getItem("kallenavn");
     console.log("Kallenavn: "+kallenavn)
-    $("#kallenavnOutput").text("Hei "+kallenavn+", velkommen til ventesiden");
+    $("#kallenavnOutput").text(kallenavn);
 }
 
 //Kjør javascript

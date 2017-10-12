@@ -1,4 +1,3 @@
-
 var tid = window.setInterval(tellNed,1000);
 
 //Objekt og variabler
@@ -37,21 +36,13 @@ function getQuizId() {
 
 function getKallenavn() {
     kallenavn = localStorage.getItem("kallenavn");
-    console.log("Kallenavn: "+kallenavn)
+    console.log("Kallenavn quiz: "+kallenavn)
     $("#kallenavnOutput").text(kallenavn);
 }
 
-
-//Generelle metoder
-function main() {
-
-    getQuizId();
-    getKallenavn();
-    hentQuiz(quizId);
-}
-
-//Kjør javascript
-main();
+getQuizId();
+getKallenavn();
+hentQuiz(quizId);
 
 $(document).on("click", ".funkyradio-primary", function(event){
     //Legg inn valgt quiz som en slags cookie
