@@ -23,6 +23,7 @@ var quizId = 0; //Lar denne være manuell for testing
 var kallenavn;
 var poeng = 0;
 var valgtSvar = 0;
+var antSvarForrigeSporsmaal = 0;
 
 var getTidIgjen = function () {
     return tidIgjen;
@@ -75,14 +76,15 @@ function sjekkRiktigSvar() {
 //Oppdater layout
 
 function setupLayout() {
+    if (antSvarForrigeSporsmaal > 1) {
+        fjernAlleSvar();
+    }
     sporsmaal = quiz.sporsmaalArray[quiz.sporsmaalNaa];
-    console.log(sporsmaal.varighet);
+    antSvarForrigeSporsmaal = sporsmaal.svarArray.length;
     tidIgjen = sporsmaal.varighet;
     $("#sporsmaalTekst").text(sporsmaal.sporsmaalTekst);
     $("#poeng").text("Poeng: "+poeng);
-    console.log("BildeURL: "+sporsmaal.bildeURL);
     $("#quizbilde").attr("src",sporsmaal.bildeURL);
-    fjernAlleSvar();
     nyeSvar();
 }
 
@@ -128,10 +130,8 @@ function nesteSporsmaal() {
     }
     else {
         quiz.sporsmaalNaa++;
-        console.log("Vi er nå på spørsmål: "+quiz.sporsmaalNaa);
-        console.log("Spørsmåltittel: "+sporsmaal.sporsmaalTekst);
         oppdaterSporsmaalNaa(); //Fortell serveren hvilket spørsmål vi er på
-        //Setup layout?
+        //Setup layout
         setupLayout();
 
     }
@@ -164,7 +164,7 @@ function hentQuiz(id) {
         dataType: 'json',
         success: function (result) {
             quiz = result;
-            console.log("Hentet ut "+quiz.tittel);
+            console.log("GET-success! Hentet ut "+quiz.tittel);
             setupLayout();
             leggInnSpiller();
         }
@@ -179,7 +179,7 @@ function oppdaterSporsmaalNaa() { //Altså spørsmålnr
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
         success: function(result) {
-            console.log("Oppdaterte serveren med nåværende indeksen til nåværende spørsmål")
+            console.log("POST-success! Oppdaterte serveren med nåværende indeksen til nåværende spørsmål")
         }
     })
 }
@@ -192,7 +192,7 @@ function leggInnSpiller() {
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
         success: function(result) {
-            console.log("Kallenavn "+kallenavn+" lagt på server!")
+            console.log("POST-success! Kallenavn "+kallenavn+" lagt på server!")
             //Kan returnere ID til spilleren kanskje?/quiz/{quizId}
         },
         error: function(error) {
@@ -215,7 +215,7 @@ function oppdaterSpillerPoeng() {
             contentType: 'application/json; charset=utf-8',
             dataType: 'json',
             success: function(result) {
-                console.log("OppdaterPoeng returnerte "+result);
+                console.log("PUT-success! OppdaterPoeng returnerte "+result);
                 //Kan returnere ID til spilleren kanskje?/quiz/{quizId}
             },
             error: function(error) {
