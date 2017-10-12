@@ -49,7 +49,7 @@ function addSpillere(startIndeks) {
     for (i=startIndeks; i < spillere.length; i++) {
         spillereLagtTil++; //Holder oversikt over hvor mange spillere vi har lagt til
         var markup = "<li class='list-group-item justify-contentbetween'>"+spillere[i].kallenavn+"<span class='badge badge-default badge-pill' id='"+i+"'>"+spillere[i].poeng+"</span></li>";
-        var spesialMarkup = "<li class='list-group-item justify-contentbetween active'>"+spillere[i].kallenavn+"<span class='badge badge-default badge-pill' id='"+i+">"+spillere[i].poeng+"</span></li>";
+        var spesialMarkup = "<li class='list-group-item justify-contentbetween active'>"+spillere[i].kallenavn.replace(/"/g, "")+"<span class='badge badge-default badge-pill' id="+i+">"+spillere[i].poeng+"</span></li>";
 
         //Gjør så kallenavnavn kan sammenlignes
         var gaasoyne = '"';
