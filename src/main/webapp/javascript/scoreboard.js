@@ -43,6 +43,9 @@ function setTittel() {
 }
 
 function addSpillere(startIndeks) {
+    console.log("Inne i addSpillere. Spillere.length = "+spillere.length);
+    console.log("Startindekks: "+startIndeks);
+    console.log("Spillere lagt til så langt: "+spillereLagtTil);
     for (i=startIndeks; i < spillere.length; i++) {
         spillereLagtTil++; //Holder oversikt over hvor mange spillere vi har lagt til
         var markup = "<li class='list-group-item justify-contentbetween'>"+spillere[i].kallenavn+"<span class='badge badge-default badge-pill' id="+i+">"+spillere[i].poeng+"</span></li>";
@@ -61,6 +64,11 @@ function addSpillere(startIndeks) {
         else {
             $(".list-group").append(markup);
         }
+
+        console.log("På slutten av loop nr: "+i+" Spillere.length = "+spillere.length);
+        console.log("Startindekks: "+startIndeks);
+        console.log("Spillere lagt til så langt: "+spillereLagtTil);
+
 
     }
     oppdaterSpillerPoeng();
@@ -95,11 +103,17 @@ function hentSpillere() {
 
 function fjernQuiz() {
     //console.log("FjernQuiz er deaktivert av debug-grunner")
-    $.ajax({
-        url: 'rest/QuizService/quiz/'+quizId+'',
-        type: 'DELETE',
-        success: function(result) {
-            console.log("Fjernet quiz fra indeks "+result);
-        }
-    });
+    if (kallenavn == "" || kallenavn == " " || kallenavn == "undefined")  {
+        console.log("Kallenavn er tomt, ikke slett quiz!")
+    }
+    else  {
+        $.ajax({
+            url: 'rest/QuizService/quiz/'+quizId+'',
+            type: 'DELETE',
+            success: function(result) {
+                console.log("Fjernet quiz fra indeks "+result);
+            }
+        });
+    }
+
 }

@@ -11,8 +11,29 @@ h1 {
     transform: translate(-50%, -50%)
 }
 
+
+.btn-sm {
+    margin-left:20px;
+    margin-right:-5px;
+}
+
 #test {
     margin-left:40px;
+}
+
+.list-group {
+    margin-top:10px;
+}
+
+.customButtonList
+{
+    height: 50px;
+}
+.customButtonList .date { float:right }
+.customButtonList .name { float:left }
+
+#submitQuiz {
+    margin-top:-7px;
 }
 
 
@@ -20,5 +41,6 @@ h1 {
 Har lyst til å få en knapp inline
 .gruppering {
    //display: inline-block;
+   //Bruk SPAN!
 }
 */

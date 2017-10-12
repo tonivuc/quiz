@@ -30,6 +30,13 @@
         $('#manglerRiktig').hide();
     });
 
+    $(document).on("click", ".fjern-knapp", function(event){
+        var knappFjernet = $(this).parent().attr('id');
+        var knappFjernetId = knappFjernet.substr(knappFjernet.length - 1); //Last index
+        quiz.sporsmaalArray.splice(knappFjernetId, 1);   //Må også fjernes fra spørsmålarray
+        $(this).parent().remove();
+    });
+
     $("#sporsmaalFerdig").click(function () {
         if (knappnr <= 1) {
             $('#manglerSvar').show();
@@ -70,18 +77,23 @@
             $("#nyttSvar").val("");
             $("#spmBildeURL").val("");
             quiz.sporsmaalArray.push(sporsmaal);
-            $("#quizSporsmaalListe").append("<a href='' class='list-group-item'>"+sporsmaal.sporsmaalTekst+"</a>");
+
+            //Append av liste med fjern-knapp
+            var linje1 = "<li class='customButtonList list-group-item' id='sporsmaalOutput"+(quiz.sporsmaalArray.length-1)+"'>";
+            var linje2 = "<span class='name'>"+sporsmaal.sporsmaalTekst+"</span>";
+            var linje3 = "<button type='button' class='btn btn-default btn-sm date fjern-knapp'>";
+            var linje4 = "<span class='glyphicon glyphicon-remove fjern-knapp'></span> Fjern";
+            var linje5 = "</button></li>";
+
+            $("#quizSporsmaalListe").append(linje1+linje2+linje3+linje4+linje5);
+
             knappnr = 0;
             selectedKnappNr = -1;
         }
     });
 
-
-    //var myVar = setInterval(getFunksjon, 1000);
-
     //Send inn Quiz til REST-serveren
     $("#submitQuiz").click(function () {
-        console.log(JSON.stringify(quiz));
 
         quiz.tittel = $("#navnInput").val();
         quiz.startDate = new Date($("#quizStartDato").val());
@@ -90,19 +102,8 @@
         $("#hovedSkjema").append(link);
 
         submitAjax();
-
-        /*
-        $.ajax({
-            url: 'rest/lagquiz/' + $("#navnInput").val(),
-            type: 'POST',
-            success: function (result) {
-                alert("Post success!");
-            }
-        })
-
-        alert("test");
-
-        */
+        console.log(JSON.stringify(quiz));
+        document.location.href = "quizoversikt.html";
     });
 
     function submitAjax() {
@@ -114,7 +115,7 @@
             contentType: 'application/json; charset=utf-8',
             dataType: 'json',
             success: function (result) {
-                alert("Stringify success!");
+                console.log("Quiz posted!")
             },
             error: function (err) {
                 console.log(err)

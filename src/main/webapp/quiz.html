@@ -1,201 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- <link rel="stylesheet" type="text/css" href="css/quiz.css"> -->
-    <!-- <link rel="stylesheet" type="text/css" href="css/funkyradio.css"> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css"> <!-- Bootstrap -->
+    <link rel="stylesheet" type="text/css" href="css/quiz.css">
+    <link rel="stylesheet" type="text/css" href="css/funkyradio.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> <!-- jQuery -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="javascript/quiz.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-<div id="left">
-    <p id="kallenavnOutput">Kallenavn</p>
-    <p id="poeng"> Poeng: 60 </p>
-</div>
-<div id="center">
-    <img id="quizbilde" src="http://3milliondogs.com/blog-assets-two/2014/04/0zx20e1jvbw1.jpeg" alt="Smiley face">
-    <h1 id="sporsmaalTekst"> Det mangler spørsmål i quizzen </h1>
-    <section id="svar">
-        <div class="list-group funkyradio" id="funkyradio">
 
+    <div class="navbar navbar-default">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="quizoversikt.html">QuizMeister</a>
         </div>
-    </section>
-</div>
-<div id="right">
-    <p id="tid"> 6 </p>
-</div>
-<script src="javascript/quiz.js"></script>
-<style>
-    html, body {
-        height: 100%;
-        margin: 0;
-    }
-    div {
-        /*height: 100%;*/
-        /*background-color: #EEE;*/
-        float: left;
-    }
-    #left {
-        width:20%;
-        margin: 5px;
-        text-align:center;
-    }
-    #center {
-        margin: 5px 0;
-        width: 58%;
-        text-align:center;
-    }
-    #right {
-        margin: 5px;
-        width: 20%;
-        text-align:center;
-    }
+        <p class="navbar-text navbar-right" id="kallenavnOutput"><span class="glyphicon glyphicon-user"></span> Ola Normann </p>
+        <style>
+            #kallenavnOutput {
+                margin-right: 1%;
+            }
+        </style>
+    </div>
 
-    #svar {
-        text-align:center;
-        margin-left: auto;
-        margin-right: auto;
-    }
+    <div class="container-fluid">
+        <div class="row" id="topRow">
+            <div class="col-md-4 col-xs-12" id="left">
+                <p id="poeng"> Poeng: 60 </p>
+            </div>
+            <div class="col-md-4 col-xs-12" id="center">
+                <div id="bildeDiv">
+                    <img id="quizbilde" class="img-responsive" src="http://3milliondogs.com/blog-assets-two/2014/04/0zx20e1jvbw1.jpeg" alt="Smiley face">
+                </div>
+                <h1 id="sporsmaalTekst"> Det mangler spørsmål i quizzen </h1>
+                <section id="svar">
+                    <div class="list-group funkyradio" id="funkyradio">
+                    </div>
+                </section>
+            </div>
+            <div class="col-md-4 col-xs-12" id="right">
+                <p id="tid"></p>
+            </div>
+        </div>
+    </div>
 
-    #svar {
-        width:80%
-    }
-
-    #tid {
-        margin-top:20%;
-        font-size: 5.5em;
-    }
-
-    #poeng {
-        margin-top:20%;
-        font-size: 2.5em;
-    }
-
-    img {
-        width:50%;
-    }
-
-    .funkyradio {
-        width:100%;
-    }
-
-    .funkyradio-primary {
-        width:100%;
-    }
-
-    /* Ekstern Bootstrap-css som brukes på radio-buttons
-    */
-
-    .funkyradio div {
-        clear: both;
-        overflow: hidden;
-    }
-
-    .funkyradio label {
-        width: 100%;
-        border-radius: 3px;
-        border: 1px solid #D1D3D4;
-        font-weight: normal;
-    }
-
-    .funkyradio input[type="radio"]:empty,
-    .funkyradio input[type="checkbox"]:empty {
-        display: none;
-    }
-
-    .funkyradio input[type="radio"]:empty ~ label,
-    .funkyradio input[type="checkbox"]:empty ~ label {
-        position: relative;
-        line-height: 2.5em;
-        text-indent: 3.25em;
-        margin-top: 1em;
-        cursor: pointer;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-    }
-
-    .funkyradio input[type="radio"]:empty ~ label:before,
-    .funkyradio input[type="checkbox"]:empty ~ label:before {
-        position: absolute;
-        display: block;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        content: '';
-        width: 2.5em;
-        background: #D1D3D4;
-        border-radius: 3px 0 0 3px;
-    }
-
-    .funkyradio input[type="radio"]:hover:not(:checked) ~ label,
-    .funkyradio input[type="checkbox"]:hover:not(:checked) ~ label {
-        color: #888;
-    }
-
-    .funkyradio input[type="radio"]:hover:not(:checked) ~ label:before,
-    .funkyradio input[type="checkbox"]:hover:not(:checked) ~ label:before {
-        content: '\2714';
-        text-indent: .9em;
-        color: #C2C2C2;
-    }
-
-    .funkyradio input[type="radio"]:checked ~ label,
-    .funkyradio input[type="checkbox"]:checked ~ label {
-        color: #777;
-    }
-
-    .funkyradio input[type="radio"]:checked ~ label:before,
-    .funkyradio input[type="checkbox"]:checked ~ label:before {
-        content: '\2714';
-        text-indent: .9em;
-        color: #333;
-        background-color: #ccc;
-    }
-
-    .funkyradio input[type="radio"]:focus ~ label:before,
-    .funkyradio input[type="checkbox"]:focus ~ label:before {
-        box-shadow: 0 0 0 3px #999;
-    }
-
-    .funkyradio-default input[type="radio"]:checked ~ label:before,
-    .funkyradio-default input[type="checkbox"]:checked ~ label:before {
-        color: #333;
-        background-color: #ccc;
-    }
-
-    .funkyradio-primary input[type="radio"]:checked ~ label:before,
-    .funkyradio-primary input[type="checkbox"]:checked ~ label:before {
-        color: #fff;
-        background-color: #337ab7;
-    }
-
-    .funkyradio-success input[type="radio"]:checked ~ label:before,
-    .funkyradio-success input[type="checkbox"]:checked ~ label:before {
-        color: #fff;
-        background-color: #5cb85c;
-    }
-
-    .funkyradio-danger input[type="radio"]:checked ~ label:before,
-    .funkyradio-danger input[type="checkbox"]:checked ~ label:before {
-        color: #fff;
-        background-color: #d9534f;
-    }
-
-    .funkyradio-warning input[type="radio"]:checked ~ label:before,
-    .funkyradio-warning input[type="checkbox"]:checked ~ label:before {
-        color: #fff;
-        background-color: #f0ad4e;
-    }
-
-    .funkyradio-info input[type="radio"]:checked ~ label:before,
-    .funkyradio-info input[type="checkbox"]:checked ~ label:before {
-        color: #fff;
-        background-color: #5bc0de;
-    }
-</style>
 </body>
 </html>
