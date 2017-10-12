@@ -24,11 +24,14 @@ var kallenavn;
 var poeng = 0;
 var valgtSvar = 0;
 
+var getTidIgjen = function () {
+    return tidIgjen;
+}
 
 //Hent stuff fra localstorage
 function getQuizId() {
     quizId = localStorage.getItem("quizId");
-    console.log("QuizID= "+quizId);
+    console.log("QuizID = "+quizId);
 }
 
 function getKallenavn() {
@@ -60,6 +63,7 @@ function sjekkRiktigSvar() {
         console.log("Riktig svar!");
         return true;
     }
+
     else {
         console.log("Feil svar!");
         return false;
@@ -91,15 +95,29 @@ function leggInnSvarAlternativer() {
 }
 */
 
+visRiktigSvar();
+
 function tellNed() {
     tidIgjen--;
-    $("#tid").text(tidIgjen);
+    
+    if (tidIgjen >= 0) {
+        $("#tid").text(tidIgjen);
+    }
 
     //Logikk for å gå til neste quiz, ish?
+
     if (tidIgjen === 0) {
+        visRiktigSvar();
+    }
+
+    if (tidIgjen === -5) {
         nesteSporsmaal();
     }
 }
+
+function visRiktigSvar() {
+    $("#radioLabel" + sporsmaal.riktigSvar).css({"backgroundColor":"green"})
+};
 
 //Gå videre til neste spørsmål
 function nesteSporsmaal() {
@@ -131,7 +149,7 @@ function nyeSvar() {
     console.log("Legger inn nye svar");
     for(i = 0; i < sporsmaal.svarArray.length; i++) {
         console.log(sporsmaal.svarArray[i]);
-        $(".funkyradio").append("<div class='funkyradio-primary' id='radioParent"+i+"'> <input class='radioknapp' type='radio' name='radio' id='radio"+i+"'/> <label for='radio"+i+"'>"+sporsmaal.svarArray[i]+"</label></div>");
+        $(".funkyradio").append("<div class='funkyradio-primary' id='radioParent"+i+"'> <input class='radioknapp' type='radio' name='radio' id='radio"+i+"'/> <label for='radio"+i+"' id='radioLabel"+i+"'>"+sporsmaal.svarArray[i]+"</label></div>");
     }
 }
 

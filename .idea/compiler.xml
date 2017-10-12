@@ -7,10 +7,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="Oving4" />
+        <module name="Quizprosjekt" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="Oving4" target="1.8" />
+      <module name="Quizprosjekt" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
