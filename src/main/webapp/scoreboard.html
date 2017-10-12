@@ -8,6 +8,19 @@
 </head>
 <body>
 
+<div class="navbar navbar-default">
+    <div class="navbar-header">
+        <a class="navbar-brand" href="index.html">QuizMeister</a>
+    </div>
+    <button onclick="location.href = 'lagquiz.html'" class="btn btn-danger navbar-btn" href="" ><a href="lagquiz.html"></a>Lag Quiz</button>
+    <p class="navbar-text navbar-right" id="kallenavnOutput"><span class="glyphicon glyphicon-user"></span> Ola Normann </p>
+    <style>
+        #kallenavnOutput {
+            margin-right: 1%;
+        }
+    </style>
+</div>
+
 <div id="main">
     <div id="senter">
         <h2 id="tittel">Quiz tittel</h2>
@@ -28,7 +41,7 @@
                 </li>
             </ul>
         </div>
-        <a href="quizoversikt.html" class="button ">Tilbake til quizoversikt</a>
+        <a href="index.html" class="button ">Tilbake til quizoversikt</a>
     </div>
 </div>
 <script src="javascript/scoreboard.js"></script>
