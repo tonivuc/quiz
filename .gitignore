@@ -101,3 +101,7 @@ log/
 target/
 
 # End of https://www.gitignore.io/api/intellij
+.idea/inspectionProfiles/
+"src/main/webapp/img/Gmail - P\303\245minnelse om forfalt saldo.pdf"
+src/main/webapp/img/Gmail - Utskrift av chat med NextGenTel.pdf
+src/main/webapp/img/Utskrift av chat med NextGenTel 04_10_2017.pdf
