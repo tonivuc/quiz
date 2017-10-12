@@ -98,12 +98,12 @@
         quiz.tittel = $("#navnInput").val();
         quiz.startDate = new Date($("#quizStartDato").val());
 
-        var link = "<a href='quizoversikt.html'>Se live quizzer! </a>"
+        var link = "<a href='/Quizprogram/'></a>"
         $("#hovedSkjema").append(link);
 
         submitAjax();
         console.log(JSON.stringify(quiz));
-        document.location.href = "quizoversikt.html";
+        document.location.href = "/Quizprogram/";
     });
 
     function submitAjax() {
