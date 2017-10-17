@@ -103,7 +103,7 @@ function tellNed() {
         visRiktigSvar();
     }
 
-    if (tidIgjen === -5) {
+    if (tidIgjen === -3) {
         nesteSporsmaal();
     }
 }
