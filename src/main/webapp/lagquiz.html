@@ -18,10 +18,23 @@
     <div class="navbar-header">
         <a class="navbar-brand" href="index.html">QuizMeister</a>
     </div>
-    <button onclick="location.href = 'lagquiz.html'" class="btn btn-danger navbar-btn" href="" ><a href="lagquiz.html"></a>Lag Quiz</button>
+    <button onclick="location.href = 'lagquiz.html'" class="btn navbar-btn" href="" ><a href="lagquiz.html"></a>Lag Quiz</button>
     <style>
         #kallenavnOutput {
             margin-right: 1%;
+        }
+
+        .navbar {
+            background-color: #45ADA8;
+        }
+
+        .navbar-default .navbar-brand {
+            color: #FCFBE3;
+        }
+
+        .navbar-default .navbar-btn {
+            background-color: #547980;
+            color: #FCFBE3;
         }
     </style>
 </div>
@@ -36,9 +49,7 @@
         <p style="color:gray; margin-top:4px; margin-bottom:-4px;"> Husk å skrive inn tid :) </p>
     </div>
     <button id="nyttSporsmaal" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Lag spørsmål</button>
-        <div class="list-group" id="quizSporsmaalListe">
-        </div>
-
+        <div class="list-group" id="quizSporsmaalListe"></div>
         <button id="submitQuiz" type="button" class="btn btn-success">Publiser quiz</button>
     </form>
 
@@ -90,9 +101,13 @@
                     <p class="mb-0">Klikk på et svar du har lagt inn for å markere det som rett</p>
                 </div>
 
+                <div id="sporsmalLagtTil" class="alert alert-success collapse" role="alert">
+                    <strong>Spørsmål lagt til i quiz!</strong>
+                </div>
+
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Lukk</button>
             </div>
         </div>
 

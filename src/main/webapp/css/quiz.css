@@ -2,34 +2,40 @@
     margin-bottom: 10px;
 }
 
+.jumbotron {
+    background-color: white;
+    border: 3px solid #594F4F ;
+}
+
 .container-fluid{
     width: 70%;
 }
+
 
 #svar {
     text-align:center;
     margin-left: auto;
     margin-right: auto;
-}
-
-#svar {
     width:80%
 }
 
 #sporsmaalTekst{
+    color: #594F4F ;
     text-align: center;
 }
 
 #tid {
+    color: #594F4F ;
     text-align: center;
     margin-top:20%;
-    font-size: 5.5em;
+    font-size: 4.2em;
 }
 
 #poeng {
+    color: #594F4F ;
     text-align: center;
     margin-top:20%;
-    font-size: 2.5em;
+    font-size: 4.0em;
 }
 
 #bildeDiv {

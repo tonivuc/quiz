@@ -22,20 +22,30 @@
         <div class="navbar-header">
             <a class="navbar-brand" href="index.html">QuizMeister</a>
         </div>
-        <button onclick="location.href = 'lagquiz.html'" class="btn btn-danger navbar-btn" href="" ><a href="lagquiz.html"></a>Lag Quiz</button>
+        <button onclick="location.href = 'lagquiz.html'" class="btn navbar-btn" href="" ><a href="lagquiz.html"></a>Lag Quiz</button>
         <style>
             #kallenavnOutput {
                 margin-right: 1%;
             }
+
+            .navbar {
+                background-color: #45ADA8;
+            }
+
+            .navbar-default .navbar-brand {
+                color: #FCFBE3;
+            }
+
+            .navbar-default .navbar-btn {
+                background-color: #547980;
+                color: #FCFBE3;
+            }
+
         </style>
     </div>
 
     <h1> Live quizzer </h1>
     <div id="mainBody">
-        <div id="velgKallenavn">
-            <label>Kallenavn</label>
-             <input id="kallenavnInput" type="text" class="form-control" placeholder="Skriv inn kallenavn">
-        </div>
 
     <table id="myTable">
         <thead>
@@ -62,6 +72,35 @@
         <p style="margin:10px; color:gray"> I framtiden vil sekunder til start bare vises når det er mindre enn 100 sekunder. Og klokkeslett vises ellers. Deltagere skal byttes ut med hvilket spørsmål man er på. Og quizzer skal fjernes uten at man trenger å refreshe</p>
     </div>
 
+    <div class="container">
+
+        <!-- Modal -->
+        <div id="kallenavnModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Skriv inn kallenavn</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div id="velgKallenavn">
+                            <label>Kallenavn</label>
+                            <input id="kallenavnInput" type="text" class="form-control" placeholder="Skriv inn kallenavn">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="kallenavnOK" class="btn btn-default" data-dismiss="modal">Ok</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
     <script src="javascript/quizoversikt.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 </body>
 </html>

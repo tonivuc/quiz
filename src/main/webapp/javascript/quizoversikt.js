@@ -90,18 +90,16 @@ function oppdaterTid() {
 }
 
 //Knapp for å navigere til quiz
+var valgtQuiz;
 $(document).on("click", ".quizButton", function(event){
-    if (!($("#kallenavnInput").val().length === 0)) {
-        //Legg inn valgt quiz som en slags cookie
-        valgtQuiz = $(this).attr('id');
-        localStorage.setItem("quizId", valgtQuiz);
-        localStorage.setItem("kallenavn", $("#kallenavnInput").val());
-        document.location.href = "venteside.html";
-    }
-    else {
-        alert("Skriv inn et kallenavn :)")
-    }
+    valgtQuiz = $(this).attr('id');
+    $('#kallenavnModal').modal('show');
+});
 
+$("#kallenavnOK").click(function () {
+    localStorage.setItem("quizId", valgtQuiz);
+    localStorage.setItem("kallenavn", $("#kallenavnInput").val());
+    document.location.href = "venteside.html";
 });
 
 //Knapp for å åpne scoreboardet til en quiz
@@ -134,11 +132,12 @@ function leggInnQuiz(quiz) {
     //Alt herfra er bare for å få med hvilken quiz man har klikket på
     var markupStart = "<tr id='rad"+quiz.id+"'><td><img style='margin-left:5px; float:left' class='scoreboardKnapp' id='"+scoreBoardId+"' border='0' alt='scorebaord' src='img/scoreboard-symbol.png' width='20' height='20'>"+quiz.tittel+"</td><td id='"+tidFeltId+"'>" + sekundertil + "</td><td>8/20</td><td class='knappfelt'><button id='";
     var markupMiddle = quiz.id;
-    var markupLast = "' type='submit' class='btn btn-success btn-block quizButton' >Bli med!</button></form></td></tr>";
+    var markupLast = "' type='submit' class='btn btn-block quizButton'>Bli med!</button></form></td></tr>";
     var con1 = markupStart.concat(markupMiddle);
     var con2 = con1.concat(markupLast);
     $("table tbody").append(con2);
 }
+
 
 //Fjern quiz fra tabellen
 function fjernQuiz(quizID) {

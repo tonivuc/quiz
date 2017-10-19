@@ -103,13 +103,13 @@ function tellNed() {
         visRiktigSvar();
     }
 
-    if (tidIgjen === -5) {
+    if (tidIgjen === -3) {
         nesteSporsmaal();
     }
 }
 
 function visRiktigSvar() {
-    $("#radioLabel" + sporsmaal.riktigSvar).css({"backgroundColor":"green"})
+    $("#radioLabel" + sporsmaal.riktigSvar).css({"backgroundColor":"#9DE0AD"})
 };
 
 //Gå videre til neste spørsmål

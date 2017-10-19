@@ -15,31 +15,46 @@
         <div class="navbar-header">
             <a class="navbar-brand" href="index.html">QuizMeister</a>
         </div>
-        <button onclick="location.href = 'lagquiz.html'" class="btn btn-danger navbar-btn" href="" ><a href="lagquiz.html"></a>Lag Quiz</button>
+        <button onclick="location.href = 'lagquiz.html'" class="btn navbar-btn" href=""><a href="lagquiz.html"></a>Lag Quiz</button>
         <style>
             #kallenavnOutput {
                 margin-right: 1%;
             }
+
+            .navbar {
+                background-color: #45ADA8;
+            }
+
+            .navbar-default .navbar-brand {
+                color: #FCFBE3;
+            }
+
+            .navbar-default .navbar-btn {
+                background-color: #547980;
+                color: #FCFBE3;
+            }
         </style>
     </div>
 
-    <div class="container-fluid">
-        <div class="row" id="topRow">
-            <div class="col-md-4 col-xs-12" id="left">
-                <p id="poeng"> Poeng: 60 </p>
-            </div>
-            <div class="col-md-4 col-xs-12" id="center">
-                <div id="bildeDiv">
-                    <img id="quizbilde" class="img-responsive" src="http://3milliondogs.com/blog-assets-two/2014/04/0zx20e1jvbw1.jpeg" alt="Smiley face">
+    <div class="container-fluid" id="quizBakgrunn">
+        <div class="jumbotron">
+            <div class="row" id="topRow">
+                <div class="col-md-4 col-xs-12" id="left">
+                    <p id="poeng"> Poeng: 60 </p>
                 </div>
-                <h1 id="sporsmaalTekst"> Det mangler spørsmål i quizzen </h1>
-                <section id="svar">
-                    <div class="list-group funkyradio" id="funkyradio">
+                <div class="col-md-4 col-xs-12" id="center">
+                    <div id="bildeDiv">
+                        <img id="quizbilde" class="img-responsive" src="http://3milliondogs.com/blog-assets-two/2014/04/0zx20e1jvbw1.jpeg" alt="">
                     </div>
-                </section>
-            </div>
-            <div class="col-md-4 col-xs-12" id="right">
-                <p id="tid"></p>
+                    <h1 id="sporsmaalTekst"> Det mangler spørsmål i quizzen </h1>
+                    <section id="svar">
+                        <div class="list-group funkyradio" id="funkyradio">
+                        </div>
+                    </section>
+                </div>
+                <div class="col-md-4 col-xs-12" id="right">
+                    <p id="tid"></p>
+                </div>
             </div>
         </div>
     </div>
