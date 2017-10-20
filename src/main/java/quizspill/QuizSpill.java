@@ -64,7 +64,7 @@ public class QuizSpill {
         ferdigQuizes.add(ferdigQuiz);
     }
 
-    public static LiveQuiz startFerdigQuiz(int quizId, int startTid) {
+    public static LiveQuiz startFerdigQuiz(int quizId, long startTid) {
         Optional<FerdigQuiz> optionalTemplate = ferdigQuizes.stream()
                 .filter(quiz -> quiz.getId() == quizId).findFirst();
         if (!optionalTemplate.isPresent()) {

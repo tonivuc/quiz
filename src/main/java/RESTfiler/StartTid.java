@@ -1,13 +1,13 @@
 package RESTfiler;
 
 public class StartTid {
-    private int startTid;
+    private long startTid;
 
-    public int getStartTid() {
+    public long getStartTid() {
         return startTid;
     }
 
-    public void setStartTid(int startTid) {
+    public void setStartTid(long startTid) {
         this.startTid = startTid;
     }
 }
