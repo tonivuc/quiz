@@ -27,8 +27,6 @@ import java.util.ArrayList;
 @Path("/QuizService")
 public class QuizService {
 
-    private static ArrayList<LiveQuiz> liveQuizArray = QuizSpill.liveQuizes;
-
     @PUT
     @Path("/quiz/{quizId}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -132,6 +130,18 @@ public class QuizService {
     @Produces(MediaType.APPLICATION_JSON)
     public FerdigQuiz[] getFerdigQuizer() {
         return QuizSpill.ferdigQuizes.toArray(new FerdigQuiz[0]);
+    }
+
+    @POST
+    @Path("/ferdigquiz/{quizId}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public LiveQuiz startFerdigQuiz(@PathParam("quizId") int quizId, StartTid startTid) {
+        LiveQuiz quiz = QuizSpill.startFerdigQuiz(quizId, startTid.getStartTid());
+        if (quiz == null) {
+            throw new NotFoundException();
+        }
+        return quiz;
     }
 
 }
