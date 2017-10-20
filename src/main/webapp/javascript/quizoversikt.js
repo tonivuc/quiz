@@ -1,6 +1,7 @@
 
 //Variabler
 var serverQuizzer; //Quiz[]
+var ferdigQuizzer;
 var lokaleQuizzer = []; //Quiz[]
 var tid = window.setInterval(refresh,2000);
 var tid2 = window.setInterval(oppdaterTid,1000);
@@ -58,6 +59,7 @@ function sjekkMotLokalt() {
 
             //Legg inn ny quiz i lokaleQuizzer array og i HTML
             leggInnQuiz(serverQuizzer[i]);
+            leggInnFerdigQuiz(serverQuizzer[i]);
         }
     }
 }
@@ -113,6 +115,15 @@ $(document).on("click", ".scoreboardKnapp", function(event){
 
 });
 
+//Legg inn ferdig quiz i quizArkiv
+function leggInnFerdigQuiz(quiz) {
+    var markupStart = "<tr id='arkivRad"+quiz.id+"'><td>"+quiz.tittel+"</td><button id='arkiv";
+    var markupMiddle = quiz.id;
+    var markupLast = "' type='submit' class='btn btn-block quizArkivButton'>Start</button></td></tr>";
+    var con1 = markupStart.concat(markupMiddle);
+    var con2 = con1.concat(markupLast);
+    $("#quizArkivTable tbody").append(con2);
+}
 
 //Legg inn en quiz i tabellen
 function leggInnQuiz(quiz) {
@@ -135,7 +146,7 @@ function leggInnQuiz(quiz) {
     var markupLast = "' type='submit' class='btn btn-block quizButton'>Bli med!</button></form></td></tr>";
     var con1 = markupStart.concat(markupMiddle);
     var con2 = con1.concat(markupLast);
-    $("table tbody").append(con2);
+    $("quizA tbody").append(con2);
 }
 
 
@@ -165,6 +176,23 @@ function refresh() {
             sjekkMotLokalt();
         }
     })
+
+    $.ajax({
+        url: 'rest/QuizService/ferdigquiz',
+        type: 'GET',
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        success: function (result) {
+            ferdigQuizzer = result; //Dette er en array med quizzer
+            if (typeof lokaleQuizzer == 'undefined') {
+                console.log("Undefined found. Setting to serverquizzer!")
+                //lokaleQuizzer = serverQuizzer;
+            }
+            sjekkMotLokalt();
+        }
+    })
+
+
 }
 
 
