@@ -6,7 +6,9 @@ import RESTfiler.Sporsmaal;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
+import java.util.Optional;
 
 public class QuizSpill {
 
@@ -60,5 +62,23 @@ public class QuizSpill {
         ferdigQuiz.setTittel(liveQuiz.getTittel());
         ferdigQuiz.setSporsmaalArray(liveQuiz.getSporsmaalArray());
         ferdigQuizes.add(ferdigQuiz);
+    }
+
+    public static LiveQuiz startFerdigQuiz(int quizId, int startTid) {
+        Optional<FerdigQuiz> optionalTemplate = ferdigQuizes.stream()
+                .filter(quiz -> quiz.getId() == quizId).findFirst();
+        if (!optionalTemplate.isPresent()) {
+            return null;
+        }
+        FerdigQuiz template = optionalTemplate.get();
+
+        LiveQuiz quiz = new LiveQuiz();
+        quiz.setId(template.getId());
+        quiz.setSpillere(new ArrayList<>());
+        quiz.setSporsmaalArray(template.getSporsmaalArray());
+        quiz.setTittel(template.getTittel());
+        quiz.setStartDate(new Date(startTid));
+
+        return quiz;
     }
 }
