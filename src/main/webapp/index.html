@@ -18,89 +18,108 @@
 </head>
 <body>
 
-    <div class="navbar navbar-default">
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
         <div class="navbar-header">
             <a class="navbar-brand" href="index.html">QuizMeister</a>
         </div>
         <button onclick="location.href = 'lagquiz.html'" class="btn navbar-btn" href="" ><a href="lagquiz.html"></a>Lag Quiz</button>
-        <style>
-            #kallenavnOutput {
-                margin-right: 1%;
-            }
-
-            .navbar {
-                background-color: #45ADA8;
-            }
-
-            .navbar-default .navbar-brand {
-                color: #FCFBE3;
-            }
-
-            .navbar-default .navbar-btn {
-                background-color: #547980;
-                color: #FCFBE3;
-            }
-
-        </style>
     </div>
+    <style>
+        #kallenavnOutput {
+            margin-right: 1%;
+        }
 
-    <h1> Live quizzer </h1>
-    <div id="mainBody">
+        .navbar {
+            background-color: #45ADA8;
+        }
 
-    <table id="myTable">
-        <thead>
-        <tr><th class="navnfelt">Navn</th><th class="tidfelt">Start om (s)</th><th class="deltagerfelt">Deltagere</th><th class="knappfelt"></th>
-        </tr></thead>
-        <tbody>
-        <tr>
-            <td class="navnfelt">Lørdagsquiz
-                <img style="margin-left:5px; float:left" border="0" alt="scorebaord" src="img/scoreboard-symbol.png" width="20" height="20"></td>
-            <td class="tidfelt">18:32 </td>
-            <td class="deltagerfelt">20/20 </td>
-            <td class="knappfelt"><button type="button" class="btn btn-dark btn-block">Fullt</button></td>
-        </tr>
-        <tr>
-            <td class="navnfelt">Placeholderquiz
-                <img style="margin-left:5px; float:left" border="0" alt="scorebaord" src="img/scoreboard-symbol.png" width="20" height="20"></td>
-            <td class="tidfelt">17:54 </td>
-            <td class="deltagerfelt">10/10 </td>
-            <td class="knappfelt"><button type="button" class="btn btn-dark btn-block">Fullt</button></td>
-        </tr>
+        .navbar-default .navbar-brand {
+            color: #FCFBE3;
+        }
 
-        </tbody>
-    </table>
-        <p style="margin:10px; color:gray"> I framtiden vil sekunder til start bare vises når det er mindre enn 100 sekunder. Og klokkeslett vises ellers. Deltagere skal byttes ut med hvilket spørsmål man er på. Og quizzer skal fjernes uten at man trenger å refreshe</p>
-    </div>
+        .navbar-default .navbar-btn {
+            background-color: #547980;
+            color: #FCFBE3;
+        }
 
-    <div class="container">
+    </style>
+</nav>
 
-        <!-- Modal -->
-        <div id="kallenavnModal" class="modal fade" role="dialog">
-            <div class="modal-dialog">
+<div class="container" id="mainContainer">
+    <div class="row">
+        <div class="col-lg-9 col-sm-12 no-float" id="mainBody">
+            <h1> Live quizzer </h1>
+            <table id="myTable">
+                <thead>
+                <tr><th class="navnfelt">Navn</th><th class="tidfelt">Start om (s)</th><th class="deltagerfelt">Deltagere</th><th class="knappfelt"></th>
+                </tr></thead>
+                <tbody>
+                <tr>
+                    <td class="navnfelt">Lørdagsquiz
+                        <img style="margin-left:5px; float:left" border="0" alt="scorebaord" src="img/scoreboard-symbol.png" width="20" height="20"></td>
+                    <td class="tidfelt">18:32 </td>
+                    <td class="deltagerfelt">20/20 </td>
+                    <td class="knappfelt"><button type="button" class="btn btn-dark btn-block">Fullt</button></td>
+                </tr>
+                <tr>
+                    <td class="navnfelt">Placeholderquiz
+                        <img style="margin-left:5px; float:left" border="0" alt="scorebaord" src="img/scoreboard-symbol.png" width="20" height="20"></td>
+                    <td class="tidfelt">17:54 </td>
+                    <td class="deltagerfelt">10/10 </td>
+                    <td class="knappfelt"><button type="button" class="btn btn-dark btn-block">Fullt</button></td>
+                </tr>
 
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Skriv inn kallenavn</h4>
-                    </div>
-                    <div class="modal-body">
-                        <div id="velgKallenavn">
-                            <label>Kallenavn</label>
-                            <input id="kallenavnInput" type="text" class="form-control" placeholder="Skriv inn kallenavn">
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" id="kallenavnOK" class="btn btn-default" data-dismiss="modal">Ok</button>
-                    </div>
-                </div>
+                </tbody>
+            </table>
+            <p style="margin:10px; color:gray"> I framtiden vil sekunder til start bare vises når det er mindre enn 100 sekunder. Og klokkeslett vises ellers. Deltagere skal byttes ut med hvilket spørsmål man er på. Og quizzer skal fjernes uten at man trenger å refreshe</p>
+        </div>
 
-            </div>
+        <div class="col-lg-3 col-sm-12 no-float" id="ferdigQuizCol">
+            <h1>Quizarkiv</h1>
+            <table id="quizArkivTable">
+                <thead><tr><th class="navnfelt"></th></tr></thead>
+                <tbody></tbody>
+            </table>
         </div>
     </div>
+</div>
 
-    <script src="javascript/quizoversikt.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+
+
+
+
+
+<div class="container" id="leggTilKallenavn">
+    <!-- Modal -->
+    <div id="kallenavnModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Skriv inn kallenavn</h4>
+                </div>
+                <div class="modal-body">
+                    <div id="velgKallenavn">
+                        <label>Kallenavn</label>
+                        <input id="kallenavnInput" type="text" class="form-control" placeholder="Skriv inn kallenavn">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="kallenavnOK" class="btn btn-default" data-dismiss="modal">Ok</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script src="javascript/quizoversikt.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 </body>
 </html>

@@ -40,6 +40,23 @@ function getKallenavn() {
     $("#kallenavnOutput").text(kallenavn);
 }
 
+//Interaksjon med REST-server
+//Hent quiz-objekt fra server
+function hentQuiz(id) {
+    $.ajax({
+        url: 'rest/QuizService/quiz/'+id+'',
+        type: 'GET',
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        success: function (result) {
+            quiz = result;
+            console.log("GET-success! Hentet ut "+quiz.tittel);
+            setupLayout();
+            leggInnSpiller();
+        }
+    })
+}
+
 getQuizId();
 getKallenavn();
 hentQuiz(quizId);
@@ -63,6 +80,26 @@ function sjekkRiktigSvar() {
 }
 
 
+function fjernAlleSvar() {
+    //$(".listgroup").empty(); Funker ikke på custom listen
+    for (i=0; i < sporsmaal.svarArray.length; i++) {
+        $("#radioParent"+i).remove();
+    }
+}
+
+function nyeSvar() {
+    //For lengden av spørsm
+    console.log("Legger inn nye svar");
+    for(i = 0; i < sporsmaal.svarArray.length;) {
+        console.log(sporsmaal.svarArray[i]);
+        $(".funkyradio1").append("<div class='funkyradio-primary' id='radioParent"+i+"'><input class='radioknapp' type='radio' name='radio' id='radio"+i+"'/> <label for='radio"+i+"' id='radioLabel"+i+"'>"+sporsmaal.svarArray[i]+"</label></div>");
+        i++;
+        if (sporsmaal.svarArray[i] == null) break;
+        console.log(sporsmaal.svarArray[i]);
+        $(".funkyradio2").append("<div class='funkyradio-primary' id='radioParent"+i+"'><input class='radioknapp' type='radio' name='radio' id='radio"+i+"'/> <label for='radio"+i+"' id='radioLabel"+i+"'>"+sporsmaal.svarArray[i]+"</label></div>");
+        i++;
+    }
+}
 
 //Oppdater layout
 
@@ -126,40 +163,6 @@ function nesteSporsmaal() {
         setupLayout();
 
     }
-}
-
-function fjernAlleSvar() {
-    //$(".listgroup").empty(); Funker ikke på custom listen
-    for (i=0; i < sporsmaal.svarArray.length; i++) {
-        $("#radioParent"+i).remove();
-    }
-}
-
-function nyeSvar() {
-    //For lengden av spørsm
-    console.log("Legger inn nye svar");
-    for(i = 0; i < sporsmaal.svarArray.length; i++) {
-        console.log(sporsmaal.svarArray[i]);
-        $(".funkyradio").append("<div class='funkyradio-primary' id='radioParent"+i+"'> <input class='radioknapp' type='radio' name='radio' id='radio"+i+"'/> <label for='radio"+i+"' id='radioLabel"+i+"'>"+sporsmaal.svarArray[i]+"</label></div>");
-    }
-}
-
-
-//Interaksjon med REST-server
-//Hent quiz-objekt fra server
-function hentQuiz(id) {
-    $.ajax({
-        url: 'rest/QuizService/quiz/'+id+'',
-        type: 'GET',
-        contentType: 'application/json; charset=utf-8',
-        dataType: 'json',
-        success: function (result) {
-            quiz = result;
-            console.log("GET-success! Hentet ut "+quiz.tittel);
-            setupLayout();
-            leggInnSpiller();
-        }
-    })
 }
 
 function oppdaterSporsmaalNaa() { //Altså spørsmålnr
