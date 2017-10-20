@@ -1,6 +1,6 @@
 package RESTfiler;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import quizspill.QuizSpill;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -27,17 +27,15 @@ import java.util.ArrayList;
 @Path("/QuizService")
 public class QuizService {
 
-    static ArrayList<Quiz> quizArray = new ArrayList<Quiz>();
-    static int antQuizGenerert = 0;
-
+    private static ArrayList<LiveQuiz> liveQuizArray = QuizSpill.liveQuizes;
 
     @PUT
     @Path("/quiz/{quizId}")
     @Produces(MediaType.APPLICATION_JSON)
     public int leggInnPoeng(@PathParam("quizId") int quizId, Spiller spiller) {
-        for (int i = 0; i < quizArray.size(); i++) {
-            if (quizArray.get(i).getId() == quizId) {
-                return quizArray.get(i).oppdaterPoeng(spiller);
+        for (int i = 0; i < QuizSpill.liveQuizes.size(); i++) {
+            if (QuizSpill.liveQuizes.get(i).getId() == quizId) {
+                return QuizSpill.liveQuizes.get(i).oppdaterPoeng(spiller);
             }
         }
         return -1;
@@ -47,11 +45,11 @@ public class QuizService {
     @GET
     @Path("/quiz")
     @Produces(MediaType.APPLICATION_JSON)
-    public Quiz[] getQuizzer() {
+    public LiveQuiz[] getQuizzer() {
         //Produser tekstbeskjed
-        Quiz[] quizzer = new Quiz[quizArray.size()];
-        for (int i = 0; i < quizArray.size(); i++) {
-            quizzer[i] = quizArray.get(i);
+        LiveQuiz[] quizzer = new LiveQuiz[QuizSpill.liveQuizes.size()];
+        for (int i = 0; i < QuizSpill.liveQuizes.size(); i++) {
+            quizzer[i] = QuizSpill.liveQuizes.get(i);
         }
         return quizzer;
     }
@@ -60,10 +58,10 @@ public class QuizService {
     @Path("/quiz/{quizId}/spillere")
     @Produces(MediaType.APPLICATION_JSON)
     public Spiller[] getSpillere(@PathParam("quizId") int id) {
-        for (int i = 0; i < quizArray.size(); i++) {
-            if (quizArray.get(i).getId() == id) {
-                Spiller[] spillere = new Spiller[quizArray.get(i).getSpillere().size()];
-                spillere = quizArray.get(i).getSpillere().toArray(spillere);
+        for (int i = 0; i < QuizSpill.liveQuizes.size(); i++) {
+            if (QuizSpill.liveQuizes.get(i).getId() == id) {
+                Spiller[] spillere = new Spiller[QuizSpill.liveQuizes.get(i).getSpillere().size()];
+                spillere = QuizSpill.liveQuizes.get(i).getSpillere().toArray(spillere);
                 return spillere;
             }
         }
@@ -74,11 +72,11 @@ public class QuizService {
     @GET
     @Path("/quiz/{quizId}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Quiz getQuiz(@PathParam("quizId") int quizId) {
-        for (int i = 0; i < quizArray.size(); i++) {
-            if (quizArray.get(i).getId() == quizId) {
-                System.out.println("Returnerer quiz: "+quizArray.get(i).getTittel());
-                return quizArray.get(i);
+    public LiveQuiz getQuiz(@PathParam("quizId") int quizId) {
+        for (int i = 0; i < QuizSpill.liveQuizes.size(); i++) {
+            if (QuizSpill.liveQuizes.get(i).getId() == quizId) {
+                System.out.println("Returnerer quiz: "+ QuizSpill.liveQuizes.get(i).getTittel());
+                return QuizSpill.liveQuizes.get(i);
             }
         }
         return null;
@@ -90,10 +88,10 @@ public class QuizService {
     @POST
     @Path("/sporsmaal")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void oppdaterSporsmaalNr(Quiz quizInn) {
-        for (int i = 0; i < quizArray.size(); i++) {
-            if (quizInn.getId() == quizArray.get(i).getId()) {
-                quizArray.get(i).setSporsmaalNaa(quizInn.getSporsmaalNaa());
+    public void oppdaterSporsmaalNr(LiveQuiz liveQuizInn) {
+        for (int i = 0; i < QuizSpill.liveQuizes.size(); i++) {
+            if (liveQuizInn.getId() == QuizSpill.liveQuizes.get(i).getId()) {
+                QuizSpill.liveQuizes.get(i).setSporsmaalNaa(liveQuizInn.getSporsmaalNaa());
             }
         }
     }
@@ -104,31 +102,35 @@ public class QuizService {
     public void addSpiller(@PathParam("quizId") int quizId, String kallenavn) {
         Spiller nySpiller = new Spiller();
         nySpiller.setKallenavn(kallenavn);
-        for (int i = 0; i < quizArray.size(); i++) {
-            if (quizArray.get(i).getId() == quizId) {
-                quizArray.get(i).addSpiller(nySpiller);
+        for (int i = 0; i < QuizSpill.liveQuizes.size(); i++) {
+            if (QuizSpill.liveQuizes.get(i).getId() == quizId) {
+                QuizSpill.liveQuizes.get(i).addSpiller(nySpiller);
             }
         }
     }
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public void leggInQuiz(Quiz quiz) {
-        quiz.setId(antQuizGenerert);
-        antQuizGenerert = antQuizGenerert +1;
-        quizArray.add(quiz);
+    public void leggInQuiz(LiveQuiz liveQuiz) {
+        QuizSpill.addQuiz(liveQuiz);
     }
 
     @DELETE
     @Path("quiz/{quizId}")
     public int slettKunde(@PathParam("quizId") int quizId) {
-        for (int i = 0; i < quizArray.size(); i++) {
-            if (quizArray.get(i).getId() == quizId) {
-                quizArray.remove(i);
+        for (int i = 0; i < QuizSpill.liveQuizes.size(); i++) {
+            if (QuizSpill.liveQuizes.get(i).getId() == quizId) {
+                QuizSpill.liveQuizes.remove(i);
                 return i;
             }
         }
         return -1;
+    }
+
+    @GET
+    @Path("/ferdigquiz")
+    public FerdigQuiz[] getFerdigQuizer() {
+        return QuizSpill.ferdigQuizes.toArray(new FerdigQuiz[0]);
     }
 
 }
