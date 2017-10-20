@@ -14,7 +14,7 @@
     var selectedKnappNr = -1;
 
     //Legger inn nytt
-    function leggTilSporsmal() {
+    function leggTilSvar() {
         var svar = $("#nyttSvar").val();
         midlertidligSvarArray.push(svar);
         $(".funkyradio").append("<div class='funkyradio-primary' id='radioParent" + knappnr + "'> <input class='radioknapp' type='radio' name='radio' id='radio" + knappnr + "'/> <label for='radio" + knappnr + "'>" + svar + "</label></div>");
@@ -22,16 +22,16 @@
 
         $('#manglerSvar').hide();
         $("#nyttSvar").val("");
-        $("#nyttSvar").focus();
+        $("#nyttSvar").focus(); //Setter fokus tilbake til input for å legge til nytt svar
     }
 
-    $("#nyttSvarKnapp").click(leggTilSporsmal);
+    $("#nyttSvarKnapp").click(leggTilSvar); //Legger til et svar når du trykker på "legg til svar"-knappen
 
-
+    //Hvis input for å legge til svar er i fokus kan man trykke enter for å legge til det svaret
     $(document).keypress(function (event) {
         var code = event.keyCode;
        if(code == 13 && $("#nyttSvar").is(":focus")) {
-           leggTilSporsmal();
+           leggTilSvar();
        }
     });
 

@@ -55,18 +55,34 @@ function sjekkMotLokalt() {
     }
 }
 
-//Endre layout/html
-
-//Oppdater tiden det er igjen til quizzen starter
+//Oppdater tiden det er igjen til quizen starter
 function oppdaterTid() {
-
     //If (tidfelt regn ut hvor mange sekunder som er igjen) < 100
-    console.log("oppdaterer tid");
     for (i=0; i < lokaleQuizzer.length; i++) {
 
+        //Formaterer fra sekunder igjen til start, til dager, timer, minutter og sekunder igjen til start.
+        var tidTilQuiz = Math.round((lokaleQuizzer[i].startDate - Date.now()) / 1000);
+        var startTid = tidTilQuiz;
+        var days = Math.floor(tidTilQuiz / (3600*24));
+        startTid = startTid  % (3600*24);
+        hrs = Math.floor(startTid / 3600);
+        startTid = startTid % 3600;
+        mnts = Math.floor(startTid / 60);
+        startTid = startTid % 60;
+        secs = startTid;
+
+        //Legger til alt som ikke er lik 0 i til i en String som vises i tabellen
+        var tidTilQuizString = "";
+        if (days != 0) tidTilQuizString += days + " dager, ";
+        if (days != 0 || hrs != 0) tidTilQuizString += hrs + " timer, ";
+        if (days != 0 || hrs != 0 || mnts != 0) tidTilQuizString += mnts + " minutter, ";
+        tidTilQuizString += secs + " sekunder";
+
+
+        //tidNaa brukes som en gjemt atributt for å sortere tabellen etter tid
         var selector = "#tidFelt";
         selector += lokaleQuizzer[i].id;
-        var tidNaa = $(selector).text();
+        var tidNaa = $("#sekTilStart"+lokaleQuizzer[i].id).text();
         if (tidNaa < -30000 || tidNaa === "Ugyldig tid") {
             $(selector).text("Ugyldig tid");
         }
@@ -75,21 +91,28 @@ function oppdaterTid() {
         }
         else {
             tidNaa--;
-            $(selector).text(tidNaa);
+            $(selector).text(tidTilQuizString);
+            $("#sekTilStart"+lokaleQuizzer[i].id).text(tidNaa);
         }
     }
 }
 
+
+var valgtQuiz; //Variabel som sier hvilken quiz brukeren har trykt på
+
 //Knapp for å navigere til quiz
-var valgtQuiz;
 $(document).on("click", ".quizButton", function(event){
     valgtQuiz = $(this).attr('id');
     $('#kallenavnModal').modal('show');
 });
 
-var valgtFerdigQuiz;
+
+var valgtFerdigQuiz; //Variabel som sier hvilken av de ferdiglagde quizzene brukeren har trykt på
+
+//Knapp for å gi brukeren mulighet til å velge starttidspunkt for den ferdiglagde quizen han/hun har trykt på
 $(document).on("click", ".quizArkivButton", function(event) {
 
+    //Setter opp dateTime-velgeren
     $('.form_datetime').datetimepicker({
         language:  'nb',
         weekStart: 1,
@@ -106,7 +129,10 @@ $(document).on("click", ".quizArkivButton", function(event) {
 
 });
 
+//Logikk for hva som skal skje når bruker har valgt/ikke valgt startid for ferdiglagd quiz og trykt "ok"
 $("#startTidOk").click(function () {
+
+    //Hvis bruker ikke har valgt starttid kommer det opp en varsel om at bruker ikke har valgt starttid
     if ($("#dateTimePickerInput").val() == "") {
         $("#manglerStarttid").show();
 
@@ -120,6 +146,7 @@ $("#startTidOk").click(function () {
 
         date = new Date(dateParts[2], parseInt(dateParts[1], 10) - 1, dateParts[0], timeParts[0], timeParts[1]);
 
+        //Dato og tid fra DateTime-velgeren sendes til Rest-serveren og gjøres om til en liveQuiz.
         $.ajax({
             url: 'rest/QuizService/ferdigquiz/' + valgtFerdigQuiz,
             type: 'POST',
@@ -133,9 +160,9 @@ $("#startTidOk").click(function () {
         });
 
         $("#startTidModal").modal('toggle');
-
     }
 });
+
 
 $("#kallenavnOK").click(function () {
     localStorage.setItem("quizId", valgtQuiz);
@@ -189,7 +216,7 @@ function leggInnQuiz(quiz) {
     scoreBoardId += quiz.id;
 
     //Alt herfra er bare for å få med hvilken quiz man har klikket på
-    var markupStart = "<tr id='rad"+quiz.id+"'><td><img style='margin-left:5px; float:left' class='scoreboardKnapp' id='"+scoreBoardId+"' border='0' alt='scorebaord' src='img/scoreboard-symbol.png' width='20' height='20'>"+quiz.tittel+"</td><td id='"+tidFeltId+"'>" + sekundertil + "</td><td class='knappfelt'><button id='";
+    var markupStart = "<tr id='rad"+quiz.id+"'><td><img style='margin-left:5px; float:left' class='scoreboardKnapp' id='"+scoreBoardId+"' border='0' alt='scorebaord' src='img/scoreboard-symbol.png' width='20' height='20'>"+quiz.tittel+"</td><td id='"+tidFeltId+"'></td><td class='sekunderTilStart' id='sekTilStart"+quiz.id+"'>"+sekundertil+"</td><td class='knappfelt'><button id='";
     var markupMiddle = quiz.id;
     var markupLast = "' type='submit' class='btn btn-block quizButton'>Bli med!</button></form></td></tr>";
     var con1 = markupStart.concat(markupMiddle);
@@ -208,7 +235,7 @@ function fjernQuiz(quizID) {
 
 //AJAX, koding mot serveren
 
-//Henter inn en array med quizzer fra serveren
+//Henter inn en array med live og ferdiglagde quizer fra serveren
 function refresh() {
     $.ajax({
         url: 'rest/QuizService/quiz',
@@ -237,16 +264,13 @@ function refresh() {
             }
 
             sjekkMotLokalt();
+
+            //Sorterer quizene, den som begynner om kortest tid kommer øverst osv.
             if (lokaleQuizzer.length != 0) {
-                $("#myTable").tablesorter( {sortList: [[1,0]]});  // <-- 'myTable' is the id of your table
+                $("#myTable").tablesorter( {sortList: [[2,0]]});  // <-- 'myTable' is the id of your table
             }
-
         }
-
-
     });
-
-
 }
 
 

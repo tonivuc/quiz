@@ -46,14 +46,12 @@ th {
     padding-bottom:4px;
 }
 
-.tidfelt {
-    width:10%;
-    text-align: center;
+.tidfelt{
+    width:100%;
 }
 
-.deltagerfelt {
-    width:15%;
-    text-align: center;
+.sekunderTilStart {
+    display: none;
 }
 
 .navnfelt {
