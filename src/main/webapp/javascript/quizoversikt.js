@@ -1,3 +1,4 @@
+refresh();
 
 //Variabler
 var serverQuizzer; //Quiz[]
@@ -60,10 +61,11 @@ function sjekkMotLokalt() {
 function oppdaterTid() {
 
     //If (tidfelt regn ut hvor mange sekunder som er igjen) < 100
+    console.log("oppdaterer tid");
+    for (i=0; i < lokaleQuizzer.length; i++) {
 
-    for (i=0; i < lokaleQuizzer.length + 1; i++) {
         var selector = "#tidFelt";
-        selector += i;
+        selector += lokaleQuizzer[i].id;
         var tidNaa = $(selector).text();
         if (tidNaa < -30000 || tidNaa === "Ugyldig tid") {
             $(selector).text("Ugyldig tid");
@@ -75,7 +77,6 @@ function oppdaterTid() {
             tidNaa--;
             $(selector).text(tidNaa);
         }
-
     }
 }
 
@@ -188,7 +189,7 @@ function leggInnQuiz(quiz) {
     scoreBoardId += quiz.id;
 
     //Alt herfra er bare for å få med hvilken quiz man har klikket på
-    var markupStart = "<tr id='rad"+quiz.id+"'><td><img style='margin-left:5px; float:left' class='scoreboardKnapp' id='"+scoreBoardId+"' border='0' alt='scorebaord' src='img/scoreboard-symbol.png' width='20' height='20'>"+quiz.tittel+"</td><td id='"+tidFeltId+"'>" + sekundertil + "</td><td>8/20</td><td class='knappfelt'><button id='";
+    var markupStart = "<tr id='rad"+quiz.id+"'><td><img style='margin-left:5px; float:left' class='scoreboardKnapp' id='"+scoreBoardId+"' border='0' alt='scorebaord' src='img/scoreboard-symbol.png' width='20' height='20'>"+quiz.tittel+"</td><td id='"+tidFeltId+"'>" + sekundertil + "</td><td class='knappfelt'><button id='";
     var markupMiddle = quiz.id;
     var markupLast = "' type='submit' class='btn btn-block quizButton'>Bli med!</button></form></td></tr>";
     var con1 = markupStart.concat(markupMiddle);
@@ -234,10 +235,21 @@ function refresh() {
                 console.log("Undefined found. Setting to serverquizzer!")
                 //lokaleQuizzer = serverQuizzer;
             }
+
             sjekkMotLokalt();
+            if (lokaleQuizzer.length != 0) {
+                $("#myTable").tablesorter( {sortList: [[1,0]]});  // <-- 'myTable' is the id of your table
+            }
+
         }
+
+
     });
+
+
 }
+
+
 
 
 // Find and remove selected table rows
