@@ -22,8 +22,9 @@
     <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
 
-    <link rel="stylesheet" type="text/css" href="css/quizoversikt.css">
+    <link href="bootstrapDateTimePicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> <!-- Bootstrap -->
+    <link rel="stylesheet" type="text/css" href="css/quizoversikt.css">
     <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="http://cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
     <meta charset="UTF-8">
@@ -95,7 +96,7 @@
         <div class="col-lg-3 col-sm-12 no-float" id="ferdigQuizCol">
             <h1>Quizarkiv</h1>
             <table id="quizArkivTable">
-                <thead><tr><th class="navnfelt"></th></tr></thead>
+                <thead><tr><th class="navnfelt">Navn</th><th class="knappfelt"></th></tr></thead>
                 <tbody></tbody>
             </table>
         </div>
@@ -135,8 +136,48 @@
     </div>
 </div>
 
+<div class="container" id="velgStartForFerdigQuiz">
+    <!-- Modal -->
+    <div id="startTidModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Skriv inn starttid for quiz</h4>
+                </div>
+                <div class="modal-body">
+                    <div id="velgStartTid">
+                        <div class="input-group" id="dateTimePicker">
+                            <div class="input-group date form_datetime" data-date="" data-date-format="dd mm yyyy - hh:ii:ss" data-link-field="dtp_input1">
+                                <span class="input-group-addon lagQuizAddon">Start for Quiz</span>
+                                <input class="form-control" type="text" value="" readonly id="dateTimePickerInput">
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                            </div>
+                            <input type="hidden" id="dtp_input1" class="form-control" value="" /><br/>
+                        </div>
+                    </div>
+
+                    <!-- Alert! Mangler starttid -->
+                    <div id="manglerStarttid" class="alert alert-danger collapse" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+                        <p class="alert-heading">Du må legge til starttid for quizen først!</p>>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="startTidOk" class="btn btn-default">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <script src="javascript/quizoversikt.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="bootstrapDateTimePicker/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+<script type="text/javascript" src="bootstrapDateTimePicker/js/locales/bootstrap-datetimepicker.nb.js" charset="UTF-8"></script>
 
 </body>
 </html>
