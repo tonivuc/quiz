@@ -129,6 +129,7 @@ public class QuizService {
 
     @GET
     @Path("/ferdigquiz")
+    @Produces(MediaType.APPLICATION_JSON)
     public FerdigQuiz[] getFerdigQuizer() {
         return QuizSpill.ferdigQuizes.toArray(new FerdigQuiz[0]);
     }
