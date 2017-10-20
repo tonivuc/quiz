@@ -1,8 +1,9 @@
 
 //Variabler
 var serverQuizzer; //Quiz[]
-var ferdigQuizzer;
 var lokaleQuizzer = []; //Quiz[]
+var ferdigQuizzer;
+var lokaleFerdigQuizzer = [];
 var tid = window.setInterval(refresh,2000);
 var tid2 = window.setInterval(oppdaterTid,1000);
 
@@ -59,7 +60,20 @@ function sjekkMotLokalt() {
 
             //Legg inn ny quiz i lokaleQuizzer array og i HTML
             leggInnQuiz(serverQuizzer[i]);
-            leggInnFerdigQuiz(serverQuizzer[i]);
+        }
+    }
+
+    var fantFerdigQuiz = false;
+    for (i = 0; i < ferdigQuizzer.length; i++) {
+        for (j = 0;  j < lokaleFerdigQuizzer.length; j++) {
+            fantFerdigQuiz = false;
+            if (ferdigQuizzer[i].id == lokaleFerdigQuizzer[j].id) {
+                fant = true;
+                break;
+            }
+        }
+        if (!fant) {
+            leggInnFerdigQuiz(ferdigQuizzer[i]);
         }
     }
 }
@@ -68,11 +82,10 @@ function sjekkMotLokalt() {
 
 //Oppdater tiden det er igjen til quizzen starter
 function oppdaterTid() {
-    console.log("Countern virker");
 
     //If (tidfelt regn ut hvor mange sekunder som er igjen) < 100
 
-    for (i=0; i < lokaleQuizzer.length; i++) {
+    for (i=0; i < lokaleQuizzer.length + 1; i++) {
         var selector = "#tidFelt";
         selector += i;
         var tidNaa = $(selector).text();
@@ -83,7 +96,6 @@ function oppdaterTid() {
             $(selector).text("Startet");
         }
         else {
-            console.log("Tidnaa"+tidNaa);
             tidNaa--;
             $(selector).text(tidNaa);
         }
@@ -96,6 +108,10 @@ var valgtQuiz;
 $(document).on("click", ".quizButton", function(event){
     valgtQuiz = $(this).attr('id');
     $('#kallenavnModal').modal('show');
+});
+
+$(document).on("click", ".quizArkivButton", function(event) {
+   console.log("JASDASd")
 });
 
 $("#kallenavnOK").click(function () {
@@ -117,9 +133,11 @@ $(document).on("click", ".scoreboardKnapp", function(event){
 
 //Legg inn ferdig quiz i quizArkiv
 function leggInnFerdigQuiz(quiz) {
-    var markupStart = "<tr id='arkivRad"+quiz.id+"'><td>"+quiz.tittel+"</td><button id='arkiv";
+
+    lokaleFerdigQuizzer.push(quiz);
+    var markupStart = "<tr id='rad"+quiz.id+"'><td>"+quiz.tittel+"</td><td class='knappfelt'><button id='";
     var markupMiddle = quiz.id;
-    var markupLast = "' type='submit' class='btn btn-block quizArkivButton'>Start</button></td></tr>";
+    var markupLast = "' type='submit' class='btn btn-block quizArkivButton'>Start</button></form></td></tr>";
     var con1 = markupStart.concat(markupMiddle);
     var con2 = con1.concat(markupLast);
     $("#quizArkivTable tbody").append(con2);
@@ -146,7 +164,7 @@ function leggInnQuiz(quiz) {
     var markupLast = "' type='submit' class='btn btn-block quizButton'>Bli med!</button></form></td></tr>";
     var con1 = markupStart.concat(markupMiddle);
     var con2 = con1.concat(markupLast);
-    $("quizA tbody").append(con2);
+    $("#myTable tbody").append(con2);
 }
 
 
@@ -173,9 +191,8 @@ function refresh() {
                 console.log("Undefined found. Setting to serverquizzer!")
                 //lokaleQuizzer = serverQuizzer;
             }
-            sjekkMotLokalt();
         }
-    })
+    });
 
     $.ajax({
         url: 'rest/QuizService/ferdigquiz',
@@ -190,9 +207,7 @@ function refresh() {
             }
             sjekkMotLokalt();
         }
-    })
-
-
+    });
 }
 
 
