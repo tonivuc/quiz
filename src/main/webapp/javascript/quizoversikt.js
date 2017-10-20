@@ -124,9 +124,9 @@ $("#startTidOk").click(function () {
             type: 'POST',
             contentType: 'application/json; charset=utf-8',
             dataType: 'json',
-            data: {
+            data: JSON.stringify({
                 startTid: date.getTime(),
-            },
+            }),
             success: function (result) {
             }
         });
