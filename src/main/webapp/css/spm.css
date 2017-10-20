@@ -4,10 +4,10 @@
 
 .jumbotron {
     background-color: white;
-    border: 3px solid #594F4F ;
+    border: 3px solid #594F4F;
 }
 
-.container-fluid{
+#quizBakgrunn{
     width: 70%;
 }
 
@@ -20,19 +20,19 @@
 }
 
 #sporsmaalTekst{
-    color: #594F4F ;
+    color: #594F4F;
     text-align: center;
 }
 
 #tid {
-    color: #594F4F ;
+    color: #594F4F;
     text-align: center;
     margin-top:20%;
     font-size: 4.2em;
 }
 
 #poeng {
-    color: #594F4F ;
+    color: #594F4F;
     text-align: center;
     margin-top:20%;
     font-size: 4.0em;

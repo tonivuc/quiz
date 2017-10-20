@@ -1,8 +1,8 @@
 var spillere=[];
 
 //IF quiz spørsmål er siste spørsmål, slett quiz.
-var tid = window.setInterval(hentSpillere,2000);
-var tid2 = window.setInterval(fjernQuiz,5000); //Setter hvor lenge man venter før man fjerner quizzen. I millisekunder.
+//var tid = window.setInterval(hentSpillere,2000);
+//var tid2 = window.setInterval(fjernQuiz,5000); //Setter hvor lenge man venter før man fjerner quizzen. I millisekunder.
 
 var spiller = {
     kallenavn:"",
@@ -46,6 +46,14 @@ function addSpillere(startIndeks) {
     console.log("Inne i addSpillere. Spillere.length = "+spillere.length);
     console.log("Startindekks: "+startIndeks);
     console.log("Spillere lagt til så langt: "+spillereLagtTil);
+    //console.log("!!!Alle spillerene" + spillere[0].kallenavn);
+
+    spillere.push({kallenavn: "Supergirl", poeng: 14});
+    spillere.push({kallenavn: "Quizknusemanden", poeng: 2});
+    spillere.push({kallenavn: "Deathbringer", poeng: 1});
+
+    spillere.sort(function(a,b) {return (a.poeng > b.poeng) ? -1 : ((b.poeng > a.poeng) ? 1 : 0);} );
+
     for (i=startIndeks; i < spillere.length; i++) {
         spillereLagtTil++; //Holder oversikt over hvor mange spillere vi har lagt til
         var markup = "<li class='list-group-item justify-contentbetween'>"+spillere[i].kallenavn+"<span class='badge badge-default badge-pill' id="+i+">"+spillere[i].poeng+"</span></li>";
