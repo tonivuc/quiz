@@ -11,30 +11,6 @@ var tid2 = window.setInterval(oppdaterTid,1000);
 
 //Legger til og fjerner quizzer lokalt avhengig av hvordan det ser ut på serveren
 function sjekkMotLokalt() {
-    //Sletter først, mindre å gå gjennom etterpå
-
-    /* Fjernekoden fungerer ikke enda. Men man kan refreshe for å fjerne
-    var fant2 = false;
-    //Sjekk om det finnes et element i lokaleQuizzer som ikke finnes i serverQuizzer
-    //Gå gjennom alle elementer i lokaleQuizzer
-    for (i = 0; i < lokaleQuizzer.length; i++) {
-        //Sjekk om hver i i lokaleQuizzer finnes i serverQuizzer
-        for (j = 0; j < serverQuizzer.length; j++) {
-            //Hvis vi fant den lokale quizzen i serverquizzlisten
-            if (lokaleQuizzer[i].id == serverQuizzer[j].id) {
-                fant2 = true;
-                break;
-            }
-        }
-        //Hvis vi ikke fant den lokale quizzen i serverQuizzlisten
-        if (fant2 != true) {
-            //Fjern den lokale quizzen fra den lokale quizlisten og HTML
-            fjernQuiz(lokaleQuizzer[i].id);
-        }
-    }
-    */
-
-
     //Sammenlign alle quizIDer i serverquizzer med quizIDer i lokaleQuizzer
     //Legg inn nye quizzer
     var fant = false;
@@ -117,18 +93,25 @@ $(document).on("click", ".quizArkivButton", function(event) {
 $("#kallenavnOK").click(function () {
     localStorage.setItem("quizId", valgtQuiz);
     localStorage.setItem("kallenavn", $("#kallenavnInput").val());
-    document.location.href = "venteside.html";
+});
+
+$(document).keypress(function (event) {
+    var code = event.keyCode;
+    if(code == 13 && $("#kallenavnInput").is(":focus")) {
+        localStorage.setItem("quizId", valgtQuiz);
+        localStorage.setItem("kallenavn", $("#kallenavnInput").val());
+        document.location.href = "venteside.html";
+    }
 });
 
 //Knapp for å åpne scoreboardet til en quiz
 $(document).on("click", ".scoreboardKnapp", function(event){
     //Må ta substring her
-        valgtQuizString = $(this).attr('id');
-        valgtQuiz = valgtQuizString.slice(-1);
-        localStorage.setItem("quizId", valgtQuiz);
-        localStorage.setItem("kallenavn", "");
-        document.location.href = "scoreboard.html";
-
+    valgtQuizString = $(this).attr('id');
+    valgtQuiz = valgtQuizString.slice(-1);
+    localStorage.setItem("quizId", valgtQuiz);
+    localStorage.setItem("kallenavn", "");
+    document.location.href = "scoreboard.html";
 });
 
 //Legg inn ferdig quiz i quizArkiv
