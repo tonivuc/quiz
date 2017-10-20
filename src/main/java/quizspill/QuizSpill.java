@@ -73,12 +73,13 @@ public class QuizSpill {
         FerdigQuiz template = optionalTemplate.get();
 
         LiveQuiz quiz = new LiveQuiz();
-        quiz.setId(template.getId());
+        quiz.setId(++antQuizGenerert);
         quiz.setSpillere(new ArrayList<>());
         quiz.setSporsmaalArray(template.getSporsmaalArray());
         quiz.setTittel(template.getTittel());
         quiz.setStartDate(new Date(startTid));
 
+        liveQuizes.add(quiz);
         return quiz;
     }
 }
