@@ -52,13 +52,11 @@ public class QuizSpill {
     }
 
     public static void addQuiz(LiveQuiz liveQuiz) {
-        int newId = ++antQuizGenerert;
-
-        liveQuiz.setId(newId);
+        liveQuiz.setId(++antQuizGenerert);
         liveQuizes.add(liveQuiz);
 
         FerdigQuiz ferdigQuiz = new FerdigQuiz();
-        ferdigQuiz.setId(newId);
+        ferdigQuiz.setId(++antQuizGenerert);
         ferdigQuiz.setTittel(liveQuiz.getTittel());
         ferdigQuiz.setSporsmaalArray(liveQuiz.getSporsmaalArray());
         ferdigQuizes.add(ferdigQuiz);
