@@ -37,7 +37,7 @@ function getQuizId() {
 function getKallenavn() {
     kallenavn = localStorage.getItem("kallenavn");
     console.log("Kallenavn quiz: "+kallenavn)
-    $("#kallenavnOutput").text(kallenavn);
+    $("#kallenavnOutput").html(kallenavn);
 }
 
 getQuizId();
