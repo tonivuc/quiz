@@ -63,8 +63,10 @@ hentQuiz(quizId);
 
 $(document).on("click", ".funkyradio-primary", function(event){
     //Legg inn valgt quiz som en slags cookie
-    valgtSvarKnapp = $(this).attr('id');
-    valgtSvar= valgtSvarKnapp.substr(valgtSvarKnapp.length - 1); //Få tak i indeksen som kan brukes i sporsmaal.sporsmaalArray
+    if (tidIgjen > 0) {
+        valgtSvarKnapp = $(this).attr('id');
+        valgtSvar= valgtSvarKnapp.substr(valgtSvarKnapp.length - 1); //Få tak i indeksen som kan brukes i sporsmaal.sporsmaalArray
+    }
 });
 
 function sjekkRiktigSvar() {
@@ -134,6 +136,7 @@ function tellNed() {
     //Logikk for å gå til neste quiz, ish?
 
     if (tidIgjen === 0) {
+        $(".radioknapp").prop("disabled", true);
         visRiktigSvar();
     }
 
