@@ -167,6 +167,7 @@ $("#startTidOk").click(function () {
 $("#kallenavnOK").click(function () {
     localStorage.setItem("quizId", valgtQuiz);
     localStorage.setItem("kallenavn", $("#kallenavnInput").val());
+    document.location.href = "venteside.html";
 });
 
 $(document).keypress(function (event) {
