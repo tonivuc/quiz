@@ -48,9 +48,9 @@ function addSpillere(startIndeks) {
     console.log("Spillere lagt til så langt: "+spillereLagtTil);
     //console.log("!!!Alle spillerene" + spillere[0].kallenavn);
 
-    spillere.push({kallenavn: "Supergirl", poeng: 14});
-    spillere.push({kallenavn: "Quizknusemanden", poeng: 2});
-    spillere.push({kallenavn: "Deathbringer", poeng: 1});
+    spillere.push({kallenavn: "Supergirl", poeng: 10});
+    spillere.push({kallenavn: "Quizknusemanden", poeng: 20});
+    spillere.push({kallenavn: "Deathbringer", poeng: 0});
 
     spillere.sort(function(a,b) {return (a.poeng > b.poeng) ? -1 : ((b.poeng > a.poeng) ? 1 : 0);} );
 
