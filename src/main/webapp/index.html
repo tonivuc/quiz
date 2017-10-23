@@ -2,11 +2,29 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Quizmaister</title>
 
-    <link rel="stylesheet" type="text/css" href="css/quizoversikt.css">
+    <link rel="apple-touch-icon" sizes="57x57" href="img/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="img/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="img/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="img/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="img/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="img/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="img/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="img/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="img/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="img/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon/favicon-16x16.png">
+    <link rel="manifest" href="img/favicon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
 
+    <link href="bootstrapDateTimePicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> <!-- Bootstrap -->
+    <link rel="stylesheet" type="text/css" href="css/quizoversikt.css">
     <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="http://cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
     <meta charset="UTF-8">
@@ -18,50 +36,147 @@
 </head>
 <body>
 
-    <div class="navbar navbar-default">
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
         <div class="navbar-header">
             <a class="navbar-brand" href="index.html">QuizMeister</a>
         </div>
-        <button onclick="location.href = 'lagquiz.html'" class="btn btn-info navbar-btn" href="" ><a href="lagquiz.html"></a>Lag Quiz</button>
-        <style>
-            #kallenavnOutput {
-                margin-right: 1%;
-            }
-        </style>
+        <button onclick="location.href = 'lagquiz.html'" class="btn navbar-btn" href="" ><a href="lagquiz.html"></a>Lag Quiz</button>
     </div>
+    <style>
+        #kallenavnOutput {
+            margin-right: 1%;
+        }
 
-    <h1> Live quizzer </h1>
-    <div id="mainBody">
-        <div id="velgKallenavn">
-            <label>Kallenavn</label>
-             <input id="kallenavnInput" type="text" class="form-control" placeholder="Skriv inn kallenavn">
+        .navbar {
+            background-color: #45ADA8;
+        }
+
+        .navbar-default .navbar-brand {
+            color: #FCFBE3;
+        }
+
+        .navbar-default .navbar-btn {
+            background-color: #547980;
+            color: #FCFBE3;
+        }
+
+    </style>
+</nav>
+
+<div class="container" id="mainContainer">
+    <div class="row">
+        <div class="col-lg-9 col-sm-12 no-float" id="mainBody">
+            <h1> Live quizzer </h1>
+            <table id="myTable" class="tablesorter">
+                <thead>
+                <tr>
+                    <th class="navnfelt">Navn</th>
+                    <th class="sekunderTilStart"></th>
+                    <th class="tidfelt">Starter om</th>
+                    <th class="knappfelt"></th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <!--
+                <tr>
+                    <td class="navnfelt">Lørdagsquiz
+                        <img style="margin-left:5px; float:left" border="0" alt="scorebaord" src="img/scoreboard-symbol.png" width="20" height="20"></td>
+                    <td class="tidfelt">18:32 </td>
+                    <td class="deltagerfelt">20/20 </td>
+                    <td class="knappfelt"><button type="button" class="btn btn-dark btn-block">Fullt</button></td>
+                </tr>
+                <tr>
+                    <td class="navnfelt">Placeholderquiz
+                        <img style="margin-left:5px; float:left" border="0" alt="scorebaord" src="img/scoreboard-symbol.png" width="20" height="20"></td>
+                    <td class="tidfelt">17:54 </td>
+                    <td class="deltagerfelt">10/10 </td>
+                    <td class="knappfelt"><button type="button" class="btn btn-dark btn-block">Fullt</button></td>
+                </tr>
+                -->
+                </tbody>
+            </table>
         </div>
 
-    <table id="myTable">
-        <thead>
-        <tr><th class="navnfelt">Navn</th><th class="tidfelt">Start om (s)</th><th class="deltagerfelt">Deltagere</th><th class="knappfelt"></th>
-        </tr></thead>
-        <tbody>
-        <tr>
-            <td class="navnfelt">Lørdagsquiz
-                <img style="margin-left:5px; float:left" border="0" alt="scorebaord" src="img/scoreboard-symbol.png" width="20" height="20"></td>
-            <td class="tidfelt">18:32 </td>
-            <td class="deltagerfelt">20/20 </td>
-            <td class="knappfelt"><button type="button" class="btn btn-dark btn-block">Fullt</button></td>
-        </tr>
-        <tr>
-            <td class="navnfelt">Placeholderquiz
-                <img style="margin-left:5px; float:left" border="0" alt="scorebaord" src="img/scoreboard-symbol.png" width="20" height="20"></td>
-            <td class="tidfelt">17:54 </td>
-            <td class="deltagerfelt">10/10 </td>
-            <td class="knappfelt"><button type="button" class="btn btn-dark btn-block">Fullt</button></td>
-        </tr>
-
-        </tbody>
-    </table>
-        <p style="margin:10px; color:gray"> I framtiden vil sekunder til start bare vises når det er mindre enn 100 sekunder. Og klokkeslett vises ellers. Deltagere skal byttes ut med hvilket spørsmål man er på. Og quizzer skal fjernes uten at man trenger å refreshe</p>
+        <div class="col-lg-3 col-sm-12 no-float" id="ferdigQuizCol">
+            <h1>Quizarkiv</h1>
+            <table id="quizArkivTable">
+                <thead><tr><th class="navnfelt">Navn</th><th class="knappfelt"></th></tr></thead>
+                <tbody></tbody>
+            </table>
+        </div>
     </div>
+</div>
 
-    <script src="javascript/quizoversikt.js"></script>
+<div class="container" id="leggTilKallenavn">
+    <!-- Modal -->
+    <div id="kallenavnModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Skriv inn kallenavn</h4>
+                </div>
+                <div class="modal-body">
+                    <div id="velgKallenavn">
+                        <label>Kallenavn</label>
+                        <input id="kallenavnInput" type="text" class="form-control" placeholder="Skriv inn kallenavn">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="kallenavnOK" class="btn btn-default" data-dismiss="modal">Ok</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="container" id="velgStartForFerdigQuiz">
+    <!-- Modal -->
+    <div id="startTidModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Skriv inn starttid for quiz</h4>
+                </div>
+                <div class="modal-body">
+                    <div id="velgStartTid">
+                        <div class="input-group" id="dateTimePicker">
+                            <div class="input-group date form_datetime" data-date="" data-date-format="dd mm yyyy - hh:ii:ss" data-link-field="dtp_input1">
+                                <span class="input-group-addon lagQuizAddon">Start for Quiz</span>
+                                <input class="form-control" type="text" value="" readonly id="dateTimePickerInput">
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                            </div>
+                            <input type="hidden" id="dtp_input1" class="form-control" value="" /><br/>
+                        </div>
+                    </div>
+
+                    <!-- Alert! Mangler starttid -->
+                    <div id="manglerStarttid" class="alert alert-danger collapse" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+                        <p class="alert-heading">Du må legge til starttid for quizen først!</p>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="startTidOk" class="btn btn-default">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="javascript/quizoversikt.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="bootstrapDateTimePicker/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+<script type="text/javascript" src="bootstrapDateTimePicker/js/locales/bootstrap-datetimepicker.nb.js" charset="UTF-8"></script>
+<script type="text/javascript" src="tablesorter/tablesorter-master/jquery.tablesorter.min.js"></script>
+
 </body>
 </html>

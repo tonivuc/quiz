@@ -14,14 +14,25 @@
     var selectedKnappNr = -1;
 
     //Legger inn nytt
-    $("#nyttSvarKnapp").click(function () {
+    function leggTilSvar() {
         var svar = $("#nyttSvar").val();
         midlertidligSvarArray.push(svar);
-        $(".funkyradio").append("<div class='funkyradio-primary' id='radioParent"+knappnr+"'> <input class='radioknapp' type='radio' name='radio' id='radio"+knappnr+"'/> <label for='radio"+knappnr+"'>"+svar+"</label></div>");
+        $(".funkyradio").append("<div class='funkyradio-primary' id='radioParent" + knappnr + "'> <input class='radioknapp' type='radio' name='radio' id='radio" + knappnr + "'/> <label for='radio" + knappnr + "'>" + svar + "</label></div>");
         knappnr++;
 
         $('#manglerSvar').hide();
         $("#nyttSvar").val("");
+        $("#nyttSvar").focus(); //Setter fokus tilbake til input for å legge til nytt svar
+    }
+
+    $("#nyttSvarKnapp").click(leggTilSvar); //Legger til et svar når du trykker på "legg til svar"-knappen
+
+    //Hvis input for å legge til svar er i fokus kan man trykke enter for å legge til det svaret
+    $(document).keypress(function (event) {
+        var code = event.keyCode;
+       if(code == 13 && $("#nyttSvar").is(":focus")) {
+           leggTilSvar();
+       }
     });
 
     $(document).on("click", ".radioknapp", function(event){
@@ -89,6 +100,11 @@
 
             knappnr = 0;
             selectedKnappNr = -1;
+            $("#sporsmalLagtTil").show();
+            $("#sporsmalLagtTil").fadeTo(2000, 500).slideUp(500, function(){
+                $("#sporsmalLagtTil").slideUp(500);
+            });
+
         }
     });
 

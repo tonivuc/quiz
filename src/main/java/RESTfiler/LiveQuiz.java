@@ -1,10 +1,12 @@
 package RESTfiler;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Quiz implements Serializable{
+public class LiveQuiz implements Serializable{
 
     String tittel;
     int id;
@@ -78,6 +80,12 @@ public class Quiz implements Serializable{
         this.sporsmaalArray = sporsmaalArray;
     }
 
-
+    public LocalDateTime getSluttTid() {
+        LocalDateTime sluttTid = LocalDateTime.ofInstant(startDate.toInstant(), ZoneId.systemDefault());
+        for (Sporsmaal question : sporsmaalArray) {
+            sluttTid = sluttTid.plusSeconds(question.varighet);
+        }
+        return sluttTid;
+    }
 
 }

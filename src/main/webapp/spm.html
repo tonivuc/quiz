@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Quizmaister</title>
+
+    <link rel="apple-touch-icon" sizes="57x57" href="img/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="img/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="img/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="img/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="img/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="img/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="img/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="img/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="img/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="img/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon/favicon-16x16.png">
+    <link rel="manifest" href="img/favicon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css"> <!-- Bootstrap -->
+    <link rel="stylesheet" type="text/css" href="css/spm.css">
+    <link rel="stylesheet" type="text/css" href="css/funkyradio.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> <!-- jQuery -->
+    <script src="javascript/spm.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+    <div class="navbar navbar-default">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="index.html">QuizMeister</a>
+        </div>
+        <button onclick="location.href = 'lagquiz.html'" class="btn navbar-btn" href=""><a href="lagquiz.html"></a>Lag Quiz</button>
+        <style>
+            #kallenavnOutput {
+                margin-right: 1%;
+            }
+
+            .navbar {
+                background-color: #45ADA8;
+            }
+
+            .navbar-default .navbar-brand {
+                color: #FCFBE3;
+            }
+
+            .navbar-default .navbar-btn {
+                background-color: #547980;
+                color: #FCFBE3;
+            }
+        </style>
+    </div>
+
+    <div class="container-fluid" id="quizBakgrunn">
+        <div class="jumbotron">
+            <div class="row" id="topRow">
+                <div class="col-md-4 col-xs-12" id="left">
+                    <p id="poeng"> Poeng: </p>
+                </div>
+                <div class="col-md-4 col-xs-12" id="center">
+                    <div id="bildeDiv">
+                        <img id="quizbilde" class="img-responsive" src="http://3milliondogs.com/blog-assets-two/2014/04/0zx20e1jvbw1.jpeg" alt="">
+                    </div>
+                    <h1 id="sporsmaalTekst"> Det mangler spørsmål i quizzen </h1>
+                    <section id="svar">
+                        <div class="list-group funkyradio" id="funkyradio">
+                        </div>
+                    </section>
+                </div>
+                <div class="col-md-4 col-xs-12" id="right">
+                    <p id="tid"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
+
+<!--<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <section id="svar1">
+                <div class="list-group funkyradio" id="funkyradio1">
+                </div>
+            </section>
+        </div>
+        <div class="col-md-6">
+            <section id="svar2">
+                <div class="list-group funkyradio" id="funkyradio2">
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+</div>-->

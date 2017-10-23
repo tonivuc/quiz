@@ -47,7 +47,7 @@ function ventTilStartTid() {
     }
     //Har en if her så dette bare kjøres én gang
     else if (sekunderTilStart <= 0) {
-        document.location.href = "quiz.html";
+        document.location.href = "../spm.html";
     }
 }
 

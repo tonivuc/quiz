@@ -1,6 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <title>Scoreboard</title>
+    <link rel="apple-touch-icon" sizes="57x57" href="img/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="img/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="img/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="img/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="img/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="img/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="img/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="img/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="img/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="img/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon/favicon-16x16.png">
+    <link rel="manifest" href="img/favicon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
     <link rel="stylesheet" type="text/css" href="css/scoreboard.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css"> <!-- Bootstrap -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> <!-- jQuery -->
@@ -12,11 +31,24 @@
     <div class="navbar-header">
         <a class="navbar-brand" href="index.html">QuizMeister</a>
     </div>
-    <button onclick="location.href = 'lagquiz.html'" class="btn btn-danger navbar-btn" href="" ><a href="lagquiz.html"></a>Lag Quiz</button>
+    <button onclick="location.href = 'lagquiz.html'" class="btn navbar-btn" href="" ><a href="lagquiz.html"></a>Lag Quiz</button>
     <p class="navbar-text navbar-right" id="kallenavnOutput"><span class="glyphicon glyphicon-user"></span> Ola Normann </p>
     <style>
         #kallenavnOutput {
             margin-right: 1%;
+        }
+
+        .navbar {
+            background-color: #45ADA8;
+        }
+
+        .navbar-default .navbar-brand {
+            color: #FCFBE3;
+        }
+
+        .navbar-default .navbar-btn {
+            background-color: #547980;
+            color: #FCFBE3;
         }
     </style>
 </div>
@@ -26,20 +58,7 @@
         <h2 id="tittel">Quiz tittel</h2>
         <h3 id="tittelPoeng" style="text-align:center"> Du er ikke en del av denne quizzen </h3>
         <div class="row">
-            <ul class="list-group">
-                <li class="list-group-item justify-content-between">
-                    Supergirl96
-                    <span class="badge badge-default badge-pill">14</span>
-                </li>
-                <li class="list-group-item justify-content-between">
-                    Quizknusemanden
-                    <span class="badge badge-default badge-pill">2</span>
-                </li>
-                <li class="list-group-item justify-content-between">
-                    Deathbringer
-                    <span class="badge badge-default badge-pill">1</span>
-                </li>
-            </ul>
+            <ul class="list-group"></ul>
         </div>
         <a href="index.html" class="button ">Tilbake til quizoversikt</a>
     </div>
