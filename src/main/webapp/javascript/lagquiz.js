@@ -13,6 +13,18 @@
     var selectedKnapp;
     var selectedKnappNr = -1;
 
+    //Setter opp dateTime-velgeren
+    $('.form_datetime').datetimepicker({
+        language:  'nb',
+        weekStart: 1,
+        todayBtn:  1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 2,
+        forceParse: 0,
+        showMeridian: 0
+    });
+
     //Legger inn nytt
     function leggTilSvar() {
         var svar = $("#nyttSvar").val();
@@ -112,14 +124,35 @@
     $("#submitQuiz").click(function () {
 
         quiz.tittel = $("#navnInput").val();
-        quiz.startDate = new Date($("#quizStartDato").val());
 
-        var link = "<a href='/Quizprogram/'></a>"
-        $("#hovedSkjema").append(link);
+        if ($("#quizStartDato").val() != "") {
+            var dateString = $("#quizStartDato").val(),
+                dateTimeParts = dateString.split(' - '),
+                timeParts = dateTimeParts[1].split(':'),
+                dateParts = dateTimeParts[0].split('.'),
+                date;
 
-        submitAjax();
-        console.log(JSON.stringify(quiz));
-        document.location.href = "/Quizprogram/";
+
+            date = new Date(dateParts[2], parseInt(dateParts[1], 10) - 1, dateParts[0], timeParts[0], timeParts[1]);
+            quiz.startDate = date;
+
+            var link = "<a href='/Quizprogram/'></a>"
+            $("#hovedSkjema").append(link);
+
+            submitAjax();
+            console.log(JSON.stringify(quiz));
+            document.location.href = "/Quizprogram/";
+        } else {
+            $("#manglerDato").toggle();
+        }
+    });
+
+    $("#datePickerButton").click(function () {
+        $("#manglerDato").hide();
+    });
+
+    $("#quizStartDato").click(function () {
+        $("#manglerDato").hide();
     });
 
     function submitAjax() {
