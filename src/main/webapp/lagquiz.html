@@ -17,6 +17,7 @@
     <link rel="icon" type="image/png" sizes="96x96" href="img/favicon/favicon-96x96.png">
     <link rel="icon" type="image/png" sizes="16x16" href="img/favicon/favicon-16x16.png">
     <link rel="manifest" href="img/favicon/manifest.json">
+
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
@@ -24,6 +25,8 @@
     <link rel="stylesheet" type="text/css" href="css/lagquiz.css">
     <link rel="stylesheet" type="text/css" href="css/funkyradio.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css"> <!-- Bootstrap -->
+    <link href="bootstrapDateTimePicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> <!-- jQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
@@ -61,17 +64,27 @@
     <h1> Lag ny quiz </h1>
     <form id="hovedSkjema">
     <div class="form-group"> <label>Navn på quiz</label>
-        <input id="navnInput" type="text" name="nick" class="form-control" placeholder="Skriv inn quiznavn"> </div>
-    <div class="form-group"> <label>Tidspunkt for start</label>
-        <input type="datetime-local" id="quizStartDato" class="form-control">
-        <p style="color:gray; margin-top:4px; margin-bottom:-4px;"> Husk å skrive inn tid :) </p>
+        <input id="navnInput" type="text" name="nick" class="form-control" placeholder="Skriv inn quiznavn">
+    </div>
+    <div class="input-group" id="dateTimePicker">
+        <div class="input-group date form_datetime" data-date="" data-date-format="dd.mm.yyyy - hh:ii:ss" data-link-field="dtp_input1">
+            <span class="input-group-addon lagQuizAddon">Start for Quiz</span>
+            <input class="form-control" type="text" value="" readonly id="quizStartDato">
+            <span class="input-group-addon"><span id="datePickerButton" class="glyphicon glyphicon-th"></span></span>
+        </div>
+        <input type="hidden" id="dtp_input1" class="form-control" value="" /><br/>
     </div>
     <button id="nyttSporsmaal" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Lag spørsmål</button>
         <div class="list-group" id="quizSporsmaalListe"></div>
         <button id="submitQuiz" type="button" class="btn btn-success">Publiser quiz</button>
     </form>
 
-
+    <!-- Alert! Mangler svar -->
+    <div id="manglerDato" class="alert alert-danger collapse" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+        <h4 class="alert-heading">Mangler dato!</h4>
+        <p>Du må legge til en startdato og tid for quizen.</p>
+    </div>
 </div>
 
 
@@ -133,6 +146,8 @@
 
     </div>
 </div>
+<script type="text/javascript" src="bootstrapDateTimePicker/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+<script type="text/javascript" src="bootstrapDateTimePicker/js/locales/bootstrap-datetimepicker.nb.js" charset="UTF-8"></script>
 <script src="javascript/lagquiz.js"></script>
 
 </body>

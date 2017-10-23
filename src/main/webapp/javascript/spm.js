@@ -37,7 +37,7 @@ function getQuizId() {
 function getKallenavn() {
     kallenavn = localStorage.getItem("kallenavn");
     console.log("Kallenavn quiz: "+kallenavn)
-    $("#kallenavnOutput").text(kallenavn);
+    $("#kallenavnOutput").html(kallenavn);
 }
 
 //Interaksjon med REST-server
@@ -92,12 +92,9 @@ function nyeSvar() {
     console.log("Legger inn nye svar");
     for(i = 0; i < sporsmaal.svarArray.length;) {
         console.log(sporsmaal.svarArray[i]);
-        $(".funkyradio1").append("<div class='funkyradio-primary' id='radioParent"+i+"'><input class='radioknapp' type='radio' name='radio' id='radio"+i+"'/> <label for='radio"+i+"' id='radioLabel"+i+"'>"+sporsmaal.svarArray[i]+"</label></div>");
+        $("#funkyradioContainer").append("<div class='funkyradio-primary' id='radioParent"+i+"'><input class='radioknapp' type='radio' name='radio' id='radio"+i+"'/> <label for='radio"+i+"' id='radioLabel"+i+"'>"+sporsmaal.svarArray[i]+"</label></div>");
         i++;
         if (sporsmaal.svarArray[i] == null) break;
-        console.log(sporsmaal.svarArray[i]);
-        $(".funkyradio2").append("<div class='funkyradio-primary' id='radioParent"+i+"'><input class='radioknapp' type='radio' name='radio' id='radio"+i+"'/> <label for='radio"+i+"' id='radioLabel"+i+"'>"+sporsmaal.svarArray[i]+"</label></div>");
-        i++;
     }
 }
 
