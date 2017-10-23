@@ -38,7 +38,7 @@ public class QuizSpill {
 
 
         FerdigQuiz geoQuiz = new FerdigQuiz();
-        geoQuiz.setId(1);
+        geoQuiz.setId(++antQuizGenerert);
         geoQuiz.setTittel("Geografiquiz");
         Sporsmaal spm1 = new Sporsmaal(), spm2 = new Sporsmaal(), spm3 = new Sporsmaal();
         spm1.setSporsmaalTekst("Hva er hovedstaden i Frankrike?");
@@ -65,7 +65,21 @@ public class QuizSpill {
         spm3.setRiktigSvar(3);
         spm3.setVarighet(20);
         geoQuiz.setSporsmaalArray(new Sporsmaal[]{spm1, spm2, spm3});
+
         ferdigQuizes.add(geoQuiz);
+
+
+        FerdigQuiz bodyQuiz = new FerdigQuiz();
+        bodyQuiz.setId(++antQuizGenerert);
+        bodyQuiz.setTittel("Bodøquiz");
+        Sporsmaal spm = new Sporsmaal();
+        spm.setSporsmaalTekst("Hvor bor rottene?");
+        spm.setSvarArray(new String[] {"Glasshuset", "Mørkved", "Nordsida", "Kjøttkjelleren"});
+        spm.setVarighet(5);
+        spm.setRiktigSvar(0);
+        bodyQuiz.setSporsmaalArray(new Sporsmaal[]{spm});
+
+        ferdigQuizes.add(bodyQuiz);
     }
 
     public static void addQuiz(LiveQuiz liveQuiz) {
