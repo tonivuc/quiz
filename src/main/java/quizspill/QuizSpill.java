@@ -63,7 +63,7 @@ public class QuizSpill {
         });
         spm3.setBildeURL("https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Dusk_on_the_Yangtze_River.jpg/1200px-Dusk_on_the_Yangtze_River.jpg");
         spm3.setRiktigSvar(3);
-        spm3.setVarighet(15);
+        spm3.setVarighet(20);
         geoQuiz.setSporsmaalArray(new Sporsmaal[]{spm1, spm2, spm3});
         ferdigQuizes.add(geoQuiz);
     }

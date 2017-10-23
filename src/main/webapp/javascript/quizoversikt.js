@@ -217,7 +217,7 @@ function leggInnQuiz(quiz) {
     scoreBoardId += quiz.id;
 
     //Alt herfra er bare for å få med hvilken quiz man har klikket på
-    var markupStart = "<tr id='rad"+quiz.id+"'><td><img style='margin-left:5px; float:left' class='scoreboardKnapp' id='"+scoreBoardId+"' border='0' alt='scorebaord' src='img/scoreboard-symbol.png' width='20' height='20'>"+quiz.tittel+"</td><td id='"+tidFeltId+"'></td><td class='sekunderTilStart' id='sekTilStart"+quiz.id+"'>"+sekundertil+"</td><td class='knappfelt'><button id='";
+    var markupStart = "<tr id='rad"+quiz.id+"'><td><img style='margin-left:5px; float:left' class='scoreboardKnapp' id='"+scoreBoardId+"' border='0' alt='scorebaord' src='img/scoreboard-symbol.png' width='20' height='20'></td><td>"+quiz.tittel+"</td><td id='"+tidFeltId+"'></td><td class='sekunderTilStart' id='sekTilStart"+quiz.id+"'>"+sekundertil+"</td><td class='knappfelt'><button id='";
     var markupMiddle = quiz.id;
     var markupLast = "' type='submit' class='btn btn-block quizButton'>Bli med!</button></form></td></tr>";
     var con1 = markupStart.concat(markupMiddle);
