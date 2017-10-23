@@ -37,18 +37,35 @@ public class QuizSpill {
         }).start();
 
 
-        FerdigQuiz ferdigQuiz = new FerdigQuiz();
-        ferdigQuiz.setId(1);
-        ferdigQuiz.setTittel("FerdigQuiz1");
-        Sporsmaal spm = new Sporsmaal();
-        spm.setSporsmaalTekst("Hva er meningen med livet?");
-        spm.setSvarArray(new String[]{
-                "Ja", "Nei", "42", "43"
+        FerdigQuiz geoQuiz = new FerdigQuiz();
+        geoQuiz.setId(1);
+        geoQuiz.setTittel("Geografiquiz");
+        Sporsmaal spm1 = new Sporsmaal(), spm2 = new Sporsmaal(), spm3 = new Sporsmaal();
+        spm1.setSporsmaalTekst("Hva er hovedstaden i Frankrike?");
+        spm1.setSvarArray(new String[]{
+                "Bordeaux", "Paris", "Lyon", "Marseille"
         });
-        spm.setRiktigSvar(2);
-        spm.setVarighet(10);
-        ferdigQuiz.setSporsmaalArray(new Sporsmaal[]{spm});
-        ferdigQuizes.add(ferdigQuiz);
+        spm1.setBildeURL("https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Tour_eiffel_at_sunrise_from_the_trocadero.jpg/1200px-Tour_eiffel_at_sunrise_from_the_trocadero.jpg");
+        spm1.setRiktigSvar(1);
+        spm1.setVarighet(10);
+
+        spm2.setSporsmaalTekst("Hva er verdens nest høyeste fjell?");
+        spm2.setSvarArray(new String[]{
+                "Glittertinden", "Mont Blanc", "K2", "Denali"
+        });
+        spm2.setBildeURL("http://theubpost.mn/wp-content/uploads/2017/06/01BookTalkK2.jpg");
+        spm2.setRiktigSvar(2);
+        spm2.setVarighet(15);
+
+        spm3.setSporsmaalTekst("Hvor lang er Cháng Jiāng, Asias lengste elv?");
+        spm3.setSvarArray(new String[]{
+                "7107 km", "5464 km", "6671 km", "6357 km"
+        });
+        spm3.setBildeURL("https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Dusk_on_the_Yangtze_River.jpg/1200px-Dusk_on_the_Yangtze_River.jpg");
+        spm3.setRiktigSvar(3);
+        spm3.setVarighet(15);
+        geoQuiz.setSporsmaalArray(new Sporsmaal[]{spm1, spm2, spm3});
+        ferdigQuizes.add(geoQuiz);
     }
 
     public static void addQuiz(LiveQuiz liveQuiz) {
